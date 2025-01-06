@@ -1,5 +1,7 @@
 <?php
 session_start();
+session_regenerate_id(true);  // Regenerate session ID to prevent session fixation
+
 include '../Backend/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -53,3 +55,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </select>
     <button type="submit">Login</button>
 </form>
+
+<p>If not yet have an account, <a href="../Frontend/Alumni/signup.php">sign up here</a>.</p>

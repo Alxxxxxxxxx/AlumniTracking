@@ -1,11 +1,13 @@
 <?php
 session_start();
 
-if ($_SESSION['user_type'] !== 'alumni') {
-    header('Location: ../../login.php');  // Redirect if not logged in as alumni
+// Check if the session exists and the user is an alumni
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'alumni') {
+    header('Location: LandingPage.php');  // Redirect if not logged in as alumni
     exit();
 }
 
+// Get user data from the session
 $user = $_SESSION['user'];
 ?>
 <h1>Welcome, <?php echo htmlspecialchars($user['name']); ?>!</h1>
@@ -17,3 +19,5 @@ $user = $_SESSION['user'];
 <p>Phone Number: <?php echo htmlspecialchars($user['phone_number']); ?></p>
 <p>Graduation Year: <?php echo htmlspecialchars($user['graduation_year']); ?></p>
 <p>Program of Study: <?php echo htmlspecialchars($user['program_of_study']); ?></p>
+
+<a href="../../logout.php">Logout</a>

@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $program_of_study = $_POST['program_of_study'];
     $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
 
+    // Adjust your SQL query to include the new fields
     $sql = "INSERT INTO alumni (id_number, name, age, nature_of_work, address, email, phone_number, graduation_year, program_of_study, password)
             VALUES ('$id_number', '$name', $age, '$nature_of_work', '$address', '$email', '$phone_number', '$graduation_year', '$program_of_study', '$password')";
     
@@ -23,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+
 <form method="POST">
     <input type="text" name="id_number" placeholder="ID Number" required />
     <input type="text" name="name" placeholder="Name" required />
