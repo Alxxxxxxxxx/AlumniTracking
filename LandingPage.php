@@ -172,7 +172,7 @@ function MM_effectBlind(targetElement, duration, from, to, toggle)
               <img alt="jee" src="images/banner.png"></div>
       <div class="banner_text">
         <h1>
-                  SACRED HEART OF JESUS CATHOLIC SCHOOL
+                  SACRED HEART OF JESUS CATHOLIC SCHOOL ni norman
           </h1>
               <h2>
                   HOME OF THE MEEK AND HUMBLE
