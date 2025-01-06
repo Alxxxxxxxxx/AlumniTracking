@@ -9,10 +9,11 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 <html>
 <head>
 <meta charset="utf-8">
-<title>Fill The Form</title>
+<title>Alumni Tracking System</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+<link rel="icon" href="images/logo.ico" type="image/logo">
 <link href="table.css" type="text/css" rel="stylesheet">
 <style>
     /* Ensure the body takes up full height and uses flexbox */
