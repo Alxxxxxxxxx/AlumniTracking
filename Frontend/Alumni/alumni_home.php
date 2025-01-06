@@ -13,3 +13,7 @@ $user = $_SESSION['user'];
 <p>Age: <?php echo htmlspecialchars($user['age']); ?></p>
 <p>Nature of Work: <?php echo htmlspecialchars($user['nature_of_work']); ?></p>
 <p>Address: <?php echo htmlspecialchars($user['address']); ?></p>
+<p>Email: <?php echo htmlspecialchars($user['email']); ?></p>
+<p>Phone Number: <?php echo htmlspecialchars($user['phone_number']); ?></p>
+<p>Graduation Year: <?php echo htmlspecialchars($user['graduation_year']); ?></p>
+<p>Program of Study: <?php echo htmlspecialchars($user['program_of_study']); ?></p>
