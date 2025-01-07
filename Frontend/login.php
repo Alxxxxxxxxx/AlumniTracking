@@ -117,7 +117,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-family: 'Shrikhand', sans-serif;
             margin-top: 0;
             margin-bottom: 20px;
-            color: #fafafa;
+            color: #222222;
             font-size: 2.5rem;
             font-weight: lighter;
         }
@@ -130,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border: 1px solid #ccc;
             border-radius: 5px;
             font-size: 1rem;
+            font-family: 'Noticia Text', serif;
         }
 
         .login-container button {
@@ -140,6 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border: none;
             border-radius: 5px;
             font-size: 1.2rem;
+            font-family: 'Noticia Text', serif;
             cursor: pointer;
         }
 
@@ -224,7 +226,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             align-items: center;
             font-weight: lighter;
         }
+        .suh {
+            background-color:transparent;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            font-weight: lighter;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+        .suh2 {
+            background-color:transparent;
+            color: #222222;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
 
+        .suh2:hover {
+            color: #a00c30;
+        }
         .back-button:hover {
             color: #222222;
         }
@@ -261,7 +290,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <?php endif; ?>
             <button type="submit">Login</button>
         </form>
-        <p>If not yet have an account, <a href="../Frontend/Alumni/signup.php">sign up here</a>.</p>
+        <p class="suh">If not yet have an account, <a href="../Frontend/Alumni/signup.php" class="suh2">sign up here</a>.</p>
     </div>
 </body>
 </html>
