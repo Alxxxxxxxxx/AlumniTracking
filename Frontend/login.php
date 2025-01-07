@@ -1,59 +1,198 @@
 <?php
 session_start();
-session_regenerate_id(true);  // Regenerate session ID to prevent session fixation
+session_regenerate_id(true); // Regenerate session ID to prevent session fixation
 
 include '../Backend/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Sanitize user inputs (important for security)
-    $username = $_POST['username'];
+    // Sanitize user inputs
+    $username = trim($_POST['username']);
     $password = $_POST['password'];
-    $userType = $_POST['user_type']; // Either "alumni" or "admin"
 
-    // Prepare SQL statement to prevent SQL injection
-    if ($userType === "alumni") {
-        // For alumni, prepare statement
-        $sql = "SELECT * FROM alumni WHERE id_number = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username); // "s" stands for string
-    } else {
-        // For admin, prepare statement
-        $sql = "SELECT * FROM admin WHERE username = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("s", $username); // "s" stands for string
-    }
+    // Query for admin
+    $sqlAdmin = "SELECT * FROM admin WHERE username = ?";
+    $stmtAdmin = $conn->prepare($sqlAdmin);
+    $stmtAdmin->bind_param("s", $username);
+    $stmtAdmin->execute();
+    $resultAdmin = $stmtAdmin->get_result();
+    $rowAdmin = $resultAdmin->fetch_assoc();
 
-    // Execute prepared query
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_assoc();
+    // Query for alumni
+    $sqlAlumni = "SELECT * FROM alumni WHERE id_number = ? OR email = ?";
+    $stmtAlumni = $conn->prepare($sqlAlumni);
+    $stmtAlumni->bind_param("ss", $username, $username);
+    $stmtAlumni->execute();
+    $resultAlumni = $stmtAlumni->get_result();
+    $rowAlumni = $resultAlumni->fetch_assoc();
 
-    // Check if the user was found and password matches
-    if ($row && password_verify($password, $row['password'])) {
-        $_SESSION['user'] = $row;
-        $_SESSION['user_type'] = $userType;
-
-        // Redirect based on user type
-        if ($userType === "alumni") {
-            header('Location: ../Frontend/Alumni/alumni_home.php');
-        } else {
-            header('Location: ../Frontend/Admin/admin_dashboard.php');
-        }
+    // Check if user is found and verify password
+    if ($rowAdmin && password_verify($password, $rowAdmin['password'])) {
+        $_SESSION['user'] = $rowAdmin;
+        $_SESSION['user_type'] = "admin";
+        header('Location: ../Frontend/Admin/admin_dashboard.php');
+        exit();
+    } elseif ($rowAlumni && password_verify($password, $rowAlumni['password'])) {
+        $_SESSION['user'] = $rowAlumni;
+        $_SESSION['user_type'] = "alumni";
+        header('Location: ../Frontend/Alumni/alumni_home.php');
         exit();
     } else {
-        echo "Invalid login!";
+        $error = "Invalid username or password!";
     }
 }
 ?>
 
-<form method="POST">
-    <input type="text" name="username" placeholder="Username/ID Number" required />
-    <input type="password" name="password" placeholder="Password" required />
-    <select name="user_type">
-        <option value="alumni">Alumni</option>
-        <option value="admin">Admin</option>
-    </select>
-    <button type="submit">Login</button>
-</form>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Alumni Tracking System</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/logo.ico" type="image/logo">
+    <link href="table.css" type="text/css" rel="stylesheet">
+    <style>
+        /* Styles (same as provided in the second code) */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Shrikhand', sans-serif;
+        }
 
-<p>If not yet have an account, <a href="../Frontend/Alumni/signup.php">sign up here</a>.</p>
+        body {
+            background: url('../images/nameback.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.53);
+            padding: 100px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            height: 300px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-family: 'Shrikhand', sans-serif;
+            margin-bottom: 20px;
+            color: rgb(255, 255, 255);
+            font-size: 2rem;
+            font-weight: lighter;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #ab140a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background: #8c1b10;
+        }
+
+        .top_banner {
+            height: 120px;
+            width: 100%;
+            background: transparent;
+        }
+
+        .in_banner {
+            width: 100%;
+            margin: 0 auto;
+            height: 120px;
+            background: transparent;
+        }
+
+        .banner_text {
+            float: left;
+            width: 1000px;
+            margin: 37px 0 0 30px;
+            text-align: left;
+        }
+
+        .banner_text h1 {
+            font-size: 25pt;
+            color: #fbfff2;
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Shrikhand', cursive;
+        }
+
+        .banner_text h2 {
+            font-size: 25pt;
+            color: #fbfff2;
+            margin: 0;
+            margin-top: -20px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Noticia Text', serif;
+        }
+
+        .glogo {
+            width: 102px;
+            height: 120px;
+            float: left;
+            margin: 0px 5px 0 5px;
+        }
+
+        .logo {
+            float: left;
+            width: 107px;
+            height: 112px;
+            margin: 20px 0 0 20px;
+            cursor: pointer;
+            z-index: 10; 
+            position: relative; 
+        }
+    </style>
+</head>
+<body>
+    <div class="top_banner">
+        <div class="in_banner">
+            <div class="logo">
+                <img alt="jee" src="../images/banner.png">
+            </div>
+            <div class="banner_text">
+                <h1>SACRED HEART OF JESUS CATHOLIC SCHOOL</h1>
+                <h2>HOME OF THE MEEK AND HUMBLE</h2>
+            </div>
+        </div>
+    </div>
+    <div class="login-container">
+        <h2>Welcome to the Alumnus!</h2>
+        <?php if (isset($error)): ?>
+            <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+        <?php endif; ?>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username or Email" required />
+            <input type="password" name="password" placeholder="Password" required />
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>
