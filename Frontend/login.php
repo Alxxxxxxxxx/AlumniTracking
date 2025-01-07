@@ -5,48 +5,72 @@ session_regenerate_id(true); // Regenerate session ID to prevent session fixatio
 include '../Backend/db_connect.php';
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    // Sanitize user inputs
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
+    // Verify reCAPTCHA
+    $recaptchaSecret = '6LeswLAqAAAAAA5GuxqoGVOV0GQWMxRUdUxLAp6O';
+    $recaptchaResponse = $_POST['g-recaptcha-response'];
+    $verifyResponse = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$recaptchaSecret&response=$recaptchaResponse");
+    $responseData = json_decode($verifyResponse);
 
-    // Query for admin
-    $sqlAdmin = "SELECT * FROM admin WHERE username = ?";
-    $stmtAdmin = $conn->prepare($sqlAdmin);
-    $stmtAdmin->bind_param("s", $username);
-    $stmtAdmin->execute();
-    $resultAdmin = $stmtAdmin->get_result();
-    $rowAdmin = $resultAdmin->fetch_assoc();
-
-    // Query for alumni
-    $sqlAlumni = "SELECT * FROM alumni WHERE id_number = ? OR email = ?";
-    $stmtAlumni = $conn->prepare($sqlAlumni);
-    $stmtAlumni->bind_param("ss", $username, $username);
-    $stmtAlumni->execute();
-    $resultAlumni = $stmtAlumni->get_result();
-    $rowAlumni = $resultAlumni->fetch_assoc();
-
-    // Check if user is found and verify password
-    if ($rowAdmin && password_verify($password, $rowAdmin['password'])) {
-        $_SESSION['user'] = $rowAdmin;
-        $_SESSION['user_type'] = "admin";
-        header('Location: ../Frontend/Admin/admin_dashboard.php');
-        exit();
-    } elseif ($rowAlumni && password_verify($password, $rowAlumni['password'])) {
-        $_SESSION['user'] = $rowAlumni;
-        $_SESSION['user_type'] = "alumni";
-        header('Location: ../Frontend/Alumni/alumni_home.php');
-        exit();
+    if (!$responseData->success) {
+        $error = "reCAPTCHA verification failed. Please try again.";
     } else {
-        $error = "Invalid username or password!";
+        // Sanitize user inputs
+        $username = trim($_POST['username']);
+        $password = $_POST['password'];
+
+        // Query for admin (only using username)
+        $sqlAdmin = "SELECT * FROM admin WHERE username = ?"; 
+        $stmtAdmin = $conn->prepare($sqlAdmin);
+
+        // Check if prepare was successful
+        if ($stmtAdmin === false) {
+            die('Error preparing SQL query for admin: ' . $conn->error);
+        }
+
+        $stmtAdmin->bind_param("s", $username);
+        $stmtAdmin->execute();
+        $resultAdmin = $stmtAdmin->get_result();
+        $rowAdmin = $resultAdmin->fetch_assoc();
+
+        // Query for alumni (using either username or email)
+        $sqlAlumni = "SELECT * FROM alumni WHERE username = ? OR email = ?";
+        $stmtAlumni = $conn->prepare($sqlAlumni);
+
+        // Check if prepare was successful
+        if ($stmtAlumni === false) {
+            die('Error preparing SQL query for alumni: ' . $conn->error);
+        }
+
+        $stmtAlumni->bind_param("ss", $username, $username);  // Search using username or email
+        $stmtAlumni->execute();
+        $resultAlumni = $stmtAlumni->get_result();
+        $rowAlumni = $resultAlumni->fetch_assoc();
+
+        // Check if user is found and verify password
+        if ($rowAdmin && password_verify($password, $rowAdmin['password'])) {
+            $_SESSION['user'] = $rowAdmin;
+            $_SESSION['user_type'] = "admin";
+            header('Location: ../Frontend/Admin/admin_dashboard.php');
+            exit();
+        } elseif ($rowAlumni && password_verify($password, $rowAlumni['password'])) {
+            $_SESSION['user'] = $rowAlumni;
+            $_SESSION['user_type'] = "alumni";
+            header('Location: ../Frontend/Alumni/alumni_home.php');
+            exit();
+        } else {
+            $error = "Invalid username or password!";
+        }
     }
 }
 ?>
+
 
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <title>Alumni Tracking System</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
@@ -77,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             width: 800px;
-            height: 300px;
+            height: 400px;
             text-align: center;
         }
 
@@ -169,6 +193,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             z-index: 10; 
             position: relative; 
         }
+
+        .captcha-container {
+            display: flex;
+            justify-content: center; /* Centers horizontally */
+            align-items: center; /* Centers vertically */
+            margin: 20px 0; /* Optional: Adds space above and below */
+        }
+
     </style>
 </head>
 <body>
@@ -185,14 +217,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
     <div class="login-container">
         <h2>Welcome to the Alumnus!</h2>
-        <?php if (isset($error)): ?>
-            <p style="color: red;"><?= htmlspecialchars($error) ?></p>
-        <?php endif; ?>
         <form method="POST">
             <input type="text" name="username" placeholder="Username or Email" required />
             <input type="password" name="password" placeholder="Password" required />
+            <div class="captcha-container">
+                <div class="g-recaptcha" data-sitekey="6LeswLAqAAAAANMxYj8aJkCz8UimL0NOJ3drnCfQ"></div>
+            </div>
+            <?php if (isset($error)): ?>
+                <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+            <?php endif; ?>
             <button type="submit">Login</button>
         </form>
+        <p>If not yet have an account, <a href="../Frontend/Alumni/signup.php">sign up here</a>.</p>
     </div>
 </body>
 </html>
