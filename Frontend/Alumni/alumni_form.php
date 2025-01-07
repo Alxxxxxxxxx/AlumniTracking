@@ -1,27 +1,101 @@
+<?php
+session_start();
+include('../../Backend/db_connect.php');
+
+if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'alumni') {
+    // User is logged in as alumni
+    $alumniInfo = $_SESSION['user'];  // Access session data
+    $user_identifier = $alumniInfo['email']; // Try email first, or use username if email is not set
+} else {
+    echo "User not logged in.";
+    exit();
+}
+
+// Retrieve the email from the database based on the email or username in the session
+$sql = "SELECT email FROM alumni WHERE email = ? OR username = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $user_identifier, $user_identifier);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $email = $row['email']; // Set the email from the database
+} else {
+    echo "User not found.";
+    exit();  // Stop the script if no matching user is found
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Collect form data
+    $privacy_consent = isset($_POST['privacy_consent']) ? 1 : 0;
+    $last_name = $conn->real_escape_string($_POST['last_name']);
+    $first_name = $conn->real_escape_string($_POST['first_name']);
+    $middle_name = $conn->real_escape_string($_POST['middle_name']);
+    $present_location = $conn->real_escape_string($_POST['present_location']);
+    $present_address = $conn->real_escape_string($_POST['present_address']);
+    $contact_number = $conn->real_escape_string($_POST['contact_number']);
+    $strand = $conn->real_escape_string($_POST['strand']);
+    $years_of_enrollment = $conn->real_escape_string($_POST['years_of_enrollment']);
+    $involvement = $conn->real_escape_string($_POST['involvement']);
+    $academic_awards = $conn->real_escape_string($_POST['academic_awards']);
+    $current_status = $conn->real_escape_string($_POST['current_status']);
+    $university_employer = $conn->real_escape_string($_POST['university_employer']);
+    $position_year_level = $conn->real_escape_string($_POST['position_year_level']);
+    $sector = $conn->real_escape_string($_POST['sector']);
+    $type_of_employment = $conn->real_escape_string($_POST['type_of_employment']);
+    $year_hired = $conn->real_escape_string($_POST['year_hired']);
+    $confirm_data = isset($_POST['confirm_data']) ? 1 : 0;
+
+    // Insert into database
+    $sql = "INSERT INTO alumni (
+        privacy_consent, last_name, first_name, middle_name,
+        present_location, present_address, contact_number, strand, years_of_enrollment,
+        involvement, academic_awards, current_status, university_employer,
+        position_year_level, sector, type_of_employment, year_hired, confirm_data
+    ) VALUES (
+        $privacy_consent, '$last_name', '$first_name', '$middle_name',
+        '$present_location', '$present_address', '$contact_number', '$strand', '$years_of_enrollment',
+        '$involvement', '$academic_awards', '$current_status', '$university_employer',
+        '$position_year_level', '$sector', '$type_of_employment', '$year_hired', $confirm_data
+    )";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Data successfully submitted! <a href='form.php'>Go Back</a>";
+    } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+    }
+}
+
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Form</title>
-   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="container my-5">
-    <h2 class="mb-4 text-center">Log In</h2>
+    <h2 class="mb-4 text-center">Alumni Registration</h2>
     <p class="text-center">
         Rest assured that your information for this questionnaire will be treated with confidentiality.
         <br><small>*Add Data Privacy Act and Terms & Conditions</small>
     </p>
-    <form action="process_form.php" method="POST">
+    <form action="" method="POST">
         <!-- PART 1: PERSONAL INFORMATION -->
         <h4 class="mb-3">Personal Information</h4>
         <p>Be reminded that if no answers are applicable, write or choose "N/A.”.</p>
+
+        <!-- Display Email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" id="email" class="form-control" required>
+            <input class="form-control" value="<?php echo $email; ?>" disabled>
         </div>
+
         <div class="form-check mb-3">
             <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" required>
             <label for="privacy_consent" class="form-check-label">
@@ -122,40 +196,35 @@
             <input type="text" name="university_employer" id="university_employer" class="form-control" required>
         </div>
         <div class="mb-3">
-            <label for="position_year_level" class="form-label">Position / Year Level</label>
+            <label for="position_year_level" class="form-label">Position or Year Level</label>
             <input type="text" name="position_year_level" id="position_year_level" class="form-control" required>
         </div>
         <div class="mb-3">
             <label for="sector" class="form-label">Sector</label>
             <select name="sector" id="sector" class="form-select" required>
-                <option value="Private">Private</option>
                 <option value="Public">Public</option>
-                <option value="Government">Government</option>
-                <option value="NGO">NGO</option>
-                <option value="Non-Profit">Non-Profit</option>
+                <option value="Private">Private</option>
             </select>
         </div>
         <div class="mb-3">
             <label for="type_of_employment" class="form-label">Type of Employment</label>
             <select name="type_of_employment" id="type_of_employment" class="form-select" required>
                 <option value="Full-time">Full-time</option>
-                <option value="Part-Time">Part-Time</option>
-                <option value="Others">Others</option>
+                <option value="Part-time">Part-time</option>
+                <option value="Intern">Intern</option>
             </select>
         </div>
         <div class="mb-3">
-            <label for="year_hired" class="form-label">Year When Hired / Enrolled / Established</label>
-            <input type="text" name="year_hired" id="year_hired" class="form-control" required>
+            <label for="year_hired" class="form-label">Year Hired</label>
+            <input type="number" name="year_hired" id="year_hired" class="form-control" required>
         </div>
 
-        <!-- PART 5: CONFIRMATION -->
-        <h4 class="mb-3">Confirmation</h4>
-        <div class="form-check mb-3">
+        <!-- AGREEMENT AND SUBMISSION -->
+        <div class="mb-3 form-check">
             <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" required>
-            <label for="confirm_data" class="form-check-label">
-                I confirm that all the information given is true and honest.
-            </label>
+            <label for="confirm_data" class="form-check-label">I confirm that the data provided is accurate.</label>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>

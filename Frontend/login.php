@@ -55,7 +55,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         } elseif ($rowAlumni && password_verify($password, $rowAlumni['password'])) {
             $_SESSION['user'] = $rowAlumni;
             $_SESSION['user_type'] = "alumni";
-            header('Location: ../Frontend/Alumni/alumni_home.php');
+        
+            // Check if the alumni has filled in the information
+            if (empty($rowAlumni['last_name']) || empty($rowAlumni['first_name']) || empty($rowAlumni['present_address'])) {
+                // Redirect to alumni form if required fields are missing
+                header('Location: ../Frontend/Alumni/alumni_form.php');
+            } else {
+                // Redirect to alumni home if the information is complete
+                header('Location: ../Frontend/Alumni/alumni_home.php');
+            }
             exit();
         } else {
             $error = "Invalid username or password!";
