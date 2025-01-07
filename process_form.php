@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $confirm_data = isset($_POST['confirm_data']) ? 1 : 0;
 
    
-    $sql = "INSERT INTO tables (
+    $sql = "INSERT INTO alumni (
         email, privacy_consent, last_name, first_name, middle_name,
         present_location, present_address, contact_number, strand, years_of_enrollment,
         involvement, academic_awards, current_status, university_employer,
