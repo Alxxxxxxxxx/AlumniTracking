@@ -76,10 +76,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         WHERE email = '$email'";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Data successfully updated! <a href='form.php'>Go Back</a>";
+        // Display a success message and redirect after 1 second
+        echo "<script>
+                alert('Data successfully updated!');
+                setTimeout(function() {
+                    window.location.href = '../login.php'; // Redirect to the login page
+                }, 1000); // 1000ms = 1 second
+            </script>";
     } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+        // Display an error message with popup and no redirection
+        echo "<script>
+                alert('Error: " . $conn->error . "');
+            </script>";
     }
+
 }
 
 $conn->close();
