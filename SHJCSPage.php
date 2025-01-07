@@ -7,7 +7,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Alumni Tracking System</title>
+    <title>About SHJCS</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
@@ -21,22 +21,10 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             display: flex;
             flex-direction: column;
             font-family: 'Shrikhand', sans-serif;
-            
         }
 
         body {
-            background: url('images/schoolback.jpg') no-repeat center center fixed;
-            background-size: cover;
-        }
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(243, 243, 243, 0.7);
-            z-index: -1;
+            background: #FAFAFA;
         }
 /* Top Banner and Other Styles */
 .top_banner {
@@ -226,38 +214,61 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     text-decoration: underline; 
 }
 
-        /* Slideshow container */
-        .slideshow-container {
-    max-width: 810px;
-    position: relative;
+
+        .content-section {
+    display: flex;
+    justify-content: space-around;
     margin: 0;
-    text-align: center;  /* Center the slideshow */
-    float: right;        /* Float to the right side */
-    margin-right: 100px;  /* Add space between the container and the right edge */
-    border: 10px solid #fafafa; /* Add a border with color (#222222 is a dark gray) */
-    border-radius: 10px; /* Optional: Adds rounded corners to the border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow around the border */
+    padding: 0;
 }
-        .slide {
-            display: none;
-            width: 80%;  /* Adjust the width here */
-            margin: auto;  /* Ensure the images are centered */
-            height: auto; /* Maintain the aspect ratio of the image */
-        }
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
-        }
 
-        @keyframes fade {
-            from {
-                opacity: 0.4;
-            }
-            to {
-                opacity: 1;
-            }
-        }
+.content-box {
+    display: flex;
+    align-items: flex-start;  /* Align items to the top */
+    justify-content: space-between;
+    background-color: transparent;
+}
 
+.vision, .mission, .identity, .corevalues {
+    flex: 1;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;  /* Stack elements vertically */
+}
+
+.vision h2, .mission h2, .identity h2, .corevalues h2 {
+    font-size: 30px;
+    color: #da1a32;
+    margin-bottom: 15px; /* Space between the header and content */
+    text-align: center;
+    font-weight: lighter;
+}
+
+.vision p, .mission p, .identity p{
+    font-size: 16px;
+    color: #222222;
+    margin-top: 0;  /* Remove any default margin that could push the content down */
+    text-align: justify;
+    font-family: 'Noticia Text', serif;
+    font-weight: bold;
+    line-height: 2;
+}
+
+.corevalues h3 {
+    font-size: 30px;
+    color: #222222;
+    margin-top: 0;
+    text-align: justify;
+    font-family: 'Noticia Text', serif;
+    font-weight: bolder;
+    line-height: 1.5; 
+}
+
+.vertical-line {
+    border-left: 2px solid #bbbbbb; /* Vertical line between sections */
+    height: 85%;
+    margin-top: 50px;
+}
 
     </style>
 </head>
@@ -278,22 +289,48 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
     <div class="wavy-sidebar">
         <ul>
-            <li><a href="LandingPage.php" class="active">Home</a></li>
-            <li><a href="SHJCSPage.php">SHJCS</a></li>
+            <li><a href="LandingPage.php">Home</a></li>
+            <li><a href="#" class="active">SHJCS</a></li>
             <li><a href="Frontend/login.php">Alumni Tracker</a></li>
         </ul>
     </div>
 
-    <div class="slideshow-container">
-        <!-- Slide 1 -->
-        <img class="slide fade" src="images/slide1.jpg" style="width:100%">
-        <!-- Slide 2 -->
-        <img class="slide fade" src="images/slide2.jpg" style="width:100%">
-        <!-- Slide 3 -->
-        <img class="slide fade" src="images/slide3.jpg" style="width:100%">
-    </div>
-
-
+    <div class="content-section">
+            <div class="content-box">
+                <div class="vision">
+                    <h2>Vision</h2>
+                        <p>
+                        A people called by the FATHER in JESUS CHRIST to become a COMMUNITY of persons with FULLNESS OF LIFE, witnessing to the KINGDOM OF GOD by living the PASCHAL MYSTERY in the power of the HOLY SPIRIT with MARY AS COMPANION                        </p>
+                </div>
+        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+                <div class="mission">
+                    <h2>Mission</h2>
+                        <p>
+                        Through the ever-encompassing love of the Sacred Heart of Jesus, the SHJCS is committed to:
+                        <br>1. Promote religion as the heart of the curriculum by providing a nurturing Catholic learning environment & fostering Gospel values and well-being.
+                        <br>2. Develop holistic individuals that will become persons of character and competence.
+                        <br>3. Produce graduates who will become productive and responsible servant leaders.
+                        <br>4. Promote love of country and nationalism.
+                        <br>5. Exercise efficient management and delivery of services.
+                        </p>
+                </div>
+        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+                <div class="identity">
+                    <h2>Identity</h2>
+                        <p>
+                        Inflamed by the Sacred Heart of Jesus, inspired of the APOSTOLIC VISON of the Archdiocese of Manila and in adherence to the thrusts of RCAM ES, the SHJCS envisions itself as a Catholic Educational Institution that proclaims the Gospel, forms human persons and renews the Church and Nation.                        </p>
+                </div>
+        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+                <div class="corevalues">
+                    <h2>Core Values</h2>
+                        <h3>
+                            SERVICE
+                        <br>HUMILITY
+                        <br>JUSTICE
+                        <br>CHARITY
+                        <br>SIMPLICITY
+                        </h3>              
+                </div>
 
     <!-- Footer-->
     <footer>

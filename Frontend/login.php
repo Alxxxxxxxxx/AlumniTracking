@@ -95,7 +95,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         body {
-            background: url('../images/nameback.png') no-repeat center center fixed;
+            background: url('../images/namebg.png') no-repeat center center fixed;
             background-size: cover;
         }
 
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(255, 255, 255, 0.53);
+            background: rgba(255, 255, 255, 0.5);
             padding: 100px;
             border-radius: 50px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -115,9 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .login-container h2 {
             font-family: 'Shrikhand', sans-serif;
+            margin-top: 0;
             margin-bottom: 20px;
-            color: rgb(255, 255, 255);
-            font-size: 2rem;
+            color: #fafafa;
+            font-size: 2.5rem;
             font-weight: lighter;
         }
 
@@ -134,7 +135,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .login-container button {
             width: 100%;
             padding: 10px;
-            background: #ab140a;
+            background: #a00c30;
             color: white;
             border: none;
             border-radius: 5px;
@@ -143,7 +144,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         .login-container button:hover {
-            background: #8c1b10;
+            background: #222222;
         }
 
         .top_banner {
@@ -168,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .banner_text h1 {
             font-size: 25pt;
-            color: #fbfff2;
+            color: #fafafa;
             margin: 0;
             padding: 0;
             font-weight: normal;
@@ -177,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .banner_text h2 {
             font-size: 25pt;
-            color: #fbfff2;
+            color: #fafafa;
             margin: 0;
             margin-top: -20px;
             padding: 0;
@@ -208,6 +209,29 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             align-items: center; /* Centers vertically */
             margin: 20px 0; /* Optional: Adds space above and below */
         }
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color:transparent;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: lighter;
+        }
+
+        .back-button:hover {
+            color: #222222;
+        }
+
+        .back-button i {
+            margin-right: 5px;
+        }
 
     </style>
 </head>
@@ -224,7 +248,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
     <div class="login-container">
-        <h2>Welcome to the Alumnus!</h2>
+    <a href="../LandingPage.php" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+        <h2>Welcome Alumnus!</h2>
         <form method="POST">
             <input type="text" name="username" placeholder="Username or Email" required />
             <input type="password" name="password" placeholder="Password" required />
