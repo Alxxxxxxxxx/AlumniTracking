@@ -75,21 +75,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired', confirm_data = $confirm_data
         WHERE email = '$email'";
 
-    if ($conn->query($sql) === TRUE) {
-        // Display a success message and redirect after 1 second
-        echo "<script>
-                alert('Data successfully updated!');
-                setTimeout(function() {
-                    window.location.href = '../login.php'; // Redirect to the login page
-                }, 1000); // 1000ms = 1 second
-            </script>";
-    } else {
-        // Display an error message with popup and no redirection
-        echo "<script>
-                alert('Error: " . $conn->error . "');
-            </script>";
-    }
+        if ($conn->query($sql) === TRUE) {
+            // Display success modal
+            echo "<script>
+                    window.onload = function() {
+                        var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
+                            keyboard: false
+                        });
+                        myModal.show(); // Show the modal dynamically
 
+                        // Redirect after 3 seconds
+                        setTimeout(function() {
+                            window.location.href = '../login.php';
+                        }, 3000);  // 3000ms = 3 seconds
+                    };
+                </script>";
+        } else {
+            echo "<script>alert('Error: " . $conn->error . "');</script>";
+        }
 }
 
 $conn->close();
@@ -117,8 +120,8 @@ $conn->close();
             height: 100%;
             z-index: -1;
             box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
-            padding-left: 20px; /* Adjust the left padding as needed */
-            padding-right: 20px; /* Adjust the right padding as needed */
+            padding-left: 20px; 
+            padding-right: 20px; 
         }
 
         h1 {
@@ -180,6 +183,55 @@ $conn->close();
         .form-check-input:checked {
             background-color: #da1a32; 
             border-color: #da1a32;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .modal-header {
+            background-color: #a00c30;
+            color: white;
+            padding: 10px;
+            font-size: 1.2rem;
+        }
+
+        .modal-body {
+            padding: 20px;
+            font-size: 1.1rem;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -334,6 +386,23 @@ $conn->close();
     </form>
 </div>
 
+
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">Success</h5>
+            </div>
+            <div class="modal-body">
+                Data Successfully Received.
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

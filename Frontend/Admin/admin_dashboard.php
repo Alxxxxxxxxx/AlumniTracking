@@ -142,11 +142,11 @@ $result = $conn->query($sql);
 </head>
 <body>
     <div class="container">
-            <div class="wavy-section">
+        <div class="wavy-section">
             <div class="logo">
                 <img alt="jee" src="../../images/banner.png">
             </div>
-            </div>
+        </div>
         <h1>Admin Dashboard</h1>
         <p class="text-center">Welcome, Admin!</p>
 
@@ -179,7 +179,6 @@ $result = $conn->query($sql);
             </select>
             <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $filters['search'] ?>" style="width: auto; display: inline-block;">
             <button type="submit" class="btn btn-primary">Filter</button>
-
         </form>
 
         <?php if ($result->num_rows > 0): ?>
@@ -205,6 +204,7 @@ $result = $conn->query($sql);
                             <th>Sector</th>
                             <th>Type of Employment</th>
                             <th>Year Hired</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -228,6 +228,10 @@ $result = $conn->query($sql);
                                 <td><?= $row['sector']; ?></td>
                                 <td><?= $row['type_of_employment']; ?></td>
                                 <td><?= $row['year_hired']; ?></td>
+                                <td>
+                                    <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="delete_alumni.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
