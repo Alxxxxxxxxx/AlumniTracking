@@ -2,43 +2,35 @@
 session_start();
 include('../../Backend/db_connect.php');
 
-// Check if the session exists and the user is an alumni
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'alumni') {
-    header('Location: LandingPage.php');  // Redirect if not logged in as alumni
+    header('Location: LandingPage.php');  
     exit();
 }
 
-// Get the alumni email from session
 $alumni_email = $_SESSION['user']['email'];
 
-// Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize input data to prevent SQL injection
     $company_name = htmlspecialchars($_POST['company_name']);
     $position = htmlspecialchars($_POST['position']);
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $job_description = htmlspecialchars($_POST['job_description']);
 
-    // Prepare and execute the SQL statement to insert the data
     $sql = "INSERT INTO work_history (alumni_email, company_name, position, start_date, end_date, job_description) 
             VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ssssss", $alumni_email, $company_name, $position, $start_date, $end_date, $job_description);
 
     if ($stmt->execute()) {
-        // Redirect to alumni home page after successful insertion
         header("Location: alumni_home.php?status=success");
         exit();
     } else {
         echo "Error: " . $stmt->error;
     }
 
-    // Close the prepared statement
     $stmt->close();
 }
 
-// Close the database connection
 $conn->close();
 ?>
 

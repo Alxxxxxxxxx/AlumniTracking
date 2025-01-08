@@ -2,27 +2,22 @@
 session_start();
 include('../../Backend/db_connect.php');
 
-// Check if the session exists and the user is an alumni
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'alumni') {
-    header('Location: LandingPage.php');  // Redirect if not logged in as alumni
+    header('Location: LandingPage.php');  
     exit();
 }
 
-// Get the alumni email from session
 $alumni_email = $_SESSION['user']['email'];
 
-// Check if the work history ID is set in the URL
 if (isset($_GET['id'])) {
     $work_history_id = $_GET['id'];
 
-    // Retrieve the work history data from the database
     $sql = "SELECT * FROM work_history WHERE id = ? AND alumni_email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("is", $work_history_id, $alumni_email);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    // If the work history exists, fetch the data
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
         $company_name = htmlspecialchars($row['company_name']);
@@ -39,34 +34,28 @@ if (isset($_GET['id'])) {
     exit();
 }
 
-// Check if the form is submitted to update the work history
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize input data to prevent SQL injection
     $company_name = htmlspecialchars($_POST['company_name']);
     $position = htmlspecialchars($_POST['position']);
     $start_date = $_POST['start_date'];
     $end_date = $_POST['end_date'];
     $job_description = htmlspecialchars($_POST['job_description']);
 
-    // Prepare and execute the SQL statement to update the data
     $sql = "UPDATE work_history SET company_name = ?, position = ?, start_date = ?, end_date = ?, job_description = ? 
             WHERE id = ? AND alumni_email = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssssis", $company_name, $position, $start_date, $end_date, $job_description, $work_history_id, $alumni_email);
 
     if ($stmt->execute()) {
-        // Redirect to alumni home page after successful update
         header("Location: alumni_home.php?status=updated");
         exit();
     } else {
         echo "Error: " . $stmt->error;
     }
 
-    // Close the prepared statement
     $stmt->close();
 }
 
-// Close the database connection
 $conn->close();
 ?>
 
