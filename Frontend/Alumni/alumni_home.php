@@ -38,6 +38,17 @@ if ($result->num_rows > 0) {
     exit();
 }
 
+// Retrieve Work History from the database
+$work_history_sql = "SELECT * FROM work_history WHERE alumni_email = ?";
+$work_stmt = $conn->prepare($work_history_sql);
+$work_stmt->bind_param("s", $user_identifier);
+$work_stmt->execute();
+$work_result = $work_stmt->get_result();
+$work_history = [];
+while ($work_row = $work_result->fetch_assoc()) {
+    $work_history[] = $work_row;
+}
+
 $conn->close();
 ?>
 
@@ -60,7 +71,7 @@ $conn->close();
         }
         .container {
             background-color: #fafafa;
-            height: 100vh;
+            height: 100%;
             z-index: -2;
             box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
             padding-left: 10px; 
@@ -90,23 +101,16 @@ $conn->close();
             font-size: 1.2rem;
             color: #222222;
             font-family: 'Noticia Text', serif;
-
-        }
-        .filters {
-            margin-bottom: 10px;
-        }
-        .filters select, .filters input[type="text"] {
-            margin: 3px;
         }
 
-        .btn-primary{
+        .btn-primary {
             font-family: 'Noticia Text', serif;
             background-color: #a00c30;
             border-color: #a00c30;
             margin: 3px;
         }
 
-        .btn-primary:hover{
+        .btn-primary:hover {
             font-family: 'Noticia Text', serif;
             background-color: #da1a32;
             border-color: #da1a32;
@@ -127,15 +131,24 @@ $conn->close();
             transition: background-color 0.3s ease;
         }
         .logout:hover {
-            background-color:  #da1a32;
+            background-color: #da1a32;
+        }
+
+        .work-history {
+            margin-top: 30px;
+        }
+
+        .work-history table {
+            width: 100%;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-    <div class="logo">
-                <img alt="jee" src="../../images/banner.png">
-            </div>
+        <div class="logo">
+            <img alt="jee" src="../../images/banner.png">
+        </div>
         <h1>Welcome, <?php echo $first_name; ?>!</h1>
         <p><strong>Full Name:</strong> <?php echo $first_name . " " . $last_name; ?></p>
         <p><strong>Email:</strong> <?php echo $email; ?></p>
@@ -149,6 +162,42 @@ $conn->close();
         <p><strong>Type of Employment:</strong> <?php echo $type_of_employment; ?></p>
         <p><strong>Year Hired:</strong> <?php echo $year_hired; ?></p>
 
+        <!-- Work History Section -->
+        <div class="work-history">
+            <h3>Work History</h3>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Company Name</th>
+                        <th>Position</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Job Description</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php if (count($work_history) > 0): ?>
+                        <?php foreach ($work_history as $work): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($work['company_name']); ?></td>
+                                <td><?php echo htmlspecialchars($work['position']); ?></td>
+                                <td><?php echo htmlspecialchars($work['start_date']); ?></td>
+                                <td><?php echo htmlspecialchars($work['end_date']); ?></td>
+                                <td><?php echo htmlspecialchars($work['job_description']); ?></td>
+                                <td><a href="edit_work_history.php?id=<?php echo $work['id']; ?>" class="btn btn-primary">Edit</a></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="6" class="text-center">No work history available.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+
+        <a href="add_work_history.php" class="btn btn-primary">Add Work History</a>
         <a href="../../logout.php" class="logout">Logout</a>
     </div>
 </body>
