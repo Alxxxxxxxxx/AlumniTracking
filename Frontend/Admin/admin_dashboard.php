@@ -57,41 +57,96 @@ $result = $conn->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../images/logo.ico" type="image/logo">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: hsl(51, 100.00%, 89.40%);
-            color: rgb(26, 26, 26);
+            font-family: 'Noticia Text', serif;
+            background: url('../../images/namebg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #222222;
         }
+        .container {
+            background-color: #fafafa;
+            height: 100vh;
+            z-index: -2;
+            box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
+            padding-left: 10px; 
+            padding-right: 10px; 
+        }
+
+        .logo {
+            padding-top: 30px;
+            width: 107px;
+            height: 112px;
+            position: relative; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1;
+        }
+
         h1 {
-            color: rgb(49, 49, 49);
+            font-size: 3rem;
+            color: #222222;
             text-align: center;
+            font-family: 'Shrikhand', sans-serif;
+            padding-top: 50px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: #222222;
+            font-family: 'Noticia Text', serif;
+            margin-bottom: 40px;
+
         }
         .filters {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
         .filters select, .filters input[type="text"] {
-            margin-right: 10px;
+            margin: 3px;
         }
+
+        .btn-primary{
+            font-family: 'Noticia Text', serif;
+            background-color: #a00c30;
+            border-color: #a00c30;
+            margin: 3px;
+        }
+
+        .btn-primary:hover{
+            font-family: 'Noticia Text', serif;
+            background-color: #da1a32;
+            border-color: #da1a32;
+            margin: 3px;
+        }
+
         .logout {
             display: block;
             text-align: center;
-            color: #ffffff;
-            background-color: #ff4c4c;
+            color: #fafafa;
+            background-color: #a00c30;
             padding: 10px;
             margin-top: 20px;
             border-radius: 5px;
+            font-family: 'Noticia Text', serif;
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
         .logout:hover {
-            background-color: #cc0000;
+            background-color:  #da1a32;
         }
     </style>
 </head>
 <body>
     <div class="container">
+            <div class="wavy-section">
+            <div class="logo">
+                <img alt="jee" src="../../images/banner.png">
+            </div>
+            </div>
         <h1>Admin Dashboard</h1>
         <p class="text-center">Welcome, Admin!</p>
 
@@ -124,6 +179,7 @@ $result = $conn->query($sql);
             </select>
             <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $filters['search'] ?>" style="width: auto; display: inline-block;">
             <button type="submit" class="btn btn-primary">Filter</button>
+
         </form>
 
         <?php if ($result->num_rows > 0): ?>

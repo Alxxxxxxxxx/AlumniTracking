@@ -47,59 +47,95 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../images/logo.ico" type="image/logo">
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color:rgb(36, 36, 36);
-            color:rgb(31, 31, 31);
-            margin: 0;
-            padding: 0;
+            font-family: 'Noticia Text', serif;
+            background: url('../../images/namebg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #222222;
+        }
+        .container {
+            background-color: #fafafa;
+            height: 100vh;
+            z-index: -2;
+            box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
+            padding-left: 10px; 
+            padding-right: 10px; 
         }
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color:rgb(255, 234, 195);
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(228, 228, 228, 0.5);
+        .logo {
+            padding-top: 30px;
+            width: 107px;
+            height: 112px;
+            position: relative; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1;
         }
 
         h1 {
-            color: #ff4c4c;
+            font-size: 3rem;
+            color: #222222;
             text-align: center;
-            margin-bottom: 20px;
+            font-family: 'Shrikhand', sans-serif;
+            padding-top: 50px;
+            margin-bottom: 70px;
         }
 
         p {
-            margin: 10px 0;
-            font-size: 1.1em;
+            font-size: 1.2rem;
+            color: #222222;
+            font-family: 'Noticia Text', serif;
+
+        }
+        .filters {
+            margin-bottom: 10px;
+        }
+        .filters select, .filters input[type="text"] {
+            margin: 3px;
         }
 
-        strong {
-            color: #ff6666;
+        .btn-primary{
+            font-family: 'Noticia Text', serif;
+            background-color: #a00c30;
+            border-color: #a00c30;
+            margin: 3px;
         }
 
-        a {
+        .btn-primary:hover{
+            font-family: 'Noticia Text', serif;
+            background-color: #da1a32;
+            border-color: #da1a32;
+            margin: 3px;
+        }
+
+        .logout {
             display: block;
-            margin-top: 20px;
             text-align: center;
-            text-decoration: none;
-            color: #ffffff;
-            background-color: #ff4c4c;
-            padding: 10px 15px;
+            color: #fafafa;
+            background-color: #a00c30;
+            padding: 10px;
+            margin-top: 20px;
             border-radius: 5px;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
-
-        a:hover {
-            background-color: #cc0000;
+        .logout:hover {
+            background-color:  #da1a32;
         }
     </style>
 </head>
 <body>
     <div class="container">
+    <div class="logo">
+                <img alt="jee" src="../../images/banner.png">
+            </div>
         <h1>Welcome, <?php echo $first_name; ?>!</h1>
         <p><strong>Full Name:</strong> <?php echo $first_name . " " . $last_name; ?></p>
         <p><strong>Email:</strong> <?php echo $email; ?></p>
@@ -113,7 +149,7 @@ $conn->close();
         <p><strong>Type of Employment:</strong> <?php echo $type_of_employment; ?></p>
         <p><strong>Year Hired:</strong> <?php echo $year_hired; ?></p>
 
-        <a href="../../logout.php">Logout</a>
+        <a href="../../logout.php" class="logout">Logout</a>
     </div>
 </body>
 </html>

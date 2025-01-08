@@ -102,17 +102,97 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Form</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../images/logo.ico" type="image/logo">
+    <style>
+       body {
+            font-family: 'Noticia Text', serif;
+            background: url('../../images/namebg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #222222;
+        }
+        .container {
+            background-color: #fafafa;
+            height: 100%;
+            z-index: -1;
+            box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
+            padding-left: 20px; /* Adjust the left padding as needed */
+            padding-right: 20px; /* Adjust the right padding as needed */
+        }
+
+        h1 {
+            padding-top: 40px;
+            font-size: 3rem;
+            color: #a00c30;
+            text-align: center;
+            font-family: 'Shrikhand', sans-serif;
+        }
+        h3 {
+            font-size: 1.1rem;
+            color: #222222;
+            font-family: 'Noticia Text', serif;
+            margin-bottom: 40px;
+        }
+
+        h4 {
+            font-size: 1.5rem;
+            color: #a00c30;
+            font-family: 'Noticia Text', serif;
+            font-weight: bolder;
+            margin-bottom: 40px;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #222222;
+            font-family: 'Noticia Text', serif;
+            margin-bottom: 40px;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #222222;
+        }
+
+        .btn-primary{
+            font-family: 'Noticia Text', serif;
+            background-color: #a00c30;
+            border-color: #a00c30;
+            margin-bottom: 50px;
+        }
+
+        .btn-primary:hover{
+            font-family: 'Noticia Text', serif;
+            background-color: #da1a32;
+            border-color: #da1a32;
+        }
+        .form-check-input {
+            width: 20px;
+            height: 20px;
+            appearance: none;
+            background-color: #fff;
+            border: 2px solid #333;
+            border-radius: 1px;
+            cursor: pointer;
+        }
+
+        .form-check-input:checked {
+            background-color: #da1a32; 
+            border-color: #da1a32;
+        }
+    </style>
 </head>
 <body>
-<div class="container my-5">
-    <h2 class="mb-4 text-center">Alumni Registration</h2>
-    <p class="text-center">
+<div class="container">
+    <h1 class="mb-4 text-center"> Alumni Registration </h1>
+    <h3 class="text-center">
         Rest assured that your information for this questionnaire will be treated with confidentiality.
         <br><small>*Add Data Privacy Act and Terms & Conditions</small>
-    </p>
+    </h3>
     <form action="" method="POST">
         <!-- PART 1: PERSONAL INFORMATION -->
-        <h4 class="mb-3">Personal Information</h4>
+        <h4 class="mb-3">‣ Personal Information</h4>
         <p>Be reminded that if no answers are applicable, write or choose "N/A.”.</p>
 
         <!-- Display Email -->
@@ -156,7 +236,7 @@ $conn->close();
         </div>
 
         <!-- PART 2: STRAND AND GRADUATION YEAR -->
-        <h4 class="mb-3">Strand and Graduation Year</h4>
+        <h4 class="mb-3">‣ Strand and Graduation Year</h4>
         <div class="mb-3">
             <label class="form-label">Strand</label>
             <div>
@@ -192,7 +272,7 @@ $conn->close();
         </div>
 
         <!-- PART 3: CONNECTION TO SCHOOL -->
-        <h4 class="mb-3">Connection to Sacred Heart of Jesus Catholic School</h4>
+        <h4 class="mb-3">‣ Connection to Sacred Heart of Jesus Catholic School</h4>
         <div class="mb-3">
             <label for="involvement" class="form-label">Involvement</label>
             <input type="text" name="involvement" id="involvement" class="form-control" value="<?php echo $involvement; ?>" placeholder="Ex. SC President 2024-2025" required>
@@ -203,7 +283,7 @@ $conn->close();
         </div>
 
         <!-- PART 4: EMPLOYMENT -->
-        <h4 class="mb-3">Employment</h4>
+        <h4 class="mb-3">‣ Employment</h4>
         <div class="mb-3">
             <label for="current_status" class="form-label">Current Status</label>
             <select name="current_status" id="current_status" class="form-select" required>
