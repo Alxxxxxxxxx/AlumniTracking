@@ -226,7 +226,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
     <div class="login-container">
-    <a href="../login.php" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
         <h2>Sign Up</h2>
 
 <form method="POST">
