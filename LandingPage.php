@@ -14,20 +14,19 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <link rel="icon" href="images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
-        /* Ensure the body takes up full height and uses flexbox */
         html, body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
-            font-family: 'Shrikhand', sans-serif;
-            
+            font-family: 'Shrikhand', sans-serif;    
         }
 
         body {
             background: url('images/schoolback.jpg') no-repeat center center fixed;
             background-size: cover;
         }
+
         body::after {
             content: '';
             position: absolute;
@@ -38,8 +37,8 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             background: rgba(243, 243, 243, 0.7);
             z-index: -1;
         }
-/* Top Banner and Other Styles */
-.top_banner {
+
+        .top_banner {
             height: 120px;
             width: 100%;
             background: transparent;
@@ -95,10 +94,9 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             position: relative; 
         }
 
-        /* Wavy Sidebar */
         .wavy-sidebar {
             position: fixed;
-            left: -800px; /* Initially hidden */
+            left: -800px; 
             top: 0;
             width: 800px;
             height: 100vh;
@@ -106,27 +104,24 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             padding: 20px;
             clip-path: path('M 0 0 C 250 20, 50 150, 260 220 C 500 300, 200 500, 450 660 C 700 800, 1000 1000, 600 1000 L 0 1000 Z');
-            z-index: 2; /* Set the z-index to 2, below footer and logo */
-            transition: left 0.5s ease; /* Smooth transition for the sidebar */
+            z-index: 2; 
+            transition: left 0.5s ease; 
         }
 
-        /* Style the list of sidebar items */
         .wavy-sidebar ul {
             list-style: none;
             padding: 0;
             margin-top: 150px;
         }
 
-        /* Style for each list item in the sidebar */
         .wavy-sidebar li {
             margin: 20px 0;
         }
 
-        /* Style for the links (buttons) inside the sidebar */
         .wavy-sidebar li a {
             display: block;
             text-decoration: none;
-            color: white; /* Make the link text white */
+            color: white; 
             font-size: 30px;
             font-family: 'Noticia Text', serif;
             padding: 10px;
@@ -134,121 +129,116 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             transition: background-color 0.3s ease, padding 0.3s ease;
         }
 
-        /* Hover effect for the links */
         .wavy-sidebar li a:hover {
-            color: #FE0000; /* Change background color on hover */
-            padding-left: 20px; /* Slightly move text to the left */
+            color: #FE0000; 
+            padding-left: 20px; 
             font-weight: bolder;
         }
-        .wavy-sidebar li a.active {
-            color: #222222;         /* Text color for active link */
-            font-weight: bold;      /* Make the text bold */
-    }
 
-        /* Footer Styles */
+        .wavy-sidebar li a.active {
+            color: #222222;         
+            font-weight: bold;     
+        }
+
         footer {
             background-color: #a00c30;
             padding: 5px 5px;
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            position: fixed;  /* Fixes the footer at the bottom */
-            bottom: 0;        /* Positions it at the bottom */
-            left: 0;          /* Ensures it spans the entire width */
-            width: 100%;      /* Ensures it spans the entire width */
-            z-index: 3; /* Footer's z-index is higher */
+            position: fixed;  
+            bottom: 0;       
+            left: 0;          
+            width: 100%;      
+            z-index: 3; 
         }
 
-
         .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.quote {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #fafafa;
-}
+        .quote {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fafafa;
+        }
 
-.footer-content {
-    display: flex;             /* Flexbox to arrange items in a row */
-    justify-content: center;   /* Center items horizontally */
-    gap: 100px;                /* Space between items */
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    width: 100%;               /* Ensure the container takes up the full width */
-}
+        .footer-content {
+            display: flex;             
+            justify-content: center;   
+            gap: 100px;             
+            margin: 10px 0;          
+            width: 100%;             
+        }
 
-.footer-item {
-    background-color: #222222;
-    padding: 10px 20px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;       /* Center vertically */
-    justify-content: center;   /* Center horizontally */
-    gap: 10px;
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-    flex: 1;                   /* Ensure all footer items have the same width */
-    text-align: center;        /* Align content in the center */
-}
+        .footer-item {
+            background-color: #222222;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;     
+            justify-content: center;   
+            gap: 10px;
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+            flex: 1;                   
+            text-align: center;        
+        }
 
-.footer-location {
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-}
+        .footer-location {
+            margin: 10px 0;            
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+        }
 
-.footer-item i, .footer-location i {
-    display: inline-block;
-    color: white;
-    font-size: 1.3rem;
-}
+        .footer-item i, .footer-location i {
+            display: inline-block;
+            color: white;
+            font-size: 1.3rem;
+        }
 
-/* Custom Font for Number, Facebook, and Gmail */
-.footer-text {
-    font-family: 'Courier New', monospace; 
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #222222;
-}
+        .footer-text {
+            font-family: 'Courier New', monospace; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #222222;
+        }
 
-.fas.fa-map-marker-alt {
-    color: #fafafa;
-}
+        .fas.fa-map-marker-alt {
+            color: #fafafa;
+        }
 
-.facebook-link a {
-    color: #fafafa;
-    text-decoration: none; 
-}
+        .facebook-link a {
+            color: #fafafa;
+            text-decoration: none; 
+        }
 
-.facebook-link a:hover {
-    text-decoration: underline; 
-}
+        .facebook-link a:hover {
+            text-decoration: underline; 
+        }
 
-        /* Slideshow container */
         .slideshow-container {
-    max-width: 810px;
-    position: relative;
-    margin: 0;
-    text-align: center;  /* Center the slideshow */
-    float: right;        /* Float to the right side */
-    margin-right: 100px;  /* Add space between the container and the right edge */
-    border: 10px solid #fafafa; /* Add a border with color (#222222 is a dark gray) */
-    border-radius: 10px; /* Optional: Adds rounded corners to the border */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Adds shadow around the border */
-}
+            max-width: 810px;
+            position: relative;
+            margin: 0;
+            text-align: center;  
+            float: right;        
+            margin-right: 100px;  
+            border: 10px solid #fafafa; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
         .slide {
             display: none;
-            width: 80%;  /* Adjust the width here */
-            margin: auto;  /* Ensure the images are centered */
-            height: auto; /* Maintain the aspect ratio of the image */
+            width: 80%;  
+            margin: auto;  
+            height: auto; 
         }
         .fade {
             animation-name: fade;
             animation-duration: 1.5s;
         }
-
         @keyframes fade {
             from {
                 opacity: 0.4;
@@ -257,11 +247,8 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 opacity: 1;
             }
         }
-
-
     </style>
 </head>
-
 <body>
 <form name="aspnetForm" method="post" action="main.php">
     <div class="top_banner">
@@ -285,17 +272,11 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     </div>
 
     <div class="slideshow-container">
-        <!-- Slide 1 -->
         <img class="slide fade" src="images/slide1.jpg" style="width:100%">
-        <!-- Slide 2 -->
         <img class="slide fade" src="images/slide2.jpg" style="width:100%">
-        <!-- Slide 3 -->
         <img class="slide fade" src="images/slide3.jpg" style="width:100%">
     </div>
 
-
-
-    <!-- Footer-->
     <footer>
         <div class="footer-container">
             <p class="quote">JESUS MEEK AND HUMBLE OF HEART, MAKE OUR HEARTS LIKE UNTO THINE</p>

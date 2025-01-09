@@ -115,6 +115,7 @@ $conn->close();
             background-size: cover;
             color: #222222;
         }
+        
         .container {
             background-color: #fafafa;
             height: 100%;
@@ -131,6 +132,7 @@ $conn->close();
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
         }
+
         h3 {
             font-size: 1.1rem;
             color: #222222;
@@ -170,6 +172,7 @@ $conn->close();
             background-color: #da1a32;
             border-color: #da1a32;
         }
+
         .form-check-input {
             width: 20px;
             height: 20px;
@@ -247,7 +250,6 @@ $conn->close();
         <h4 class="mb-3">‣ Personal Information</h4>
         <p>Be reminded that if no answers are applicable, write or choose "N/A.”.</p>
 
-        <!-- Display Email -->
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
             <input class="form-control" value="<?php echo $email; ?>" disabled>

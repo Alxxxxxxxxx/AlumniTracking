@@ -17,6 +17,217 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Alumni Tracking System</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
+    <link rel="icon" href="../images/logo.ico" type="image/logo">
+    <link href="table.css" type="text/css" rel="stylesheet">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            font-family: 'Shrikhand', sans-serif;
+        }
+
+        body {
+            background: url('../../images/namebg.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .login-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.5);
+            padding: 100px;
+            border-radius: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            width: 800px;
+            height: 400px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-family: 'Shrikhand', sans-serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #222222;
+            font-size: 2.5rem;
+            font-weight: lighter;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            box-sizing: border-box;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            background: #a00c30;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-family: 'Noticia Text', serif;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .login-container button:hover {
+            background: #222222;
+        }
+
+        .top_banner {
+            height: 120px;
+            width: 100%;
+            background: transparent;
+        }
+
+        .in_banner {
+            width: 100%;
+            margin: 0 auto;
+            height: 120px;
+            background: transparent;
+        }
+
+        .banner_text {
+            float: left;
+            width: 1000px;
+            margin: 37px 0 0 30px;
+            text-align: left;
+        }
+
+        .banner_text h1 {
+            font-size: 25pt;
+            color: #fafafa;
+            margin: 0;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Shrikhand', cursive;
+        }
+
+        .banner_text h2 {
+            font-size: 25pt;
+            color: #fafafa;
+            margin: 0;
+            margin-top: -20px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Noticia Text', serif;
+        }
+
+        .glogo {
+            width: 102px;
+            height: 120px;
+            float: left;
+            margin: 0px 5px 0 5px;
+        }
+
+        .logo {
+            float: left;
+            width: 107px;
+            height: 112px;
+            margin: 20px 0 0 20px;
+            cursor: pointer;
+            z-index: 10; 
+            position: relative; 
+        }
+
+        .captcha-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px 0;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color:transparent;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: lighter;
+        }
+
+        .suh {
+            background-color:transparent;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            font-weight: lighter;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .suh2 {
+            background-color:transparent;
+            color: #222222;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .suh2:hover {
+            color: #a00c30;
+        }
+
+        .back-button:hover {
+            color: #222222;
+        }
+
+        .back-button i {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="top_banner">
+        <div class="in_banner">
+            <div class="logo">
+                <img alt="jee" src="../../images/banner.png">
+            </div>
+            <div class="banner_text">
+                <h1>SACRED HEART OF JESUS CATHOLIC SCHOOL</h1>
+                <h2>HOME OF THE MEEK AND HUMBLE</h2>
+            </div>
+        </div>
+    </div>
+    <div class="login-container">
+    <a href="../login.php" class="back-button"><i class="fas fa-arrow-left"></i> Back</a>
+        <h2>Sign Up</h2>
 
 <form method="POST">
     <input type="text" name="username" placeholder="Username" required />
@@ -26,5 +237,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </form>
 
 <p>
-    <a href="../login.php" style="text-decoration: none; color: #ab140a; font-weight: bold;">Back to Login</a>
+    <a href="../login.php" class="suh2">Back to Login</a>
 </p>
+</div>
+</body>
+</html>

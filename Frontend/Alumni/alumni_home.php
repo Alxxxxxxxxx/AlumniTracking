@@ -69,6 +69,7 @@ $conn->close();
             background-size: cover;
             color: #222222;
         }
+        
         .container {
             background-color: #fafafa;
             height: 100%;
@@ -130,6 +131,7 @@ $conn->close();
             font-weight: bold;
             transition: background-color 0.3s ease;
         }
+
         .logout:hover {
             background-color: #da1a32;
         }

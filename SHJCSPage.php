@@ -14,7 +14,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <link rel="icon" href="images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
-        /* Ensure the body takes up full height and uses flexbox */
         html, body {
             height: 100%;
             margin: 0;
@@ -26,8 +25,8 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         body {
             background: #FAFAFA;
         }
-/* Top Banner and Other Styles */
-.top_banner {
+
+        .top_banner {
             height: 120px;
             width: 100%;
             background: transparent;
@@ -83,10 +82,9 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             position: relative; 
         }
 
-        /* Wavy Sidebar */
         .wavy-sidebar {
             position: fixed;
-            left: -800px; /* Initially hidden */
+            left: -800px; 
             top: 0;
             width: 800px;
             height: 100vh;
@@ -94,27 +92,24 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             padding: 20px;
             clip-path: path('M 0 0 C 250 20, 50 150, 260 220 C 500 300, 200 500, 450 660 C 700 800, 1000 1000, 600 1000 L 0 1000 Z');
-            z-index: 2; /* Set the z-index to 2, below footer and logo */
-            transition: left 0.5s ease; /* Smooth transition for the sidebar */
+            z-index: 2; 
+            transition: left 0.5s ease; 
         }
 
-        /* Style the list of sidebar items */
         .wavy-sidebar ul {
             list-style: none;
             padding: 0;
             margin-top: 150px;
         }
 
-        /* Style for each list item in the sidebar */
         .wavy-sidebar li {
             margin: 20px 0;
         }
 
-        /* Style for the links (buttons) inside the sidebar */
         .wavy-sidebar li a {
             display: block;
             text-decoration: none;
-            color: white; /* Make the link text white */
+            color: white; 
             font-size: 30px;
             font-family: 'Noticia Text', serif;
             padding: 10px;
@@ -122,154 +117,148 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             transition: background-color 0.3s ease, padding 0.3s ease;
         }
 
-        /* Hover effect for the links */
         .wavy-sidebar li a:hover {
-            color: #FE0000; /* Change background color on hover */
-            padding-left: 20px; /* Slightly move text to the left */
+            color: #FE0000; 
+            padding-left: 20px; 
             font-weight: bolder;
         }
         .wavy-sidebar li a.active {
-            color: #222222;         /* Text color for active link */
-            font-weight: bold;      /* Make the text bold */
-    }
+            color: #222222;        
+            font-weight: bold;      
+        }
 
-        /* Footer Styles */
         footer {
             background-color: #a00c30;
             padding: 5px 5px;
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            position: fixed;  /* Fixes the footer at the bottom */
-            bottom: 0;        /* Positions it at the bottom */
-            left: 0;          /* Ensures it spans the entire width */
-            width: 100%;      /* Ensures it spans the entire width */
-            z-index: 3; /* Footer's z-index is higher */
+            position: fixed;  
+            bottom: 0;        
+            left: 0;         
+            width: 100%;      
+            z-index: 3; 
         }
 
-
         .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            max-width: 1200px;
+            margin: 0 auto;
+        }
 
-.quote {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #fafafa;
-}
+        .quote {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fafafa;
+        }
 
-.footer-content {
-    display: flex;             /* Flexbox to arrange items in a row */
-    justify-content: center;   /* Center items horizontally */
-    gap: 100px;                /* Space between items */
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    width: 100%;               /* Ensure the container takes up the full width */
-}
+        .footer-content {
+            display: flex;             
+            justify-content: center;   
+            gap: 100px;               
+            margin: 10px 0;           
+            width: 100%;               
+        }
 
-.footer-item {
-    background-color: #222222;
-    padding: 10px 20px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;       /* Center vertically */
-    justify-content: center;   /* Center horizontally */
-    gap: 10px;
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-    flex: 1;                   /* Ensure all footer items have the same width */
-    text-align: center;        /* Align content in the center */
-}
+        .footer-item {
+            background-color: #222222;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;       
+            justify-content: center;   
+            gap: 10px;
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+            flex: 1;                   
+            text-align: center;       
+            }
 
-.footer-location {
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-}
+        .footer-location {
+            margin: 10px 0;           
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+        }
 
-.footer-item i, .footer-location i {
-    display: inline-block;
-    color: white;
-    font-size: 1.3rem;
-}
+        .footer-item i, .footer-location i {
+            display: inline-block;
+            color: white;
+            font-size: 1.3rem;
+        }
 
-/* Custom Font for Number, Facebook, and Gmail */
-.footer-text {
-    font-family: 'Courier New', monospace; 
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #222222;
-}
+        .footer-text {
+            font-family: 'Courier New', monospace; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #222222;
+        }
 
-.fas.fa-map-marker-alt {
-    color: #fafafa;
-}
+        .fas.fa-map-marker-alt {
+            color: #fafafa;
+        }
 
-.facebook-link a {
-    color: #fafafa;
-    text-decoration: none; 
-}
+        .facebook-link a {
+            color: #fafafa;
+            text-decoration: none; 
+        }
 
-.facebook-link a:hover {
-    text-decoration: underline; 
-}
-
+        .facebook-link a:hover {
+            text-decoration: underline; 
+        }
 
         .content-section {
-    display: flex;
-    justify-content: space-around;
-    margin: 0;
-    padding: 0;
-}
+            display: flex;
+            justify-content: space-around;
+            margin: 0;
+            padding: 0;
+        }
 
-.content-box {
-    display: flex;
-    align-items: flex-start;  /* Align items to the top */
-    justify-content: space-between;
-    background-color: transparent;
-}
+        .content-box {
+            display: flex;
+            align-items: flex-start; 
+            justify-content: space-between;
+            background-color: transparent;
+        }
 
-.vision, .mission, .identity, .corevalues {
-    flex: 1;
-    padding: 30px;
-    display: flex;
-    flex-direction: column;  /* Stack elements vertically */
-}
+        .vision, .mission, .identity, .corevalues {
+            flex: 1;
+            padding: 30px;
+            display: flex;
+            flex-direction: column; 
+        }
 
-.vision h2, .mission h2, .identity h2, .corevalues h2 {
-    font-size: 30px;
-    color: #da1a32;
-    margin-bottom: 15px; /* Space between the header and content */
-    text-align: center;
-    font-weight: lighter;
-}
+        .vision h2, .mission h2, .identity h2, .corevalues h2 {
+            font-size: 30px;
+            color: #da1a32;
+            margin-bottom: 15px; 
+            text-align: center;
+            font-weight: lighter;
+        }
 
-.vision p, .mission p, .identity p{
-    font-size: 16px;
-    color: #222222;
-    margin-top: 0;  /* Remove any default margin that could push the content down */
-    text-align: justify;
-    font-family: 'Noticia Text', serif;
-    font-weight: bold;
-    line-height: 2;
-}
+        .vision p, .mission p, .identity p{
+            font-size: 16px;
+            color: #222222;
+            margin-top: 0; 
+            text-align: justify;
+            font-family: 'Noticia Text', serif;
+            font-weight: bold;
+            line-height: 2;
+        }
 
-.corevalues h3 {
-    font-size: 30px;
-    color: #222222;
-    margin-top: 0;
-    text-align: justify;
-    font-family: 'Noticia Text', serif;
-    font-weight: bolder;
-    line-height: 1.5; 
-}
+        .corevalues h3 {
+            font-size: 30px;
+            color: #222222;
+            margin-top: 0;
+            text-align: justify;
+            font-family: 'Noticia Text', serif;
+            font-weight: bolder;
+            line-height: 1.5; 
+        }
 
-.vertical-line {
-    border-left: 2px solid #bbbbbb; /* Vertical line between sections */
-    height: 85%;
-    margin-top: 50px;
-}
-
+        .vertical-line {
+            border-left: 2px solid #bbbbbb; 
+            height: 85%;
+            margin-top: 50px;
+        }
     </style>
 </head>
 
@@ -302,7 +291,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                         <p>
                         A people called by the FATHER in JESUS CHRIST to become a COMMUNITY of persons with FULLNESS OF LIFE, witnessing to the KINGDOM OF GOD by living the PASCHAL MYSTERY in the power of the HOLY SPIRIT with MARY AS COMPANION                        </p>
                 </div>
-        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+        <div class="vertical-line"></div> 
                 <div class="mission">
                     <h2>Mission</h2>
                         <p>
@@ -314,13 +303,13 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                         <br>5. Exercise efficient management and delivery of services.
                         </p>
                 </div>
-        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+        <div class="vertical-line"></div> 
                 <div class="identity">
                     <h2>Identity</h2>
                         <p>
                         Inflamed by the Sacred Heart of Jesus, inspired of the APOSTOLIC VISON of the Archdiocese of Manila and in adherence to the thrusts of RCAM ES, the SHJCS envisions itself as a Catholic Educational Institution that proclaims the Gospel, forms human persons and renews the Church and Nation.                        </p>
                 </div>
-        <div class="vertical-line"></div> <!-- Vertical line between sections -->
+        <div class="vertical-line"></div> 
                 <div class="corevalues">
                     <h2>Core Values</h2>
                         <h3>
@@ -331,8 +320,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                         <br>SIMPLICITY
                         </h3>              
                 </div>
-
-    <!-- Footer-->
     <footer>
         <div class="footer-container">
             <p class="quote">JESUS MEEK AND HUMBLE OF HEART, MAKE OUR HEARTS LIKE UNTO THINE</p>

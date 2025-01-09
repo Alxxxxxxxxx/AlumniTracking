@@ -85,7 +85,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="icon" href="../images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
-        /* Styles (same as provided in the second code) */
         html, body {
             height: 100%;
             margin: 0;
@@ -131,6 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             border-radius: 5px;
             font-size: 1rem;
             font-family: 'Noticia Text', serif;
+            box-sizing: border-box;
         }
 
         .login-container button {
@@ -143,6 +143,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-size: 1.2rem;
             font-family: 'Noticia Text', serif;
             cursor: pointer;
+            box-sizing: border-box;
         }
 
         .login-container button:hover {
@@ -207,10 +208,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .captcha-container {
             display: flex;
-            justify-content: center; /* Centers horizontally */
-            align-items: center; /* Centers vertically */
-            margin: 20px 0; /* Optional: Adds space above and below */
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px 0;  
         }
+
         .back-button {
             position: absolute;
             top: 10px;
@@ -226,6 +228,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             align-items: center;
             font-weight: lighter;
         }
+        
         .suh {
             background-color:transparent;
             border-radius: 10px;
@@ -238,6 +241,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             color: white;
             font-size: 1.2rem;
         }
+
         .suh2 {
             background-color:transparent;
             color: #222222;
@@ -254,6 +258,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .suh2:hover {
             color: #a00c30;
         }
+
         .back-button:hover {
             color: #222222;
         }
@@ -286,7 +291,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <div class="g-recaptcha" data-sitekey="6LeswLAqAAAAANMxYj8aJkCz8UimL0NOJ3drnCfQ"></div>
             </div>
             <?php if (isset($error)): ?>
-                <p style="color: red;"><?= htmlspecialchars($error) ?></p>
+                <p style="color: #da1a32;;"><?= htmlspecialchars($error) ?></p>
             <?php endif; ?>
             <button type="submit">Login</button>
         </form>
