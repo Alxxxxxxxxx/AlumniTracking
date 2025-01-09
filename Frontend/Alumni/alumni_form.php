@@ -350,61 +350,98 @@ $conn->close();
                 <option value="Not-Employed" <?php echo ($current_status == 'Not-Employed') ? 'selected' : ''; ?>>Not-Employed</option>
             </select>
         </div>
-        <div class="mb-3">
+        <div id="university_details" class="mb-3">
             <label for="university_employer" class="form-label">Name of University / Business / Employer</label>
-            <input type="text" name="university_employer" id="university_employer" class="form-control" value="<?php echo $university_employer; ?>" required>
+            <input type="text" name="university_employer" id="university_employer" class="form-control" value="<?php echo $university_employer; ?>" >
         </div>
-        <div class="mb-3">
+        <div id="position_details" class="mb-3">
             <label for="position_year_level" class="form-label">Position or Year Level</label>
-            <input type="text" name="position_year_level" id="position_year_level" class="form-control" value="<?php echo $position_year_level; ?>" required>
+            <input type="text" name="position_year_level" id="position_year_level" class="form-control" value="<?php echo $position_year_level; ?>" >
         </div>
-        <div class="mb-3">
+        <div id="sector_details" class="mb-3">
             <label for="sector" class="form-label">Sector</label>
-            <select name="sector" id="sector" class="form-select" required>
+            <select name="sector" id="sector" class="form-select" >
                 <option value="Public" <?php echo ($sector == 'Public') ? 'selected' : ''; ?>>Public</option>
                 <option value="Private" <?php echo ($sector == 'Private') ? 'selected' : ''; ?>>Private</option>
             </select>
         </div>
-        <div class="mb-3">
+
+        <!-- Conditional Fields: Type of Employment and Year Hired -->
+        <div id="employment_details" class="mb-3">
             <label for="type_of_employment" class="form-label">Type of Employment</label>
-            <select name="type_of_employment" id="type_of_employment" class="form-select" required>
+            <select name="type_of_employment" id="type_of_employment" class="form-select" >
                 <option value="Full-time" <?php echo ($type_of_employment == 'Full-time') ? 'selected' : ''; ?>>Full-time</option>
                 <option value="Part-time" <?php echo ($type_of_employment == 'Part-time') ? 'selected' : ''; ?>>Part-time</option>
                 <option value="Intern" <?php echo ($type_of_employment == 'Intern') ? 'selected' : ''; ?>>Intern</option>
             </select>
         </div>
-        <div class="mb-3">
+        <div id="year_details" class="mb-3">
             <label for="year_hired" class="form-label">Year Hired</label>
-            <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>" required>
+            <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>" >
         </div>
 
         <!-- AGREEMENT AND SUBMISSION -->
         <div class="mb-3 form-check">
-            <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" <?php echo ($confirm_data == 1) ? 'checked' : ''; ?> required>
+            <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" <?php echo ($confirm_data == 1) ? 'checked' : ''; ?> >
             <label for="confirm_data" class="form-check-label">I confirm that the data provided is accurate.</label>
         </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</div>
+        </form>
+        </div>
 
-
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="successModalLabel">Success</h5>
-            </div>
-            <div class="modal-body">
-                Data Successfully Received.
+        <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Success</h5>
+                    </div>
+                    <div class="modal-body">
+                        Data Successfully Received.
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+
+        <script>
+            // JavaScript to conditionally hide/show employment details based on current status
+            document.getElementById('current_status').addEventListener('change', function() {
+                var currentStatus = this.value;
+                var employmentDetails = document.getElementById('employment_details');
+                var yearDetails = document.getElementById('year_details');
+                var univDetails = document.getElementById('university_details');
+                var positionDetails = document.getElementById('position_details');
+                var sectorDetails = document.getElementById('sector_details');
+                
+                // Hide employment details and year hired fields when certain statuses are selected
+                if (currentStatus === 'Not-Employed') {
+                    // Only show "Current Status" and hide the rest
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'none';
+                    positionDetails.style.display = 'none';
+                    sectorDetails.style.display = 'none';
+                } else if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
+                    // Hide employment details and year hired for students, but show other parts
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
+                } else {
+                    // Show employment details and year hired when employed or self-employed
+                    employmentDetails.style.display = 'block';
+                    yearDetails.style.display = 'block';
+                }
+            });
+
+            // Trigger change event on page load to set initial visibility
+            document.getElementById('current_status').dispatchEvent(new Event('change'));
+        </script>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
