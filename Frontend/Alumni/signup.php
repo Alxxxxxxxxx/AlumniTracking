@@ -1,22 +1,38 @@
 <?php
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    include '../../Backend/db_connect.php';
+session_start();
+include('../../Backend/db_connect.php');
 
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Collect form data from signup form
+    $username = $conn->real_escape_string($_POST['username']);
+    $email = $conn->real_escape_string($_POST['email']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hash the password for storage
 
-    $sql = "INSERT INTO alumni (username, email, password) 
-            VALUES ('$username', '$email', '$password')";
-    
-    if (mysqli_query($conn, $sql)) {
-        header('Location: ../login.php');
-        exit(); 
+    // Check if the email already exists
+    $checkEmail = "SELECT * FROM alumni WHERE email = '$email'";
+    $result = $conn->query($checkEmail);
+    if ($result->num_rows > 0) {
+        echo "Email already exists!";
     } else {
-        echo "Error: " . mysqli_error($conn);
+        // Insert the new user into the alumni table
+        $sql = "INSERT INTO alumni (username, email, password) VALUES ('$username', '$email', '$password')";
+        if ($conn->query($sql) === TRUE) {
+            // Create session for the user
+            $_SESSION['user_type'] = 'alumni';  // Set the user type
+            $_SESSION['user'] = ['email' => $email];  // Set the user email in session
+
+            // Redirect to alumni form or any other page
+            header("Location: alumni_form.php");
+            exit();
+        } else {
+            echo "Error: " . $conn->error;
+        }
     }
 }
+
+$conn->close();
 ?>
+
 <!doctype html>
 <html>
 <head>
