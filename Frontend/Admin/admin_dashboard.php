@@ -60,6 +60,9 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
     <link rel="icon" href="../../images/logo.ico" type="image/logo">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <style>
         body {
             font-family: 'Noticia Text', serif;
@@ -239,6 +242,52 @@ $result = $conn->query($sql);
                     </tbody>
                 </table>
             </div>
+        
+</div>
+<div class="container">
+    <div class="d-flex justify-content-between align-items-center">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#slideshowModal">Manage Slideshow</button>
+    </div>
+<!-- Slideshow Modal -->
+<div class="modal fade" id="slideshowModal" tabindex="-1" aria-labelledby="slideshowModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="slideshowModalLabel">Manage Slideshow Photos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <?php
+                    
+                    $sql = "SELECT * FROM slideshow_photos";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0):
+                        while ($row = $result->fetch_assoc()): ?>
+                            <div class="col-md-4 text-center mb-4">
+                                <img src="../../images/slideshow/<?= $row['photo_name']; ?>" alt="Slideshow Image" class="img-thumbnail" style="height: 150px; width: auto;">
+                                <form action="delete_photo.php" method="POST" class="mt-2">
+                                    <input type="hidden" name="photo_id" value="<?= $row['id']; ?>">
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </div>
+                        <?php endwhile;
+                    else: ?>
+                        <p class="text-center">No photos found in the slideshow.</p>
+                    <?php endif; ?>
+                </div>
+
+                <hr>
+                <form action="upload_photo.php" method="POST" enctype="multipart/form-data">
+                    <label for="photo" class="form-label">Add New Photo:</label>
+                    <input type="file" name="photo" id="photo" class="form-control" accept="image/*" required>
+                    <button type="submit" class="btn btn-success mt-2">Upload</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
         <?php else: ?>
             <p class="text-center">No records found.</p>
         <?php endif; ?>
