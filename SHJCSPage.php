@@ -221,7 +221,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
         .vision, .mission, .identity, .corevalues {
             flex: 1;
-            padding: 30px;
+            padding: 20px;
             display: flex;
             flex-direction: column; 
         }
@@ -234,7 +234,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             font-weight: lighter;
         }
 
-        .vision p, .mission p, .identity p{
+        .vision p, .mission p, .identity p, .corevalues p{
             font-size: 16px;
             color: #222222;
             margin-top: 0; 
@@ -244,19 +244,23 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             line-height: 2;
         }
 
+        .extra-bold {
+            font-weight: bolder;
+        }
+
         .corevalues h3 {
-            font-size: 30px;
+            font-size: 14.9px;
             color: #222222;
             margin-top: 0;
             text-align: justify;
             font-family: 'Noticia Text', serif;
-            font-weight: bolder;
+            font-weight: bold;
             line-height: 1.5; 
         }
 
         .vertical-line {
             border-left: 2px solid #bbbbbb; 
-            height: 85%;
+            height: 88%;
             margin-top: 50px;
         }
     </style>
@@ -296,6 +300,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                     <h2>Mission</h2>
                         <p>
                         Through the ever-encompassing love of the Sacred Heart of Jesus, the SHJCS is committed to:
+                        <br>
                         <br>1. Promote religion as the heart of the curriculum by providing a nurturing Catholic learning environment & fostering Gospel values and well-being.
                         <br>2. Develop holistic individuals that will become persons of character and competence.
                         <br>3. Produce graduates who will become productive and responsible servant leaders.
@@ -313,13 +318,13 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 <div class="corevalues">
                     <h2>Core Values</h2>
                         <h3>
-                            SERVICE
-                        <br>HUMILITY
-                        <br>JUSTICE
-                        <br>CHARITY
-                        <br>SIMPLICITY
-                        </h3>              
-                </div>
+                        1. <strong class="extra-bold">SERVICE</strong> - by showing initiative and willingness to render a helping hand and not expecting anything in return. "In everything I showed you that by working hard in this manner you must help the weak and remember the words of the Lord Jesus, that He Himself said, "It is more blessed to give than to receive. "(Acts 20:35)
+                        <br>2. <strong class="extra-bold">HUMILITY</strong> - by accepting one's strengths and weaknesses as well as recognizing the strengths and weaknesses of others. " He leads the humble in what is right, and teaches the humble his way." (Psalms 25:9)
+                        <br>3. <strong class="extra-bold">JUSTICE</strong> - by giving everyone the possibility to enjoy a decent life worthy of becoming children of God." Learn to do good, seek justice, correct oppressions; bring justice to the fatherless, plead the widows' cause." (Isaiah 1:17)
+                        <br>4. <strong class="extra-bold">CHARITY</strong> - by showing our special Love for the poor through good deeds. "A generous man will himself be blessed, for he shares his food with the poor." (Proverbs 22:9)
+                        <br>5. <strong class="extra-bold">SIMPLICITY</strong> - by being simple in everything we do in our thoughts words and actions. "All things were made through Him, and without Him was not anything made that was made." ( John 1:3)
+                        </h3>                
+</div>
     <footer>
         <div class="footer-container">
             <p class="quote">JESUS MEEK AND HUMBLE OF HEART, MAKE OUR HEARTS LIKE UNTO THINE</p>
