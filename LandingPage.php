@@ -238,6 +238,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     border: 10px solid #fafafa; 
     border-radius: 10px; 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+    background-color: rgba(255, 255, 255, 255);
 }
         .slide {
             display: none;
