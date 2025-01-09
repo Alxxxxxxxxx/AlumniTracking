@@ -70,7 +70,7 @@ $result = $conn->query($sql);
 
         .container {
             background-color: #fafafa;
-            height: 100vh;
+            height: 100%;
             z-index: -2;
             box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
             padding-left: 10px; 
@@ -206,6 +206,7 @@ $result = $conn->query($sql);
                             <th>Sector</th>
                             <th>Type of Employment</th>
                             <th>Year Hired</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -229,6 +230,10 @@ $result = $conn->query($sql);
                                 <td><?= $row['sector']; ?></td>
                                 <td><?= $row['type_of_employment']; ?></td>
                                 <td><?= $row['year_hired']; ?></td>
+                                <td>
+                                    <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                                    <a href="delete_alumni.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
                             </tr>
                         <?php endwhile; ?>
                     </tbody>
