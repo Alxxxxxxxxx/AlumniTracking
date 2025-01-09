@@ -13,6 +13,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
     <link rel="icon" href="images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
+    
     <style>
         html, body {
             height: 100%;
@@ -247,6 +248,40 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 opacity: 1;
             }
         }
+<<<<<<< Updated upstream
+=======
+
+        .icon-btn {
+        position: absolute; /* Ensure proper placement within the slideshow container */
+        top: 50%; /* Vertically center the buttons */
+        transform: translateY(-50%); /* Adjust for proper centering */
+        background-color: rgba(0, 0, 0, 0.1); /* Semi-transparent background */
+        color: white; /* Icon color */
+        border: none; /* Remove default border */
+        padding: 5px; /* Add padding for better touch area */
+        cursor: pointer; /* Pointer cursor for better UX */
+        z-index: 1000; /* Ensure the buttons are above other elements */
+        border-radius: 25%; /* Rounded buttons */
+    }
+
+    #prevBtn {
+        left: 10px; /* Position to the left */
+    }
+
+    #nextBtn {
+        right: 10px; /* Position to the right */
+    }
+
+    .icon-btn i {
+        font-size: 20px; /* Adjust icon size */
+    }
+
+    .icon-btn:hover {
+        background-color: rgba(0, 0, 0, 0.7); /* Darken background on hover */
+    }
+
+
+>>>>>>> Stashed changes
     </style>
 </head>
 <body>
@@ -270,12 +305,23 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             <li><a href="Frontend/login.php">Alumni Tracker</a></li>
         </ul>
     </div>
+=======
+    <div class="slideshow-container" style="position: relative;">
+    <!-- Slide 1 -->
+    <img class="slide fade" src="images/slide1.jpg" style="width:100%">
+    <!-- Slide 2 -->
+    <img class="slide fade" src="images/slide2.jpg" style="width:100%">
+    <!-- Slide 3 -->
+    <img class="slide fade" src="images/slide3.jpg" style="width:100%">
 
-    <div class="slideshow-container">
-        <img class="slide fade" src="images/slide1.jpg" style="width:100%">
-        <img class="slide fade" src="images/slide2.jpg" style="width:100%">
-        <img class="slide fade" src="images/slide3.jpg" style="width:100%">
-    </div>
+    <button id="prevBtn" type="button" class="icon-btn">
+    <i class="fas fa-chevron-left"></i>
+    </button>
+    <button id="nextBtn" type="button" class="icon-btn">
+    <i class="fas fa-chevron-right"></i>
+</button>
+</div>
+>>>>>>> Stashed changes
 
     <footer>
         <div class="footer-container">
@@ -303,18 +349,18 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        // Toggle sidebar when logo is clicked
-        $('.logo').click(function() {
-            var sidebar = $('.wavy-sidebar');
-            if (sidebar.css('left') === '0px') {
-                sidebar.css('left', '-800px');
-            } else {
-                sidebar.css('left', '0px');
-            }
-        });
+    // Toggle sidebar when logo is clicked
+    $('.logo').click(function() {
+        var sidebar = $('.wavy-sidebar');
+        if (sidebar.css('left') === '0px') {
+            sidebar.css('left', '-800px');
+        } else {
+            sidebar.css('left', '0px');
+        }
     });
 
     let slideIndex = 0;
+    let slideTimer; // To store the auto-slide timer
 
     function showSlides() {
         let slides = document.getElementsByClassName("slide");
@@ -336,10 +382,52 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         slides[slideIndex - 1].style.display = "block";    
 
         // Call the function every 3 seconds
-        setTimeout(showSlides, 3000);
+        slideTimer = setTimeout(showSlides, 3000);
     }
 
+    function nextSlide() {
+        clearTimeout(slideTimer); // Stop the current timer
+        let slides = document.getElementsByClassName("slide");
+
+        // Hide current slide
+        slides[slideIndex - 1].style.display = "none";
+
+        // Move to the next slide
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1; }
+
+        // Show the new slide
+        slides[slideIndex - 1].style.display = "block";
+
+        // Restart the slideshow timer
+        slideTimer = setTimeout(showSlides, 3000);
+    }
+
+    function prevSlide() {
+        clearTimeout(slideTimer); // Stop the current timer
+        let slides = document.getElementsByClassName("slide");
+
+        // Hide current slide
+        slides[slideIndex - 1].style.display = "none";
+
+        // Move to the previous slide
+        slideIndex--;
+        if (slideIndex < 1) { slideIndex = slides.length; }
+
+        // Show the new slide
+        slides[slideIndex - 1].style.display = "block";
+
+        // Restart the slideshow timer
+        slideTimer = setTimeout(showSlides, 3000);
+    }
+
+    // Attach event listeners to buttons
+    document.getElementById("nextBtn").addEventListener("click", nextSlide);
+    document.getElementById("prevBtn").addEventListener("click", prevSlide);
+
     showSlides(); // Start the slideshow
+});
+
 
 
 </script>
