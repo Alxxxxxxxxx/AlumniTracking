@@ -2,16 +2,16 @@
 session_start();
 include('../../Backend/db_connect.php');
 
-if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'alumni') {
-    // User is logged in as alumni
-    $alumniInfo = $_SESSION['user'];  // Access session data
-    $user_identifier = $alumniInfo['email']; // Use email as unique identifier
-} else {
-    echo "User not logged in.";
+// Check if the session exists and the user is an alumni
+if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'alumni') {
+    header('Location: LandingPage.php');  // Redirect if not logged in as alumni
     exit();
 }
 
-// Retrieve the alumni data from the database based on the email
+// Get user data from the session
+$user_identifier = $_SESSION['user']['email']; // Use email as unique identifier
+
+// Retrieve the alumni data from the database
 $sql = "SELECT * FROM alumni WHERE email = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $user_identifier);
@@ -20,79 +20,71 @@ $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
-    // Pre-fill the form with the user's data
-    $email = $row['email'];
-    $last_name = $row['last_name'];
-    $first_name = $row['first_name'];
-    $middle_name = $row['middle_name'];
-    $present_location = $row['present_location'];
-    $present_address = $row['present_address'];
-    $contact_number = $row['contact_number'];
-    $strand = $row['strand'];
-    $years_of_enrollment = $row['years_of_enrollment'];
-    $involvement = $row['involvement'];
-    $academic_awards = $row['academic_awards'];
-    $current_status = $row['current_status'];
-    $university_employer = $row['university_employer'];
-    $position_year_level = $row['position_year_level'];
-    $sector = $row['sector'];
-    $type_of_employment = $row['type_of_employment'];
-    $year_hired = $row['year_hired'];
-    $privacy_consent = $row['privacy_consent'];
-    $confirm_data = $row['confirm_data'];
+
+    $first_name = htmlspecialchars($row['first_name']);
+    $last_name = htmlspecialchars($row['last_name']);
+    $email = htmlspecialchars($row['email']);
+    $contact_number = htmlspecialchars($row['contact_number']);
+    $present_address = htmlspecialchars($row['present_address']);
+    $strand = htmlspecialchars($row['strand']);
+    $years_of_enrollment = htmlspecialchars($row['years_of_enrollment']);
+    $involvement = htmlspecialchars($row['involvement']);
+    $academic_awards = htmlspecialchars($row['academic_awards']);
+    $current_status = htmlspecialchars($row['current_status']);
+    $university_employer = htmlspecialchars($row['university_employer']);
+    $position_year_level = htmlspecialchars($row['position_year_level']);
+    $type_of_employment = htmlspecialchars($row['type_of_employment']);
+    $year_hired = htmlspecialchars($row['year_hired']);
 } else {
-    echo "User not found.";
-    exit();  // Stop the script if no matching user is found
+    echo "User data not found.";
+    exit();
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Collect form data
-    $privacy_consent = isset($_POST['privacy_consent']) ? 1 : 0;
-    $last_name = $conn->real_escape_string($_POST['last_name']);
-    $first_name = $conn->real_escape_string($_POST['first_name']);
-    $middle_name = $conn->real_escape_string($_POST['middle_name']);
-    $present_location = $conn->real_escape_string($_POST['present_location']);
-    $present_address = $conn->real_escape_string($_POST['present_address']);
-    $contact_number = $conn->real_escape_string($_POST['contact_number']);
-    $strand = $conn->real_escape_string($_POST['strand']);
-    $years_of_enrollment = $conn->real_escape_string($_POST['years_of_enrollment']);
-    $involvement = $conn->real_escape_string($_POST['involvement']);
-    $academic_awards = $conn->real_escape_string($_POST['academic_awards']);
-    $current_status = $conn->real_escape_string($_POST['current_status']);
-    $university_employer = $conn->real_escape_string($_POST['university_employer']);
-    $position_year_level = $conn->real_escape_string($_POST['position_year_level']);
-    $sector = $conn->real_escape_string($_POST['sector']);
-    $type_of_employment = $conn->real_escape_string($_POST['type_of_employment']);
-    $year_hired = $conn->real_escape_string($_POST['year_hired']);
-    $confirm_data = isset($_POST['confirm_data']) ? 1 : 0;
+// Update user data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $updated_first_name = htmlspecialchars($_POST['first_name']);
+    $updated_last_name = htmlspecialchars($_POST['last_name']);
+    $updated_contact_number = htmlspecialchars($_POST['contact_number']);
+    $updated_present_address = htmlspecialchars($_POST['present_address']);
+    $updated_current_status = htmlspecialchars($_POST['current_status']);
+    $updated_university_employer = htmlspecialchars($_POST['university_employer']);
+    $updated_position_year_level = htmlspecialchars($_POST['position_year_level']);
+    $updated_type_of_employment = htmlspecialchars($_POST['type_of_employment']);
+    $updated_year_hired = htmlspecialchars($_POST['year_hired']);
 
-    // Update the data in the database
-    $sql = "UPDATE alumni SET
-        privacy_consent = $privacy_consent, last_name = '$last_name', first_name = '$first_name', middle_name = '$middle_name',
-        present_location = '$present_location', present_address = '$present_address', contact_number = '$contact_number', strand = '$strand',
-        years_of_enrollment = '$years_of_enrollment', involvement = '$involvement', academic_awards = '$academic_awards',
-        current_status = '$current_status', university_employer = '$university_employer', position_year_level = '$position_year_level',
-        sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired', confirm_data = $confirm_data
-        WHERE email = '$email'";
+    $update_sql = "UPDATE alumni SET 
+        first_name = ?, 
+        last_name = ?, 
+        contact_number = ?, 
+        present_address = ?, 
+        current_status = ?, 
+        university_employer = ?, 
+        position_year_level = ?, 
+        type_of_employment = ?, 
+        year_hired = ? 
+        WHERE email = ?";
 
-        if ($conn->query($sql) === TRUE) {
-            // Display success modal
-            echo "<script>
-                    window.onload = function() {
-                        var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
-                            keyboard: false
-                        });
-                        myModal.show(); // Show the modal dynamically
+    $update_stmt = $conn->prepare($update_sql);
+    $update_stmt->bind_param(
+        "ssssssssis", 
+        $updated_first_name, 
+        $updated_last_name, 
+        $updated_contact_number, 
+        $updated_present_address, 
+        $updated_current_status, 
+        $updated_university_employer, 
+        $updated_position_year_level, 
+        $updated_type_of_employment, 
+        $updated_year_hired, 
+        $user_identifier
+    );
 
-                        // Redirect after 3 seconds
-                        setTimeout(function() {
-                            window.location.href = '../login.php';
-                        }, 3000);  // 3000ms = 3 seconds
-                    };
-                </script>";
-        } else {
-            echo "<script>alert('Error: " . $conn->error . "');</script>";
-        }
+    if ($update_stmt->execute()) {
+        header("Location: alumni_home.php");
+        exit();
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
 }
 
 $conn->close();
@@ -103,11 +95,9 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alumni Form</title>
+    <title>Alumni Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
-    <link rel="icon" href="../../images/logo.ico" type="image/logo">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
        body {
             font-family: 'Noticia Text', serif;

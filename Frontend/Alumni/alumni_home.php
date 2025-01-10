@@ -28,6 +28,8 @@ if ($result->num_rows > 0) {
     $present_address = htmlspecialchars($row['present_address']);
     $strand = htmlspecialchars($row['strand']);
     $years_of_enrollment = htmlspecialchars($row['years_of_enrollment']);
+    $involvement = htmlspecialchars($row['involvement']);
+    $academic_awards = htmlspecialchars($row['academic_awards']);
     $current_status = htmlspecialchars($row['current_status']);
     $university_employer = htmlspecialchars($row['university_employer']);
     $position_year_level = htmlspecialchars($row['position_year_level']);
@@ -38,15 +40,51 @@ if ($result->num_rows > 0) {
     exit();
 }
 
-// Retrieve Work History from the database
-$work_history_sql = "SELECT * FROM work_history WHERE alumni_email = ?";
-$work_stmt = $conn->prepare($work_history_sql);
-$work_stmt->bind_param("s", $user_identifier);
-$work_stmt->execute();
-$work_result = $work_stmt->get_result();
-$work_history = [];
-while ($work_row = $work_result->fetch_assoc()) {
-    $work_history[] = $work_row;
+// Update user data
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $updated_first_name = htmlspecialchars($_POST['first_name']);
+    $updated_last_name = htmlspecialchars($_POST['last_name']);
+    $updated_contact_number = htmlspecialchars($_POST['contact_number']);
+    $updated_present_address = htmlspecialchars($_POST['present_address']);
+    $updated_current_status = htmlspecialchars($_POST['current_status']);
+    $updated_university_employer = htmlspecialchars($_POST['university_employer']);
+    $updated_position_year_level = htmlspecialchars($_POST['position_year_level']);
+    $updated_type_of_employment = htmlspecialchars($_POST['type_of_employment']);
+    $updated_year_hired = htmlspecialchars($_POST['year_hired']);
+
+    $update_sql = "UPDATE alumni SET 
+        first_name = ?, 
+        last_name = ?, 
+        contact_number = ?, 
+        present_address = ?, 
+        current_status = ?, 
+        university_employer = ?, 
+        position_year_level = ?, 
+        type_of_employment = ?, 
+        year_hired = ? 
+        WHERE email = ?";
+
+    $update_stmt = $conn->prepare($update_sql);
+    $update_stmt->bind_param(
+        "ssssssssis", 
+        $updated_first_name, 
+        $updated_last_name, 
+        $updated_contact_number, 
+        $updated_present_address, 
+        $updated_current_status, 
+        $updated_university_employer, 
+        $updated_position_year_level, 
+        $updated_type_of_employment, 
+        $updated_year_hired, 
+        $user_identifier
+    );
+
+    if ($update_stmt->execute()) {
+        header("Location: alumni_home.php");
+        exit();
+    } else {
+        echo "Error updating record: " . $conn->error;
+    }
 }
 
 $conn->close();
@@ -76,7 +114,8 @@ $conn->close();
             z-index: -2;
             box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
             padding-left: 10px; 
-            padding-right: 10px; 
+            padding-right: 10px;
+            padding-bottom: 10px; 
         }
 
         .logo {
@@ -144,63 +183,136 @@ $conn->close();
             width: 100%;
             margin-top: 20px;
         }
-    </style>
+        </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img alt="jee" src="../../images/banner.png">
-        </div>
+    <div class="container mt-5">
         <h1>Welcome, <?php echo $first_name; ?>!</h1>
-        <p><strong>Full Name:</strong> <?php echo $first_name . " " . $last_name; ?></p>
-        <p><strong>Email:</strong> <?php echo $email; ?></p>
-        <p><strong>Contact Number:</strong> <?php echo $contact_number; ?></p>
-        <p><strong>Present Address:</strong> <?php echo $present_address; ?></p>
-        <p><strong>Strand:</strong> <?php echo $strand; ?></p>
-        <p><strong>Years of Enrollment:</strong> <?php echo $years_of_enrollment; ?></p>
-        <p><strong>Current Status:</strong> <?php echo $current_status; ?></p>
-        <p><strong>University/Employer:</strong> <?php echo $university_employer; ?></p>
-        <p><strong>Position/Year Level:</strong> <?php echo $position_year_level; ?></p>
-        <p><strong>Type of Employment:</strong> <?php echo $type_of_employment; ?></p>
-        <p><strong>Year Hired:</strong> <?php echo $year_hired; ?></p>
+        <form method="POST" action="">
+            <div class="mb-3">
+                <label for="first_name" class="form-label">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="first_name" value="<?php echo $first_name; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="last_name" class="form-label">Last Name</label>
+                <input type="text" class="form-control" id="last_name" name="last_name" value="<?php echo $last_name; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email (Non-Editable)</label>
+                <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="contact_number" class="form-label">Contact Number</label>
+                <input type="text" class="form-control" id="contact_number" name="contact_number" value="<?php echo $contact_number; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="present_address" class="form-label">Present Address</label>
+                <input type="text" class="form-control" id="present_address" name="present_address" value="<?php echo $present_address; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="strand" class="form-label">Strand (Non-Editable)</label>
+                <input type="text" class="form-control" id="strand" name="strand" value="<?php echo $strand; ?>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="years_of_enrollment" class="form-label">Years of Enrollment (Non-Editable)</label>
+                <input type="text" class="form-control" id="years_of_enrollment" name="years_of_enrollment" value="<?php echo $years_of_enrollment; ?>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="involvement" class="form-label">Involvement (Non-Editable)</label>
+                <input type="text" class="form-control" id="involvement" name="involvement" value="<?php echo $involvement; ?>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="academic_awards" class="form-label">Academic Awards (Non-Editable)</label>
+                <input type="text" class="form-control" id="academic_awards" name="academic_awards" value="<?php echo $academic_awards; ?>" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="current_status" class="form-label">Current Status</label>
+                <select name="current_status" id="current_status" class="form-select" required>
+                    <option value="Secondary Student" <?php echo ($current_status == 'Secondary Student') ? 'selected' : ''; ?>>Secondary Student</option>
+                    <option value="Tertiary Student" <?php echo ($current_status == 'Tertiary Student') ? 'selected' : ''; ?>>Tertiary Student</option>
+                    <option value="Graduate School" <?php echo ($current_status == 'Graduate School') ? 'selected' : ''; ?>>Graduate School</option>
+                    <option value="Working Student" <?php echo ($current_status == 'Working Student') ? 'selected' : ''; ?>>Working Student</option>
+                    <option value="Employed" <?php echo ($current_status == 'Employed') ? 'selected' : ''; ?>>Employed</option>
+                    <option value="Self-Employed" <?php echo ($current_status == 'Self-Employed') ? 'selected' : ''; ?>>Self-Employed</option>
+                    <option value="Not-Employed" <?php echo ($current_status == 'Not-Employed') ? 'selected' : ''; ?>>Not-Employed</option>
+                </select>
+            </div>
 
-        <!-- Work History Section -->
-        <div class="work-history">
-            <h3>Work History</h3>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Company Name</th>
-                        <th>Position</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Job Description</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php if (count($work_history) > 0): ?>
-                        <?php foreach ($work_history as $work): ?>
-                            <tr>
-                                <td><?php echo htmlspecialchars($work['company_name']); ?></td>
-                                <td><?php echo htmlspecialchars($work['position']); ?></td>
-                                <td><?php echo htmlspecialchars($work['start_date']); ?></td>
-                                <td><?php echo htmlspecialchars($work['end_date']); ?></td>
-                                <td><?php echo htmlspecialchars($work['job_description']); ?></td>
-                                <td><a href="edit_work_history.php?id=<?php echo $work['id']; ?>" class="btn btn-primary">Edit</a></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
-                        <tr>
-                            <td colspan="6" class="text-center">No work history available.</td>
-                        </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+            <div id="university_details" class="mb-3">
+                <label for="university_employer" class="form-label">Name of University / Business / Employer</label>
+                <input type="text" name="university_employer" id="university_employer" class="form-control" value="<?php echo $university_employer; ?>">
+            </div>
 
-        <a href="add_work_history.php" class="btn btn-primary">Add Work History</a>
-        <a href="../../logout.php" class="logout">Logout</a>
+            <div id="position_details" class="mb-3">
+                <label for="position_year_level" class="form-label">Position or Year Level</label>
+                <input type="text" name="position_year_level" id="position_year_level" class="form-control" value="<?php echo $position_year_level; ?>">
+            </div>
+
+            <div id="sector_details" class="mb-3">
+                <label for="sector" class="form-label">Sector</label>
+                <select name="sector" id="sector" class="form-select">
+                    <option value="Public">Public</option>
+                    <option value="Private">Private</option>
+                </select>
+            </div>
+
+            <div id="employment_details" class="mb-3">
+                <label for="type_of_employment" class="form-label">Type of Employment</label>
+                <select name="type_of_employment" id="type_of_employment" class="form-select">
+                    <option value="Full-time" <?php echo ($type_of_employment == 'Full-time') ? 'selected' : ''; ?>>Full-time</option>
+                    <option value="Part-time" <?php echo ($type_of_employment == 'Part-time') ? 'selected' : ''; ?>>Part-time</option>
+                    <option value="Intern" <?php echo ($type_of_employment == 'Intern') ? 'selected' : ''; ?>>Intern</option>
+                </select>
+            </div>
+
+            <div id="year_details" class="mb-3">
+                <label for="year_hired" class="form-label">Year Hired</label>
+                <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>">
+            </div>
+
+            <!-- AGREEMENT AND SUBMISSION -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" required>
+                <label for="confirm_data" class="form-check-label">I confirm that the data provided is accurate.</label>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+        <a href="../../logout.php" class="btn btn-danger mt-3">Logout</a>
+    </div>
+
+        <script>
+            // JavaScript to conditionally hide/show employment details based on current status
+            document.getElementById('current_status').addEventListener('change', function() {
+                var currentStatus = this.value;
+                var employmentDetails = document.getElementById('employment_details');
+                var yearDetails = document.getElementById('year_details');
+                var univDetails = document.getElementById('university_details');
+                var positionDetails = document.getElementById('position_details');
+                var sectorDetails = document.getElementById('sector_details');
+                
+                // Hide employment details and year hired fields when certain statuses are selected
+                if (currentStatus === 'Not-Employed') {
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'none';
+                    positionDetails.style.display = 'none';
+                    sectorDetails.style.display = 'none';
+                } else if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
+                } else {
+                    employmentDetails.style.display = 'block';
+                    yearDetails.style.display = 'block';
+                }
+            });
+
+            // Trigger change event on page load to set initial visibility
+            document.getElementById('current_status').dispatchEvent(new Event('change'));
+        </script>
     </div>
 </body>
 </html>

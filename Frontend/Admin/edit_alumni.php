@@ -1,20 +1,17 @@
 <?php
 session_start();
 
-// Check if the session exists and the user is an admin
+
 if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'admin') {
-    header('Location: LandingPage.php'); // Redirect if not logged in as admin
+    header('Location: LandingPage.php'); 
     exit();
 }
 
-// Include database connection
 include '../../Backend/db_connect.php';
 
-// Check if the ID is set in the URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Fetch the alumni record to edit
     $result = $conn->query("SELECT * FROM alumni WHERE id = $id");
 
     if ($result->num_rows > 0) {
@@ -25,7 +22,6 @@ if (isset($_GET['id'])) {
     }
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Update the record
         $last_name = $_POST['last_name'];
         $first_name = $_POST['first_name'];
         $middle_name = $_POST['middle_name'];

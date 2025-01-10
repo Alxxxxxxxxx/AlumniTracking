@@ -60,11 +60,9 @@ $result = $conn->query($sql);
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
     <link rel="icon" href="../../images/logo.ico" type="image/logo">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
-        body {
+         body {
             font-family: 'Noticia Text', serif;
             background: url('../../images/namebg.png') no-repeat center center fixed;
             background-size: cover;
@@ -78,6 +76,7 @@ $result = $conn->query($sql);
             box-shadow: -15px 0 20px rgba(0, 0, 0, 0.2), 15px 0 20px rgba(0, 0, 0, 0.2);
             padding-left: 10px; 
             padding-right: 10px; 
+            padding-bottom: 10px;
         }
 
         .logo {
@@ -133,7 +132,7 @@ $result = $conn->query($sql);
             color: #fafafa;
             background-color: #a00c30;
             padding: 10px;
-            margin-top: 20px;
+            margin-top: 10px;
             border-radius: 5px;
             font-family: 'Noticia Text', serif;
             text-decoration: none;
@@ -147,119 +146,92 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-    <div class="container">
-            <div class="logo">
-                <img alt="jee" src="../../images/banner.png">
-            </div>
-        <h1>Admin Dashboard</h1>
-        <p class="text-center">Welcome, Admin!</p>
-
-        <form class="filters" method="GET" action="">
-            <select name="present_location" class="form-select" style="width: auto; display: inline-block;">
-                <option value="">Present Location (All)</option>
-                <option value="In the Philippines" <?= $filters['present_location'] == 'In the Philippines' ? 'selected' : '' ?>>In the Philippines</option>
-            </select>
-            <select name="strand" class="form-select" style="width: auto; display: inline-block;">
-                <option value="">Strand (All)</option>
-                <option value="Science, Technology, Engineering, and Mathematics" <?= $filters['strand'] == 'Science, Technology, Engineering, and Mathematics' ? 'selected' : '' ?>>Science, Technology, Engineering, and Mathematics</option>
-                <option value="Humanities and Social Sciences" <?= $filters['strand'] == 'Humanities and Social Sciences' ? 'selected' : '' ?>>Humanities and Social Sciences</option>
-                <option value="Accountancy, Businesses, and Management" <?= $filters['strand'] == 'Accountancy, Businesses, and Management' ? 'selected' : '' ?>>Accountancy, Businesses, and Management</option>
-                <option value="Information and Communication Technology" <?= $filters['strand'] == 'Information and Communication Technology' ? 'selected' : '' ?>>Information and Communication Technology</option>
-                <option value="Food and Beverages" <?= $filters['strand'] == 'Food and Beverages' ? 'selected' : '' ?>>Food and Beverages</option>
-                <option value="Other" <?= $filters['strand'] == 'Other' ? 'selected' : '' ?>>Other</option>
-            </select>
-            <select name="sector" class="form-select" style="width: auto; display: inline-block;">
-                <option value="">Sector (All)</option>
-                <option value="Private" <?= $filters['sector'] == 'Private' ? 'selected' : '' ?>>Private</option>
-                <option value="Public" <?= $filters['sector'] == 'Public' ? 'selected' : '' ?>>Public</option>
-                <option value="Government" <?= $filters['sector'] == 'Government' ? 'selected' : '' ?>>Government</option>
-                <option value="NGO" <?= $filters['sector'] == 'NGO' ? 'selected' : '' ?>>NGO</option>
-                <option value="Non-Profit" <?= $filters['sector'] == 'Non-Profit' ? 'selected' : '' ?>>Non-Profit</option>
-            </select>
-            <select name="type_of_employment" class="form-select" style="width: auto; display: inline-block;">
-                <option value="">Type of Employment (All)</option>
-                <option value="Full-time" <?= $filters['type_of_employment'] == 'Full-time' ? 'selected' : '' ?>>Full-time</option>
-                <option value="Part-time" <?= $filters['type_of_employment'] == 'Part-time' ? 'selected' : '' ?>>Part-time</option>
-            </select>
-            <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $filters['search'] ?>" style="width: auto; display: inline-block;">
-            <button type="submit" class="btn btn-primary">Filter</button>
-
-        </form>
-
-        <?php if ($result->num_rows > 0): ?>
-            <div class="table-responsive">
-                <table class="table table-striped table-bordered">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>ID</th>
-                            <th>Email</th>
-                            <th>Last Name</th>
-                            <th>First Name</th>
-                            <th>Middle Name</th>
-                            <th>Present Location</th>
-                            <th>Present Address</th>
-                            <th>Contact Number</th>
-                            <th>Strand</th>
-                            <th>Years of Enrollment</th>
-                            <th>Involvement</th>
-                            <th>Academic Awards</th>
-                            <th>Current Status</th>
-                            <th>University / Employer</th>
-                            <th>Position / Year Level</th>
-                            <th>Sector</th>
-                            <th>Type of Employment</th>
-                            <th>Year Hired</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php while ($row = $result->fetch_assoc()): ?>
-                            <tr>
-                                <td><?= $row['id']; ?></td>
-                                <td><?= $row['email']; ?></td>
-                                <td><?= $row['last_name']; ?></td>
-                                <td><?= $row['first_name']; ?></td>
-                                <td><?= $row['middle_name']; ?></td>
-                                <td><?= $row['present_location']; ?></td>
-                                <td><?= $row['present_address']; ?></td>
-                                <td><?= $row['contact_number']; ?></td>
-                                <td><?= $row['strand']; ?></td>
-                                <td><?= $row['years_of_enrollment']; ?></td>
-                                <td><?= $row['involvement']; ?></td>
-                                <td><?= $row['academic_awards']; ?></td>
-                                <td><?= $row['current_status']; ?></td>
-                                <td><?= $row['university_employer']; ?></td>
-                                <td><?= $row['position_year_level']; ?></td>
-                                <td><?= $row['sector']; ?></td>
-                                <td><?= $row['type_of_employment']; ?></td>
-                                <td><?= $row['year_hired']; ?></td>
-                                <td>
-                                    <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                                    <a href="delete_alumni.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
-                                </td>
-                            </tr>
-                        <?php endwhile; ?>
-                    </tbody>
-                </table>
-            </div>
-        
-</div>
 <div class="container">
-    <div class="d-flex justify-content-between align-items-center">
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#slideshowModal">Manage Slideshow</button>
-    </div>
-<!-- Slideshow Modal -->
-<div class="modal fade" id="slideshowModal" tabindex="-1" aria-labelledby="slideshowModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="slideshowModalLabel">Manage Slideshow Photos</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+    <h1 class="text-center">Admin Dashboard</h1>
+    <p class="text-center">Welcome, Admin!</p>
+
+    <!-- Bootstrap Tabs -->
+    <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="alumni-tab" data-bs-toggle="tab" data-bs-target="#alumni" type="button" role="tab" aria-controls="alumni" aria-selected="true">Alumni Information</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="slideshow-tab" data-bs-toggle="tab" data-bs-target="#slideshow" type="button" role="tab" aria-controls="slideshow" aria-selected="false">Slideshow Management</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="adminTabsContent">
+        <!-- Alumni Information Tab -->
+        <div class="tab-pane fade show active" id="alumni" role="tabpanel" aria-labelledby="alumni-tab">
+            <form class="filters mt-3" method="GET" action="">
+                <select name="present_location" class="form-select" style="width: auto; display: inline-block;">
+                    <option value="">Present Location (All)</option>
+                    <option value="In the Philippines" <?= $filters['present_location'] == 'In the Philippines' ? 'selected' : '' ?>>In the Philippines</option>
+                </select>
+                <select name="strand" class="form-select" style="width: auto; display: inline-block;">
+                    <option value="">Strand (All)</option>
+                    <option value="Science, Technology, Engineering, and Mathematics" <?= $filters['strand'] == 'Science, Technology, Engineering, and Mathematics' ? 'selected' : '' ?>>STEM</option>
+                    <option value="Humanities and Social Sciences" <?= $filters['strand'] == 'Humanities and Social Sciences' ? 'selected' : '' ?>>HUMSS</option>
+                </select>
+                <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $filters['search'] ?>" style="width: auto; display: inline-block;">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </form>
+            
+            <!-- Alumni Information Table -->
+            <?php if ($result->num_rows > 0): ?>
+                <div class="table-responsive mt-3">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Last Name</th>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Present Location</th>
+                                <th>Present Address</th>
+                                <th>Contact Number</th>
+                                <th>Strand</th>
+                                <th>Years of Enrollment</th>
+                                <th>Involvement</th>
+                                <th>Academic Awards</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php while ($row = $result->fetch_assoc()): ?>
+                                <tr>
+                                    <td><?= $row['id']; ?></td>
+                                    <td><?= $row['email']; ?></td>
+                                    <td><?= $row['last_name']; ?></td>
+                                    <td><?= $row['first_name']; ?></td>
+                                    <td><?= $row['middle_name']; ?></td>
+                                    <td><?= $row['present_location']; ?></td>
+                                    <td><?= $row['present_address']; ?></td>
+                                    <td><?= $row['contact_number']; ?></td>
+                                    <td><?= $row['strand']; ?></td>
+                                    <td><?= $row['years_of_enrollment']; ?></td>
+                                    <td><?= $row['involvement']; ?></td>
+                                    <td><?= $row['academic_awards']; ?></td>
+                                    <td>
+                                        <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">View</a>
+                                        <a href="delete_alumni.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <p class="text-center mt-3">No records found.</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- Slideshow Management Tab -->
+        <div class="tab-pane fade" id="slideshow" role="tabpanel" aria-labelledby="slideshow-tab">
+            <div class="mt-3">
                 <div class="row">
                     <?php
-                    
                     $sql = "SELECT * FROM slideshow_photos";
                     $result = $conn->query($sql);
 
@@ -287,15 +259,11 @@ $result = $conn->query($sql);
             </div>
         </div>
     </div>
+
+    <a href="../../logout.php" class="logout mt-3">Logout</a>
 </div>
-        <?php else: ?>
-            <p class="text-center">No records found.</p>
-        <?php endif; ?>
 
-        <a href="../../logout.php" class="logout">Logout</a>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
 
