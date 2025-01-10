@@ -341,6 +341,15 @@ $conn->close();
             </div>
         </div>
 
+        <script> 
+             <a href="#" id="terms-link">Terms and Conditions</a>
+
+                document.getElementById('terms-link').addEventListener('click', function (event) {
+                    event.preventDefault();
+                    var myModal = new bootstrap.Modal(document.getElementById('terms-modal'));
+                    myModal.show();
+                });
+        </script>
 
         <div class="mb-3">
             <label for="last_name" class="form-label">Last Name</label>
@@ -431,20 +440,23 @@ $conn->close();
                 <option value="Not-Employed" <?php echo ($current_status == 'Not-Employed') ? 'selected' : ''; ?>>Not-Employed</option>
             </select>
         </div>
+
         <div id="university_details" class="mb-3">
             <label for="university_employer" class="form-label">Name of University / Business / Employer</label>
-            <input type="text" name="university_employer" id="university_employer" class="form-control" value="<?php echo $university_employer; ?>" >
+            <input type="text" name="university_employer" id="university_employer" class="form-control" value="<?php echo $university_employer; ?>">
         </div>
+
         <div id="position_details" class="mb-3">
             <label for="position_year_level" class="form-label">Position or Year Level</label>
-            <input type="text" name="position_year_level" id="position_year_level" class="form-control" value="<?php echo $position_year_level; ?>" >
+            <input type="text" name="position_year_level" id="position_year_level" class="form-control" value="<?php echo $position_year_level; ?>">
         </div>
+
         <div id="sector_details" class="mb-3">
             <label for="sector" class="form-label">Sector</label>
-            <select name="sector" id="sector" class="form-select" >
+            <select name="sector" id="sector" class="form-select">
                 <option value="Public" <?php echo ($sector == 'Public') ? 'selected' : ''; ?>>Public</option>
                 <option value="Private" <?php echo ($sector == 'Private') ? 'selected' : ''; ?>>Private</option>
-                <option value="Goverment" <?php echo ($sector == 'Goverment') ? 'selected' : ''; ?>>Goverment</option>
+                <option value="Government" <?php echo ($sector == 'Government') ? 'selected' : ''; ?>>Government</option>
                 <option value="NGO" <?php echo ($sector == 'NGO') ? 'selected' : ''; ?>>NGO</option>
                 <option value="Non-Profit" <?php echo ($sector == 'Non-Profit') ? 'selected' : ''; ?>>Non-Profit</option>
             </select>
@@ -453,15 +465,16 @@ $conn->close();
         <!-- Conditional Fields: Type of Employment and Year Hired -->
         <div id="employment_details" class="mb-3">
             <label for="type_of_employment" class="form-label">Type of Employment</label>
-            <select name="type_of_employment" id="type_of_employment" class="form-select" >
+            <select name="type_of_employment" id="type_of_employment" class="form-select">
                 <option value="Full-time" <?php echo ($type_of_employment == 'Full-time') ? 'selected' : ''; ?>>Full-time</option>
                 <option value="Part-time" <?php echo ($type_of_employment == 'Part-time') ? 'selected' : ''; ?>>Part-time</option>
                 <option value="Intern" <?php echo ($type_of_employment == 'Intern') ? 'selected' : ''; ?>>Intern</option>
             </select>
         </div>
+
         <div id="year_details" class="mb-3">
             <label for="year_hired" class="form-label">Year Hired</label>
-            <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>" >
+            <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>">
         </div>
 
         <!-- AGREEMENT AND SUBMISSION -->
@@ -488,47 +501,50 @@ $conn->close();
         </div>
 
         <script>
-            // JavaScript to conditionally hide/show employment details based on current status
-            document.getElementById('current_status').addEventListener('change', function() {
-                var currentStatus = this.value;
-                var employmentDetails = document.getElementById('employment_details');
-                var yearDetails = document.getElementById('year_details');
-                var univDetails = document.getElementById('university_details');
-                var positionDetails = document.getElementById('position_details');
-                var sectorDetails = document.getElementById('sector_details');
-                
-                // Hide employment details and year hired fields when certain statuses are selected
-                if (currentStatus === 'Not-Employed') {
-                    // Only show "Current Status" and hide the rest
-                    employmentDetails.style.display = 'none';
-                    yearDetails.style.display = 'none';
-                    univDetails.style.display = 'none';
-                    positionDetails.style.display = 'none';
-                    sectorDetails.style.display = 'none';
-                } else if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
-                    // Hide employment details and year hired for students, but show other parts
-                    employmentDetails.style.display = 'none';
-                    yearDetails.style.display = 'none';
+            document.addEventListener('DOMContentLoaded', function () {
+            // Get the current status element
+            var currentStatus = document.getElementById('current_status');
+
+            // Get all the conditional sections
+            var employmentDetails = document.getElementById('employment_details');
+            var yearDetails = document.getElementById('year_details');
+            var univDetails = document.getElementById('university_details');
+            var positionDetails = document.getElementById('position_details');
+            var sectorDetails = document.getElementById('sector_details');
+
+            // Function to toggle the sections
+            function toggleSections(status) {
+                // Reset all sections to 'none' by default
+                employmentDetails.style.display = 'none';
+                yearDetails.style.display = 'none';
+                univDetails.style.display = 'none';
+                positionDetails.style.display = 'none';
+                sectorDetails.style.display = 'none';
+
+                if (status === 'Not-Employed') {
+                    // No additional sections to show for "Not-Employed"
+                } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
                     univDetails.style.display = 'block';
                     positionDetails.style.display = 'block';
                     sectorDetails.style.display = 'block';
                 } else {
-                    // Show employment details and year hired when employed or self-employed
+                    univDetails.style.display = 'block';
                     employmentDetails.style.display = 'block';
                     yearDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
                 }
+            }
+
+            // Initial check on page load
+            toggleSections(currentStatus.value);
+
+            // Listen for changes to the current_status dropdown
+            currentStatus.addEventListener('change', function () {
+                toggleSections(this.value);
             });
+        });
 
-            // Trigger change event on page load to set initial visibility
-            document.getElementById('current_status').dispatchEvent(new Event('change'));
-
-            <a href="#" id="terms-link">Terms and Conditions</a>
-
-            document.getElementById('terms-link').addEventListener('click', function (event) {
-                event.preventDefault();
-                var myModal = new bootstrap.Modal(document.getElementById('terms-modal'));
-                myModal.show();
-            });
         </script>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
