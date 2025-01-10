@@ -498,21 +498,20 @@ $conn->close();
                 var sectorDetails = document.getElementById('sector_details');
                 
                 // Hide employment details and year hired fields when certain statuses are selected
-                
-                if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
-                    // Hide employment details and year hired for students, but show other parts
-                    employmentDetails.style.display = 'none';
-                    yearDetails.style.display = 'none';
-                    univDetails.style.display = 'block';
-                    positionDetails.style.display = 'block';
-                    sectorDetails.style.display = 'block';
-                } else if (currentStatus === 'Not-Employed') {
+                if (currentStatus === 'Not-Employed') {
                     // Only show "Current Status" and hide the rest
                     employmentDetails.style.display = 'none';
                     yearDetails.style.display = 'none';
                     univDetails.style.display = 'none';
                     positionDetails.style.display = 'none';
                     sectorDetails.style.display = 'none';
+                } else if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
+                    // Hide employment details and year hired for students, but show other parts
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
                 } else {
                     // Show employment details and year hired when employed or self-employed
                     employmentDetails.style.display = 'block';
