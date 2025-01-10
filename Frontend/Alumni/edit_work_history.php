@@ -124,12 +124,54 @@ $conn->close();
             background-color: #da1a32;
             border-color: #da1a32;
         }
+
+        @media only screen and (max-width: 600px) {
+
+        .container {
+            background-color: 0;
+            height: 0;
+            z-index: -2;
+            box-shadow: none;
+            padding-left: 0; 
+            padding-right: 0; 
+        }
+
+        .logo {
+            padding-top: 30px;
+            width: 107px;
+            margin-top: 20px;
+            height: 112px;
+            position: relative; 
+            left: 50%;
+            transform: translateX(-50%); 
+            z-index: 1;
+        }
+
+        .edit-work-history-form {
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .logoimg{
+            margin-top:30px
+        }
+
+        .submitBtn{
+                width: 100%;
+            }
+
+
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">
-            <img alt="jee" src="../../images/banner.png">
+            <img alt="jee" src="../../images/banner.png" class="logoimg">
         </div>
         <div class="edit-work-history-form">
             <h1>Edit Work History</h1>
@@ -154,7 +196,7 @@ $conn->close();
                     <label for="job_description" class="form-label">Job Description</label>
                     <textarea class="form-control" id="job_description" name="job_description" rows="3" required><?php echo $job_description; ?></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Update Work History</button>
+                <button type="submit" class="btn btn-primary submitBtn">Update Work History</button>
             </form>
         </div>
     </div>

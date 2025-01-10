@@ -16,7 +16,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
         body {
-            height: 100%;
+            height: 100vh;
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -217,6 +217,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             justify-content: space-around;
             margin: 0;
             padding: 0;
+            flex: 1;
         }
 
         .content-box {
@@ -429,10 +430,9 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             <div class="content-box">
                 <div class="vision">
                     <h2>Vision</h2>
-                        <p>
-                        A people called by the FATHER in JESUS CHRIST to become a COMMUNITY of persons with FULLNESS OF LIFE, witnessing to the KINGDOM OF GOD by living the PASCHAL MYSTERY in the power of the HOLY SPIRIT with MARY AS COMPANION                        </p>
+                        <p>A people called by the FATHER in JESUS CHRIST to become a COMMUNITY of persons with FULLNESS OF LIFE, witnessing to the KINGDOM OF GOD by living the PASCHAL MYSTERY in the power of the HOLY SPIRIT with MARY AS COMPANION</p>
                 </div>
-        <div class="vertical-line"></div> 
+            <div class="vertical-line"></div> 
                 <div class="mission">
                     <h2>Mission</h2>
                         <p>
@@ -452,20 +452,21 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                         Inflamed by the Sacred Heart of Jesus, inspired of the APOSTOLIC VISON of the Archdiocese of Manila and in adherence to the thrusts of RCAM ES, the SHJCS envisions itself as a Catholic Educational Institution that proclaims the Gospel, forms human persons and renews the Church and Nation.                        </p>
                 </div>
         <div class="vertical-line"></div> 
-                <div class="corevalues">
-                    <h2>Core Values</h2>
-                        <h3>
-                        1. <strong class="extra-bold">SERVICE</strong> - by showing initiative and willingness to render a helping hand and not expecting anything in return. "In everything I showed you that by working hard in this manner you must help the weak and remember the words of the Lord Jesus, that He Himself said, "It is more blessed to give than to receive. "(Acts 20:35)
-                        <br>2. <strong class="extra-bold">HUMILITY</strong> - by accepting one's strengths and weaknesses as well as recognizing the strengths and weaknesses of others. " He leads the humble in what is right, and teaches the humble his way." (Psalms 25:9)
-                        <br>3. <strong class="extra-bold">JUSTICE</strong> - by giving everyone the possibility to enjoy a decent life worthy of becoming children of God." Learn to do good, seek justice, correct oppressions; bring justice to the fatherless, plead the widows' cause." (Isaiah 1:17)
-                        <br>4. <strong class="extra-bold">CHARITY</strong> - by showing our special Love for the poor through good deeds. "A generous man will himself be blessed, for he shares his food with the poor." (Proverbs 22:9)
-                        <br>5. <strong class="extra-bold">SIMPLICITY</strong> - by being simple in everything we do in our thoughts words and actions. "All things were made through Him, and without Him was not anything made that was made." ( John 1:3)
-                        </h3>                
-    </div>
+            <div class="corevalues">
+                <h2>Core Values</h2>
+                    <h3>
+                    1. <strong class="extra-bold">SERVICE</strong> - by showing initiative and willingness to render a helping hand and not expecting anything in return. "In everything I showed you that by working hard in this manner you must help the weak and remember the words of the Lord Jesus, that He Himself said, "It is more blessed to give than to receive. "(Acts 20:35)
+                    <br>2. <strong class="extra-bold">HUMILITY</strong> - by accepting one's strengths and weaknesses as well as recognizing the strengths and weaknesses of others. " He leads the humble in what is right, and teaches the humble his way." (Psalms 25:9)
+                    <br>3. <strong class="extra-bold">JUSTICE</strong> - by giving everyone the possibility to enjoy a decent life worthy of becoming children of God." Learn to do good, seek justice, correct oppressions; bring justice to the fatherless, plead the widows' cause." (Isaiah 1:17)
+                    <br>4. <strong class="extra-bold">CHARITY</strong> - by showing our special Love for the poor through good deeds. "A generous man will himself be blessed, for he shares his food with the poor." (Proverbs 22:9)
+                    <br>5. <strong class="extra-bold">SIMPLICITY</strong> - by being simple in everything we do in our thoughts words and actions. "All things were made through Him, and without Him was not anything made that was made." ( John 1:3)
+                    </h3>                
+            </div>
+        </div>
     </div>
     
     <footer>
-        <div class="footer-container" >
+        <div class="footer-container">
             <p class="quote">JESUS MEEK AND HUMBLE OF HEART, MAKE OUR HEARTS LIKE UNTO THINE</p>
             <div class="footer-content">
                 <div class="footer-item">

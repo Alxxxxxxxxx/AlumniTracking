@@ -143,6 +143,32 @@ $result = $conn->query($sql);
         .logout:hover {
             background-color:  #da1a32;
         }
+
+        .filterSelect{
+            width: auto; 
+            display: inline-block;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .adminTab{
+                display: flex;
+                width: 50%;
+            }
+            .filters {
+                margin-bottom: 10px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .filterSelect{
+                width: 48%
+            }
+
+            .uploadBtn{
+                width: 100%
+            }
+
+
+        }
     </style>
 </head>
 <body>
@@ -151,11 +177,11 @@ $result = $conn->query($sql);
             <p class="text-center">Welcome, Admin!</p>
 
             <!-- Bootstrap Tabs -->
-            <ul class="nav nav-tabs" id="adminTabs" role="tablist">
-                <li class="nav-item" role="presentation">
+            <ul class="nav nav-tabs" id="adminTabs" role="tablist" class="tabsBar">
+                <li class="nav-item adminTab" role="presentation">
                     <button class="nav-link active" id="alumni-tab" data-bs-toggle="tab" data-bs-target="#alumni" type="button" role="tab" aria-controls="alumni" aria-selected="true">Alumni Information</button>
                 </li>
-                <li class="nav-item" role="presentation">
+                <li class="nav-item adminTab" role="presentation">
                     <button class="nav-link" id="slideshow-tab" data-bs-toggle="tab" data-bs-target="#slideshow" type="button" role="tab" aria-controls="slideshow" aria-selected="false">Slideshow Management</button>
                 </li>
             </ul>
@@ -165,11 +191,11 @@ $result = $conn->query($sql);
             <div class="tab-pane fade show active" id="alumni" role="tabpanel" aria-labelledby="alumni-tab">
                 <form class="filters mt-3" method="GET" action="">
             <form class="filters" method="GET" action="">
-                <select name="present_location" class="form-select" style="width: auto; display: inline-block;">
+                <select name="present_location" class="form-select filterSelect">
                     <option value="">Present Location (All)</option>
                     <option value="In the Philippines" <?= $filters['present_location'] == 'In the Philippines' ? 'selected' : '' ?>>In the Philippines</option>
                 </select>
-                <select name="strand" class="form-select" style="width: auto; display: inline-block;">
+                <select name="strand" class="form-select filterSelect">
                     <option value="">Strand (All)</option>
                     <option value="Science, Technology, Engineering, and Mathematics" <?= $filters['strand'] == 'Science, Technology, Engineering, and Mathematics' ? 'selected' : '' ?>>STEM</option>
                     <option value="Humanities and Social Sciences" <?= $filters['strand'] == 'Humanities and Social Sciences' ? 'selected' : '' ?>>HUMSS</option>
@@ -178,7 +204,7 @@ $result = $conn->query($sql);
                     <option value="Food and Beverages" <?= $filters['strand'] == 'Food and Beverages' ? 'selected' : '' ?>>Food and Beverages</option>
                     <option value="Other" <?= $filters['strand'] == 'Other' ? 'selected' : '' ?>>Other</option>
                 </select>
-                <select name="sector" class="form-select" style="width: auto; display: inline-block;">
+                <select name="sector" class="form-select filterSelect">
                     <option value="">Sector (All)</option>
                     <option value="Private" <?= $filters['sector'] == 'Private' ? 'selected' : '' ?>>Private</option>
                     <option value="Public" <?= $filters['sector'] == 'Public' ? 'selected' : '' ?>>Public</option>
@@ -186,13 +212,13 @@ $result = $conn->query($sql);
                     <option value="NGO" <?= $filters['sector'] == 'NGO' ? 'selected' : '' ?>>NGO</option>
                     <option value="Non-Profit" <?= $filters['sector'] == 'Non-Profit' ? 'selected' : '' ?>>Non-Profit</option>
                 </select>
-                <select name="type_of_employment" class="form-select" style="width: auto; display: inline-block;">
+                <select name="type_of_employment" class="form-select filterSelect">
                     <option value="">Type of Employment (All)</option>
                     <option value="Full-time" <?= $filters['type_of_employment'] == 'Full-time' ? 'selected' : '' ?>>Full-time</option>
                     <option value="Part-time" <?= $filters['type_of_employment'] == 'Part-time' ? 'selected' : '' ?>>Part-time</option>
                 </select>
-                <input type="text" name="search" class="form-control" placeholder="Search..." value="<?= $filters['search'] ?>" style="width: auto; display: inline-block;">
-                <button type="submit" class="btn btn-primary">Filter</button>
+                <input type="text" name="search" class="form-control filterSelect" placeholder="Search..." value="<?= $filters['search'] ?>">
+                <button type="submit" class="btn btn-primary filterSelect">Filter</button>
             </form>
             
             <!-- Alumni Information Table -->
@@ -272,7 +298,7 @@ $result = $conn->query($sql);
                 <form action="upload_photo.php" method="POST" enctype="multipart/form-data">
                     <label for="photo" class="form-label">Add New Photo:</label>
                     <input type="file" name="photo" id="photo" class="form-control" accept="image/*" required>
-                    <button type="submit" class="btn btn-success mt-2">Upload</button>
+                    <button type="submit" class="btn btn-success mt-2 uploadBtn">Upload</button>
                 </form>
             </div>
         </div>

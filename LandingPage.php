@@ -283,8 +283,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
     @media only screen and (max-width: 600px) {
 
-
-
         .wavy-sidebar {
             position: fixed;
             left: -800px; /* Initially hidden */
@@ -310,7 +308,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            width: 98%;      /* Ensures it spans the entire width */
+            width: 97%;      /* Ensures it spans the entire width */
             z-index: 3; /* Footer's z-index is higher */
             margin-top: auto;
         }
@@ -417,8 +415,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         
 
 
-       
-
+    
     }
 
 

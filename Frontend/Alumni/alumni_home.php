@@ -183,6 +183,31 @@ $conn->close();
             width: 100%;
             margin-top: 20px;
         }
+
+        @media only screen and (max-width: 600px) {
+            .adminTab{
+                display: flex;
+                width: 50%;
+            }
+            .filters {
+                margin-bottom: 10px;
+                display: flex;
+                flex-wrap: wrap;
+            }
+            .filterSelect{
+                width: 48%
+            }
+
+            .updateBtn{
+                width: 100%
+            }
+
+            .logoutBtn{
+                width: 100%
+            }
+
+
+        }
         </style>
 </head>
 <body>
@@ -279,9 +304,9 @@ $conn->close();
                 <label for="confirm_data" class="form-check-label">I confirm that the data provided is accurate.</label>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary updateBtn">Update</button>
         </form>
-        <a href="../../logout.php" class="btn btn-danger mt-3">Logout</a>
+        <a href="../../logout.php" class="btn btn-danger mt-3 logoutBtn">Logout</a>
     </div>
 
         <script>
