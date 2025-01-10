@@ -150,6 +150,7 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
     <style>
        body {
@@ -298,12 +299,49 @@ $conn->close();
             <input class="form-control" value="<?php echo $email; ?>" disabled>
         </div>
 
+        <!-- Checkbox for Terms and Conditions -->
         <div class="form-check mb-3">
-            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" <?php echo ($privacy_consent == 1) ? 'checked' : ''; ?> required>
+            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" required>
             <label for="privacy_consent" class="form-check-label">
-                I have read and understood the information and details provided by the research. I, therefore, give consent to participate in this study.
+                I have read, understood, and agree to the <a href="#terms-modal" data-toggle="modal" data-target="#terms-modal">Terms and Conditions</a>.
             </label>
         </div>
+
+        <!-- Modal for Terms and Conditions -->
+        <div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content" style="z-index: 3">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="max-height: 100%; overflow-y: auto; text-align: left; padding-left: 20px; text-align: justify;">
+                        <p><strong>DATA PRIVACY ACT</strong><br>
+                            The alumni tracking system is committed to safeguarding the personal data of its users in strict compliance with the Data Privacy Act of 2012 (RA 10173). All information provided will be processed fairly, lawfully, and transparently, ensuring confidentiality and integrity. We sincerely value your security and respect your data privacy. Personal information will not be shared with third parties without explicit consent, except as required by law or with the approval of the school administration. Proper security protocols will be employed to prevent unauthorized access, disclosure, or alteration of personal data.
+                        </p>
+                        <p><strong>TERMS AND CONDITIONS</strong></p>
+                        <ul>
+                            <li><strong>Acceptance of Terms:</strong> By accessing and completing this alumni tracker questionnaire, you acknowledge that you have read, understood, and agreed to be bound by these terms and conditions. If you do not agree with any part of these terms, please do not participate in this questionnaire.</li>
+                            <li><strong>Purpose of The Alumni Tracker:</strong> The alumni tracker aims to collect information to maintain a comprehensive database of the school’s graduates for administrative, networking, and research purposes.</li>
+                            <li><strong>Potential Use for Research:</strong> With approval from the school’s administrators, the alumni tracking system may be utilized for future research. Researchers may request access to the system to identify potential respondents if deemed necessary and approved by the school’s administration.</li>
+                            <li><strong>Potential Use for Networking:</strong> The tracker may be a point of contact for the school to reach out to alumni for future programs, events, or initiatives.</li>
+                            <li><strong>User Responsibilities:</strong> Participants agree to provide accurate and truthful information and respect the confidentiality of the alumni tracker.</li>
+                            <li><strong>Prohibited Activities:</strong> Participants must not submit false information or breach system security.</li>
+                            <li><strong>Limitation of Liability:</strong> The school is not liable for indirect or consequential damages or unauthorized access to data beyond its control.</li>
+                            <li><strong>Data Privacy and Confidentiality:</strong> Information will be stored securely and used solely for the purposes outlined.</li>
+                            <li><strong>Amendments to Terms:</strong> The school may update these terms, and continued use constitutes acceptance of any revisions.</li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
         <div class="mb-3">
             <label for="last_name" class="form-label">Last Name</label>
             <input type="text" name="last_name" id="last_name" class="form-control" value="<?php echo $last_name; ?>" required>
@@ -406,6 +444,9 @@ $conn->close();
             <select name="sector" id="sector" class="form-select" >
                 <option value="Public" <?php echo ($sector == 'Public') ? 'selected' : ''; ?>>Public</option>
                 <option value="Private" <?php echo ($sector == 'Private') ? 'selected' : ''; ?>>Private</option>
+                <option value="Goverment" <?php echo ($sector == 'Goverment') ? 'selected' : ''; ?>>Goverment</option>
+                <option value="NGO" <?php echo ($sector == 'NGO') ? 'selected' : ''; ?>>NGO</option>
+                <option value="Non-Profit" <?php echo ($sector == 'Non-Profit') ? 'selected' : ''; ?>>Non-Profit</option>
             </select>
         </div>
 
@@ -480,9 +521,19 @@ $conn->close();
 
             // Trigger change event on page load to set initial visibility
             document.getElementById('current_status').dispatchEvent(new Event('change'));
+
+            <a href="#" id="terms-link">Terms and Conditions</a>
+
+            document.getElementById('terms-link').addEventListener('click', function (event) {
+                event.preventDefault();
+                var myModal = new bootstrap.Modal(document.getElementById('terms-modal'));
+                myModal.show();
+            });
         </script>
-
-
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>

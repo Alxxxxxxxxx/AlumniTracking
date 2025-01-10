@@ -253,6 +253,9 @@ $conn->close();
                 <select name="sector" id="sector" class="form-select">
                     <option value="Public">Public</option>
                     <option value="Private">Private</option>
+                    <option value="Goverment">Goverment</option>
+                    <option value="NGO">NGO</option>
+                    <option value="Non-Profit">Non-Profit</option>
                 </select>
             </div>
 

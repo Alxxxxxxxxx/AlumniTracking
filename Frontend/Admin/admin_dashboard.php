@@ -146,13 +146,24 @@ $result = $conn->query($sql);
     </style>
 </head>
 <body>
-    <div class="container">
-                <div class="logo">
-                    <img alt="jee" src="../../images/banner.png">
-                </div>
-            <h1>Admin Dashboard</h1>
+        <div class="container">
+            <h1 class="text-center">Admin Dashboard</h1>
             <p class="text-center">Welcome, Admin!</p>
 
+            <!-- Bootstrap Tabs -->
+            <ul class="nav nav-tabs" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="alumni-tab" data-bs-toggle="tab" data-bs-target="#alumni" type="button" role="tab" aria-controls="alumni" aria-selected="true">Alumni Information</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="slideshow-tab" data-bs-toggle="tab" data-bs-target="#slideshow" type="button" role="tab" aria-controls="slideshow" aria-selected="false">Slideshow Management</button>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="adminTabsContent">
+            <!-- Alumni Information Tab -->
+            <div class="tab-pane fade show active" id="alumni" role="tabpanel" aria-labelledby="alumni-tab">
+                <form class="filters mt-3" method="GET" action="">
             <form class="filters" method="GET" action="">
                 <select name="present_location" class="form-select" style="width: auto; display: inline-block;">
                     <option value="">Present Location (All)</option>
