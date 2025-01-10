@@ -7,28 +7,31 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Tracking System</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
     <link rel="icon" href="images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
+
     
     <style>
         /* Ensure the body takes up full height and uses flexbox */
-        html, body {
+
+        body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
             font-family: 'Shrikhand', sans-serif;
-            
-        }
-
-        body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
             background: url('images/schoolback.jpg') no-repeat center center fixed;
             background-size: cover;
+            min-height: 100vh;
+
         }
+
         body::after {
             content: '';
             position: absolute;
@@ -38,12 +41,14 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             height: 100%;
             background: rgba(243, 243, 243, 0.7);
             z-index: -1;
+            
         }
-/* Top Banner and Other Styles */
-.top_banner {
-            height: 120px;
-            width: 100%;
-            background: transparent;
+
+        /* Top Banner and Other Styles */
+        .top_banner {
+            height: auto;
+            text-align: center; /* Center-align for mobile */
+            padding: 20px;
         }
 
         .in_banner {
@@ -79,12 +84,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             font-family: 'Noticia Text', serif;
         }
 
-        .glogo {
-            width: 102px;
-            height: 120px;
-            float: left;
-            margin: 0px 5px 0 5px;
-        }
 
         .logo {
             float: left;
@@ -144,7 +143,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         .wavy-sidebar li a.active {
             color: #222222;         /* Text color for active link */
             font-weight: bold;      /* Make the text bold */
-    }
+        }
 
         /* Footer Styles */
         footer {
@@ -153,93 +152,82 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            position: fixed;  /* Fixes the footer at the bottom */
-            bottom: 0;        /* Positions it at the bottom */
-            left: 0;          /* Ensures it spans the entire width */
             width: 100%;      /* Ensures it spans the entire width */
             z-index: 3; /* Footer's z-index is higher */
+            margin-top: auto;
         }
 
-
         .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            margin: 0 auto;
+        }
 
-.quote {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
-    color: #fafafa;
-}
+        .quote {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #fafafa;
+        }
 
-.footer-content {
-    display: flex;             /* Flexbox to arrange items in a row */
-    justify-content: center;   /* Center items horizontally */
-    gap: 100px;                /* Space between items */
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    width: 100%;               /* Ensure the container takes up the full width */
-}
+        .footer-content {
+            display: flex;             /* Flexbox to arrange items in a row */
+            justify-content: center;   /* Center items horizontally */
+            gap: 100px;                /* Space between items */
+            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
+            width: 100%;               /* Ensure the container takes up the full width */
+        }
 
-.footer-item {
-    background-color: #222222;
-    padding: 10px 20px;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;       /* Center vertically */
-    justify-content: center;   /* Center horizontally */
-    gap: 10px;
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-    flex: 1;                   /* Ensure all footer items have the same width */
-    text-align: center;        /* Align content in the center */
-}
+        .footer-item {
+            background-color: #222222;
+            padding: 10px 20px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;       /* Center vertically */
+            justify-content: center;   /* Center horizontally */
+            gap: 10px;
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+            flex: 1;                   /* Ensure all footer items have the same width */
+            text-align: center;        /* Align content in the center */
+        }
 
-.footer-location {
-    margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-    font-size: 1.1rem;
-    font-family: 'Noticia Text', serif;
-}
+        .footer-location {
+            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+        }
 
-.footer-item i, .footer-location i {
-    display: inline-block;
-    color: white;
-    font-size: 1.3rem;
-}
+        .footer-item i, .footer-location i {
+            display: inline-block;
+            color: white;
+            font-size: 1.3rem;
+        }
 
-/* Custom Font for Number, Facebook, and Gmail */
-.footer-text {
-    font-family: 'Courier New', monospace; 
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #222222;
-}
+        /* Custom Font for Number, Facebook, and Gmail */
 
-.fas.fa-map-marker-alt {
-    color: #fafafa;
-}
+        .fas.fa-map-marker-alt {
+            color: #fafafa;
+        }
 
-.facebook-link a {
-    color: #fafafa;
-    text-decoration: none; 
-}
+        .facebook-link a {
+            color: #fafafa;
+            text-decoration: none; 
+        }
 
-.facebook-link a:hover {
-    text-decoration: underline; 
-}
+        .facebook-link a:hover {
+            text-decoration: underline; 
+        }
 
         /* Slideshow container */
         .slideshow-container {
-    max-width: 810px;
-    position: relative;
-    margin: 0;
-    text-align: center;  
-    float: right;        
-    margin-right: 100px;  
-    border: 10px solid #fafafa; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
-    background-color: rgba(255, 255, 255, 255);
-}
+            width: 35%;
+            position: relative;
+            margin: auto;
+            text-align: center;         
+            border: 10px solid #fafafa; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+            background-color: rgba(255, 255, 255, 255);
+        }
+
         .slide {
             display: none;
             width: 80%;  
@@ -260,7 +248,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             }
         }
 
-        .icon-btn {
+    .icon-btn {
         position: absolute; 
         top: 50%; 
         transform: translateY(-50%); 
@@ -269,7 +257,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         border: none; 
         padding: 5px; 
         cursor: pointer; 
-        z-index: 1000; 
+        z-index: 3; 
         border-radius: 25%; 
     }
 
@@ -289,16 +277,157 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         background-color: rgba(0, 0, 0, 0.7); 
     }
 
+    @media only screen and (max-width: 600px) {
+
+
+
+        .wavy-sidebar {
+            position: fixed;
+            left: -800px; /* Initially hidden */
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background-color: #a00c30;
+            color: white;
+            padding: 20px;
+            clip-path: none; 
+            z-index: 10; /* Set the z-index to 2, below footer and logo */
+            transition: left 0.5s ease; /* Smooth transition for the sidebar */
+        }
+
+        .quote {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #fafafa;
+        }
+
+        footer {
+            background-color: #a00c30;
+            color: white;
+            text-align: center;
+            font-family: 'Shrikhand', sans-serif;
+            width: 97%;      /* Ensures it spans the entire width */
+            z-index: 3; /* Footer's z-index is higher */
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: block;     /* Flexbox to arrange items in a row */
+            justify-content: center;   /* Center items horizontally */  
+            
+        }
+
+        .footer-item {
+            background-color: black;
+            border-radius: 30px;
+            margin-bottom: 20px;
+
+            align-items: center;       /* Center vertically */
+            justify-content: center;   /* Center horizontally */
+            font-size: 1.1rem;
+            font-family: 'Noticia Text', serif;
+            flex: 1;                   /* Ensure all footer items have the same width */
+            text-align: center;        /* Align content in the center */
+        }
+
+        .top_banner {
+            display: flex;
+            height: auto;
+            text-align: center; /* Center-align for mobile */
+            padding: 20px;
+        }
+
+        /* Slideshow container */
+        .slideshow-container {
+            width: 80%;
+            position: relative;
+            margin: auto;
+            margin-bottom:20px;
+            margin-top: 20px;
+            text-align: center;         
+            border: 10px solid #fafafa; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+            background-color: rgba(255, 255, 255, 255);
+        }
+
+        .in_banner {
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+            height: 120px;
+            background: transparent;
+        }
+
+        .banner_text {
+            float: none;
+            width: 500px;
+            margin: 0;
+            margin-left: 50px;
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .banner_text h1 {
+            font-size: 12pt;
+            color: #222222;
+            height: 50px;
+            margin: 0;
+            margin-left: 30px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Shrikhand', cursive;
+        }
+
+        .banner_text h2 {
+            font-size: 10pt;
+            color: #222222;
+            margin: 0;
+            margin-left: 30px;
+            margin-top: 0px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Noticia Text', serif;
+        }
+
+
+        .logo {
+            float: none;
+            width: 30px;
+            height: 30px;
+            margin: 0;
+            margin-top: 10px;
+            cursor: pointer;
+            z-index: 11; 
+            position: relative; 
+        }
+
+        .logoimg{
+            width: 80px;
+            height: 80px;
+            z-index: 10; 
+            position: fixed;
+        }
+
+        
+
+
+       
+
+    }
+
+
+
 
     </style>
 </head>
 
 <body>
-<form name="aspnetForm" method="post" action="main.php">
+
     <div class="top_banner">
         <div class="in_banner">
             <div class="logo">
-                <img alt="jee" src="images/banner.png">
+                <img alt="jee" src="images/banner.png" class="logoimg">
             </div>
             <div class="banner_text">
                 <h1>SACRED HEART OF JESUS CATHOLIC SCHOOL</h1>
@@ -315,26 +444,29 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         </ul>
     </div>
 
-    <div class="slideshow-container" style="position: relative;">
-    <!-- Slide 1 -->
-    <img class="slide fade" src="images/slide1.jpg" style="width:100%">
-    <!-- Slide 2 -->
-    <img class="slide fade" src="images/slide2.jpg" style="width:100%">
-    <!-- Slide 3 -->
-    <img class="slide fade" src="images/slide3.jpg" style="width:100%">
+    <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <img class="slide fade" src="images/slide1.jpg" style="width:100%">
+        <!-- Slide 2 -->
+        <img class="slide fade" src="images/slide2.jpg" style="width:100%">
+        <!-- Slide 3 -->
+        <img class="slide fade" src="images/slide3.jpg" style="width:100%">
 
-    <button id="prevBtn" type="button" class="icon-btn">
-    <i class="fas fa-chevron-left"></i>
-    </button>
-    <button id="nextBtn" type="button" class="icon-btn">
-    <i class="fas fa-chevron-right"></i>
-</button>
-</div>
+        <button id="prevBtn" type="button" class="icon-btn">
+        <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="nextBtn" type="button" class="icon-btn">
+        <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    
 
 
-
-    <!-- Footer-->
-    <footer>
+   
+ 
+<!-- Footer-->
+<footer>
         <div class="footer-container">
             <p class="quote">JESUS MEEK AND HUMBLE OF HEART, MAKE OUR HEARTS LIKE UNTO THINE</p>
             <div class="footer-content">
@@ -357,16 +489,19 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             </div>
         </div>
     </footer>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
     // Toggle sidebar when logo is clicked
     $('.logo').click(function() {
         var sidebar = $('.wavy-sidebar');
+        var logo = $('.logoimg');
         if (sidebar.css('left') === '0px') {
             sidebar.css('left', '-800px');
         } else {
             sidebar.css('left', '0px');
+
         }
     });
 
@@ -442,7 +577,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
 
 </script>
-</form>
 </body>
 </html>
 
