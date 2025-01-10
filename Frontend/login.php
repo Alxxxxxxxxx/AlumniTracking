@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION['user_type'] = "alumni";
         
             // Check if the alumni has filled in the information
-            if (empty($rowAlumni['last_name']) || empty($rowAlumni['first_name']) || empty($rowAlumni['present_address'])) {
+            if (empty($rowAlumni['last_name']) || empty($rowAlumni['first_name']) || empty($rowAlumni['present_address']) || empty($rowAlumni['contact_number']) || empty($rowAlumni['current_status']) || empty($rowAlumni['university_employer']) || empty($rowAlumni['position_year_level']) || empty($rowAlumni['type_of_employment']) || empty($rowAlumni['year_hired']) || empty($rowAlumni['strand']) || empty($rowAlumni['years_of_enrollment']) || empty($rowAlumni['involvement']) || empty($rowAlumni['academic_awards']) || empty($rowAlumni['privacy_consent']) || empty($rowAlumni['sector']) || empty($rowAlumni['type_of_employment']) || empty($rowAlumni['sector'])) {
                 // Redirect to alumni form if required fields are missing
                 header('Location: ../Frontend/Alumni/alumni_form.php');
             } else {
