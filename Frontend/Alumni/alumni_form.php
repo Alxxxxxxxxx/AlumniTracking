@@ -11,9 +11,20 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'alumni') {
 // Get user data from the session
 $user_identifier = $_SESSION['user']['email']; // Use email as unique identifier
 
+// Check database connection
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
 // Retrieve the alumni data from the database
 $sql = "SELECT * FROM alumni WHERE email = ?";
 $stmt = $conn->prepare($sql);
+
+// Check if the SQL query was prepared successfully
+if ($stmt === false) {
+    die("Error preparing SQL query: " . $conn->error);
+}
+
 $stmt->bind_param("s", $user_identifier);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -22,9 +33,11 @@ if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
 
     $first_name = htmlspecialchars($row['first_name']);
+    $middle_name = htmlspecialchars($row['middle_name']);
     $last_name = htmlspecialchars($row['last_name']);
     $email = htmlspecialchars($row['email']);
     $contact_number = htmlspecialchars($row['contact_number']);
+    $present_location = htmlspecialchars($row['present_location']); 
     $present_address = htmlspecialchars($row['present_address']);
     $strand = htmlspecialchars($row['strand']);
     $years_of_enrollment = htmlspecialchars($row['years_of_enrollment']);
@@ -35,6 +48,10 @@ if ($result->num_rows > 0) {
     $position_year_level = htmlspecialchars($row['position_year_level']);
     $type_of_employment = htmlspecialchars($row['type_of_employment']);
     $year_hired = htmlspecialchars($row['year_hired']);
+    $privacy_consent = htmlspecialchars($row['privacy_consent']); 
+    $sector = htmlspecialchars($row['sector']);
+    $confirm_data = htmlspecialchars_decode($row['confirm_data']);
+    
 } else {
     echo "User data not found.";
     exit();
@@ -43,6 +60,7 @@ if ($result->num_rows > 0) {
 // Update user data
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_first_name = htmlspecialchars($_POST['first_name']);
+    $updated_middle_name = htmlspecialchars($_POST['middle_name']);
     $updated_last_name = htmlspecialchars($_POST['last_name']);
     $updated_contact_number = htmlspecialchars($_POST['contact_number']);
     $updated_present_address = htmlspecialchars($_POST['present_address']);
@@ -51,9 +69,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_position_year_level = htmlspecialchars($_POST['position_year_level']);
     $updated_type_of_employment = htmlspecialchars($_POST['type_of_employment']);
     $updated_year_hired = htmlspecialchars($_POST['year_hired']);
+    $updated_strand = htmlspecialchars($_POST['strand']);
+    $updated_years_of_enrollment = htmlspecialchars($_POST['years_of_enrollment']);
+    $updated_involvement = htmlspecialchars($_POST['involvement']);
+    $updated_academic_awards = htmlspecialchars($_POST['academic_awards']);
+    $updated_privacy_consent = htmlspecialchars($_POST['privacy_consent']);
+    $updated_sector = htmlspecialchars($_POST['sector']);
+    $updated_confirm_data = htmlspecialchars_decode($_POST['confirm_data']);
 
+    // Simplified SQL query for update
     $update_sql = "UPDATE alumni SET 
         first_name = ?, 
+        middle_name = ?, 
         last_name = ?, 
         contact_number = ?, 
         present_address = ?, 
@@ -61,13 +88,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         university_employer = ?, 
         position_year_level = ?, 
         type_of_employment = ?, 
-        year_hired = ? 
+        year_hired = ?, 
+        strand = ?, 
+        years_of_enrollment = ?, 
+        involvement = ?, 
+        academic_awards = ?, 
+        privacy_consent = ?, 
+        sector = ?, 
+        confirm_data = ? 
         WHERE email = ?";
 
     $update_stmt = $conn->prepare($update_sql);
+
+    // Check if the update SQL query was prepared successfully
+    if ($update_stmt === false) {
+        die("Error preparing the update SQL query: " . $conn->error);
+    }
+
+    // Correct bind_param type string (17 parameters total)
     $update_stmt->bind_param(
-        "ssssssssis", 
+        "ssssssssssssssssss",  // 17 placeholders (all string types)
         $updated_first_name, 
+        $updated_middle_name, 
         $updated_last_name, 
         $updated_contact_number, 
         $updated_present_address, 
@@ -76,6 +118,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_position_year_level, 
         $updated_type_of_employment, 
         $updated_year_hired, 
+        $updated_strand, 
+        $updated_years_of_enrollment, 
+        $updated_involvement, 
+        $updated_academic_awards, 
+        $updated_privacy_consent, 
+        $updated_sector,
+        $updated_confirm_data,
         $user_identifier
     );
 
@@ -89,6 +138,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $conn->close();
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
