@@ -452,7 +452,7 @@ $conn->close();
         <div class="mb-3">
             <label for="current_status" class="form-label">Current Status</label>
             <select name="current_status" id="current_status" class="form-select" required>
-                <option value="Disabled" <?php echo ($current_status == 'Disabled') ? 'selected' : ''; ?> disabled selected>Choose Your Current Status</option>
+                <option value="" disabled selected>Choose Your Current Status</option>
                 <option value="Secondary Student" <?php echo ($current_status == 'Secondary Student') ? 'selected' : ''; ?>>Secondary Student</option>
                 <option value="Tertiary Student" <?php echo ($current_status == 'Tertiary Student') ? 'selected' : ''; ?>>Tertiary Student</option>
                 <option value="Graduate School" <?php echo ($current_status == 'Graduate School') ? 'selected' : ''; ?>>Graduate School</option>
