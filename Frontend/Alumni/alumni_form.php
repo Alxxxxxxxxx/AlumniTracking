@@ -366,6 +366,7 @@ $conn->close();
         <div class="mb-3">
             <label for="present_location" class="form-label">Present Location</label>
             <select name="present_location" id="present_location" class="form-select" required>
+                <option>Choose Your Location</option>
                 <option value="In the Philippines" <?php echo ($present_location == 'In the Philippines') ? 'selected' : ''; ?>>In the Philippines</option>
                 <option value="Foreign Country" <?php echo ($present_location == 'Foreign Country') ? 'selected' : ''; ?>>Foreign Country</option>
             </select>
@@ -431,6 +432,7 @@ $conn->close();
         <div class="mb-3">
             <label for="current_status" class="form-label">Current Status</label>
             <select name="current_status" id="current_status" class="form-select" required>
+                <option>Choose Your Location</option>
                 <option value="Secondary Student" <?php echo ($current_status == 'Secondary Student') ? 'selected' : ''; ?>>Secondary Student</option>
                 <option value="Tertiary Student" <?php echo ($current_status == 'Tertiary Student') ? 'selected' : ''; ?>>Tertiary Student</option>
                 <option value="Graduate School" <?php echo ($current_status == 'Graduate School') ? 'selected' : ''; ?>>Graduate School</option>
@@ -479,7 +481,7 @@ $conn->close();
 
         <!-- AGREEMENT AND SUBMISSION -->
         <div class="mb-3 form-check">
-            <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" <?php echo ($confirm_data == 1) ? 'checked' : ''; ?> >
+            <input type="checkbox" name="confirm_data" id="confirm_data" class="form-check-input" <?php echo ($confirm_data == 1) ? 'checked' : ''; ?> required>
             <label for="confirm_data" class="form-check-label">I confirm that the data provided is accurate.</label>
         </div>
 
