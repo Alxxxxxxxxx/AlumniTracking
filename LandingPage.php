@@ -221,8 +221,10 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         /* Slideshow container */
         .slideshow-container {
             width: 35%;
+            float:right;
             position: relative;
             margin: auto;
+            margin-right:10%;
             text-align: center;         
             border: 10px solid #fafafa; 
             border-radius: 10px; 
@@ -280,8 +282,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     }
 
     @media only screen and (max-width: 600px) {
-
-
 
         .wavy-sidebar {
             position: fixed;
@@ -344,6 +344,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             width: 80%;
             position: relative;
             margin: auto;
+            float: none;
             margin-bottom:20px;
             margin-top: 20px;
             text-align: center;         
@@ -414,8 +415,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         
 
 
-       
-
+    
     }
 
 
@@ -446,6 +446,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         </ul>
     </div>
 
+    <div >
    <div class="slideshow-container">
     <?php
 
@@ -472,6 +473,7 @@ else: ?>
         <i class="fas fa-chevron-right"></i>
     </button>
 </div> 	
+</div>
 
     
 

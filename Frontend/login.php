@@ -78,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="utf-8">
     <title>Alumni Tracking System</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
@@ -85,18 +86,21 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <link rel="icon" href="../images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
-        html, body {
+
+        body {
             height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
             font-family: 'Shrikhand', sans-serif;
-        }
-
-        body {
+            overflow-x: hidden; /* Prevent horizontal scrolling */
             background: url('../images/namebg.png') no-repeat center center fixed;
             background-size: cover;
+            min-height: 100vh;
+
         }
+
+
 
         .login-container {
             position: absolute;
@@ -116,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-family: 'Shrikhand', sans-serif;
             margin-top: 0;
             margin-bottom: 20px;
-            color: #222222;
+            color: #FFF;
             font-size: 2.5rem;
             font-weight: lighter;
         }
@@ -133,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             box-sizing: border-box;
         }
 
-        .login-container button {
+        .login-container button { 
             width: 100%;
             padding: 10px;
             background: #a00c30;
@@ -150,10 +154,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             background: #222222;
         }
 
+        /* Top Banner and Other Styles */
         .top_banner {
-            height: 120px;
-            width: 100%;
-            background: transparent;
+            height: auto;
+            text-align: center; /* Center-align for mobile */
+            padding: 20px;
+
         }
 
         .in_banner {
@@ -172,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .banner_text h1 {
             font-size: 25pt;
-            color: #fafafa;
+            color: white;
             margin: 0;
             padding: 0;
             font-weight: normal;
@@ -181,7 +187,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .banner_text h2 {
             font-size: 25pt;
-            color: #fafafa;
+            color: white;
             margin: 0;
             margin-top: -20px;
             padding: 0;
@@ -189,12 +195,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-family: 'Noticia Text', serif;
         }
 
-        .glogo {
-            width: 102px;
-            height: 120px;
-            float: left;
-            margin: 0px 5px 0 5px;
-        }
 
         .logo {
             float: left;
@@ -267,13 +267,199 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             margin-right: 5px;
         }
 
+        @media only screen and (max-width: 600px) {
+
+            .top_banner {
+                display: flex;
+                height: auto;
+                text-align: center; /* Center-align for mobile */
+                padding: 20px;
+            }
+
+
+            .in_banner {
+                display: flex;
+                width: 100%;
+                margin: 0 auto;
+                height: 120px;
+                background: transparent;
+            }
+
+            .banner_text {
+                float: none;
+                width: 500px;
+                margin: 0;
+                margin-left: 50px;
+                margin-top: 20px;
+                text-align: left;
+            }
+
+            .banner_text h1 {
+                font-size: 12pt;
+                color: white;
+                height: 50px;
+                margin: 0;
+                margin-left: 30px;
+                padding: 0;
+                font-weight: normal;
+                font-family: 'Shrikhand', cursive;
+            }
+
+            .banner_text h2 {
+                font-size: 10pt;
+                color: white;
+                margin: 0;
+                margin-left: 30px;
+                margin-top: 0px;
+                padding: 0;
+                font-weight: normal;
+                font-family: 'Noticia Text', serif;
+            }
+
+
+            .logo {
+                float: none;
+                width: 30px;
+                height: 30px;
+                margin: 0;
+                margin-top: 10px;
+                cursor: pointer;
+                z-index: 11; 
+                position: relative; 
+            }
+
+            .logoimg{
+            width: 80px;
+            height: 80px;
+            z-index: 10; 
+        }
+
+        .login-container {
+            position: static;
+            top: 0;
+            left: 0;
+            transform: none;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 0;
+            border-radius: 1px;
+            box-shadow: none;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            font-family: 'Shrikhand', sans-serif;
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: black;
+            font-size: 2.5rem;
+            font-weight: lighter;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            box-sizing: border-box;
+        }
+
+        .login-container button { 
+            width: 80%;
+            padding: 10px;
+            background: #a00c30;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-family: 'Noticia Text', serif;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .login-container button:hover {
+            background: #222222;
+        }
+
+        .captcha-container {
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px 0;  
+        }
+
+        .back-button {
+            position: static;
+            top: 0;
+            left: 0;
+            background-color:transparent;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: lighter;
+        }
+        
+        .suh {
+            width: 80%;
+            background-color:transparent;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            text-decoration: none;
+            font-weight: lighter;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .suh2 {
+            background-color:transparent;
+            color: #222222;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Noticia Text', serif;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            text-decoration: none;
+        }
+
+        .suh2:hover {
+            color: #a00c30;
+        }
+
+        .back-button:hover {
+            color: #222222;
+        }
+
+        .back-button i {
+            margin-right: 5px;
+        }
+
+
+
+        }
+
     </style>
 </head>
 <body>
     <div class="top_banner">
         <div class="in_banner">
             <div class="logo">
-                <img alt="jee" src="../images/banner.png">
+                <img alt="jee" src="../images/banner.png" class="logoimg">
             </div>
             <div class="banner_text">
                 <h1>SACRED HEART OF JESUS CATHOLIC SCHOOL</h1>
