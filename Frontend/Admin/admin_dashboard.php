@@ -148,7 +148,12 @@ $result = $conn->query($sql);
             width: auto; 
             display: inline-block;
         }
-
+        .nav-link {
+                color: #808080;
+            }
+        .nav-link:hover {
+                color: #a00c30;
+            }
         @media only screen and (max-width: 600px) {
             .adminTab{
                 display: flex;
@@ -167,7 +172,7 @@ $result = $conn->query($sql);
                 width: 100%
             }
 
-
+            
         }
     </style>
 </head>
@@ -258,7 +263,7 @@ $result = $conn->query($sql);
                                     <td><?= $row['involvement']; ?></td>
                                     <td><?= $row['academic_awards']; ?></td>
                                     <td>
-                                        <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">View</a>
+                                        <a href="edit_alumni.php?id=<?= $row['id']; ?>" class="btn btn-dark btn-sm">View</a>
                                         <a href="delete_alumni.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</a>
                                     </td>
                                 </tr>

@@ -120,7 +120,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-family: 'Shrikhand', sans-serif;
             margin-top: 0;
             margin-bottom: 20px;
-            color: #222222;
+            color: #FFF;
             font-size: 2.5rem;
             font-weight: lighter;
         }

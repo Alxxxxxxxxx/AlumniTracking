@@ -150,8 +150,10 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alumni Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+    <link rel="icon" href="../../images/logo.ico" type="image/logo">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Shrikhand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noticia+Text&display=swap" rel="stylesheet">
     <style>
        body {
             font-family: 'Noticia Text', serif;
@@ -168,7 +170,11 @@ $conn->close();
             padding-left: 20px; 
             padding-right: 20px; 
         }
-
+        .container h3 {
+            font-size: 1.3rem;
+            margin-top: -20px;
+            margin-bottom: 20px;
+        }
         h1 {
             padding-top: 40px;
             font-size: 3rem;
@@ -287,7 +293,6 @@ $conn->close();
     <h1 class="mb-4 text-center"> Alumni Registration </h1>
     <h3 class="text-center">
         Rest assured that your information for this questionnaire will be treated with confidentiality.
-        <br><small>*Add Data Privacy Act and Terms & Conditions</small>
     </h3>
     <form action="" method="POST">
         <!-- PART 1: PERSONAL INFORMATION -->
@@ -323,15 +328,18 @@ $conn->close();
                         </p>
                         <p><strong>TERMS AND CONDITIONS</strong></p>
                         <ul>
-                            <li><strong>Acceptance of Terms:</strong> By accessing and completing this alumni tracker questionnaire, you acknowledge that you have read, understood, and agreed to be bound by these terms and conditions. If you do not agree with any part of these terms, please do not participate in this questionnaire.</li>
-                            <li><strong>Purpose of The Alumni Tracker:</strong> The alumni tracker aims to collect information to maintain a comprehensive database of the school’s graduates for administrative, networking, and research purposes.</li>
-                            <li><strong>Potential Use for Research:</strong> With approval from the school’s administrators, the alumni tracking system may be utilized for future research. Researchers may request access to the system to identify potential respondents if deemed necessary and approved by the school’s administration.</li>
-                            <li><strong>Potential Use for Networking:</strong> The tracker may be a point of contact for the school to reach out to alumni for future programs, events, or initiatives.</li>
-                            <li><strong>User Responsibilities:</strong> Participants agree to provide accurate and truthful information and respect the confidentiality of the alumni tracker.</li>
-                            <li><strong>Prohibited Activities:</strong> Participants must not submit false information or breach system security.</li>
-                            <li><strong>Limitation of Liability:</strong> The school is not liable for indirect or consequential damages or unauthorized access to data beyond its control.</li>
-                            <li><strong>Data Privacy and Confidentiality:</strong> Information will be stored securely and used solely for the purposes outlined.</li>
-                            <li><strong>Amendments to Terms:</strong> The school may update these terms, and continued use constitutes acceptance of any revisions.</li>
+                            <p><strong>Acceptance of Terms:</strong> By accessing and completing this alumni tracker questionnaire, you acknowledge that you have read, understood, and agreed to be bound by these terms and conditions. If you do not agree with any part of these terms, please do not participate in this questionnaire.</p
+                            
+                            
+                            >
+                            <p><strong>Purpose of The Alumni Tracker:</strong> The alumni tracker aims to collect information to maintain a comprehensive database of the school’s graduates for administrative, networking, and research purposes.</p>
+                            <p><strong>Potential Use for Research:</strong> With approval from the school’s administrators, the alumni tracking system may be utilized for future research. Researchers may request access to the system to identify potential respondents if deemed necessary and approved by the school’s administration.</p>
+                            <p><strong>Potential Use for Networking:</strong> The tracker may be a point of contact for the school to reach out to alumni for future programs, events, or initiatives.</p>
+                            <p><strong>User Responsibilities:</strong> Participants agree to provide accurate and truthful information and respect the confidentiality of the alumni tracker.</p>
+                            <p><strong>Prohibited Activities:</strong> Participants must not submit false information or breach system security.</p>
+                            <p><strong>Limitation of Liability:</strong> The school is not liable for indirect or consequential damages or unauthorized access to data beyond its control.</p>
+                            <p><strong>Data Privacy and Confidentiality:</strong> Information will be stored securely and used solely for the purposes outlined.</p>
+                            <p><strong>Amendments to Terms:</strong> The school may update these terms, and continued use constitutes acceptance of any revisions.</p>
                         </ul>
                     </div>
                     <div class="modal-footer">
