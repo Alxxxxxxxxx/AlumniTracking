@@ -63,6 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_middle_name = htmlspecialchars($_POST['middle_name']);
     $updated_last_name = htmlspecialchars($_POST['last_name']);
     $updated_contact_number = htmlspecialchars($_POST['contact_number']);
+    $updated_present_location = htmlspecialchars($_POST['present_location']);
     $updated_present_address = htmlspecialchars($_POST['present_address']);
     $updated_current_status = htmlspecialchars($_POST['current_status']);
     $updated_university_employer = htmlspecialchars($_POST['university_employer']);
@@ -83,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         middle_name = ?, 
         last_name = ?, 
         contact_number = ?, 
+        present_location = ?,
         present_address = ?, 
         current_status = ?, 
         university_employer = ?, 
@@ -107,11 +109,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Correct bind_param type string (17 parameters total)
     $update_stmt->bind_param(
-        "ssssssssssssssssss",  // 17 placeholders (all string types)
+        "sssssssssssssssssss",  // 17 placeholders (all string types)
         $updated_first_name, 
         $updated_middle_name, 
         $updated_last_name, 
         $updated_contact_number, 
+        $updated_present_location,
         $updated_present_address, 
         $updated_current_status, 
         $updated_university_employer, 
@@ -530,8 +533,6 @@ $conn->close();
                 var univDetails = document.getElementById('university_details');
                 var positionDetails = document.getElementById('position_details');
                 var sectorDetails = document.getElementById('sector_details');
-
-                // Form fields
                 var typeOfEmployment = document.getElementById('type_of_employment');
                 var yearHired = document.getElementById('year_hired');
                 var universityEmployer = document.getElementById('university_employer');
@@ -539,27 +540,24 @@ $conn->close();
                 var sector = document.getElementById('sector');
 
                 function toggleSections(status) {
-                    // Reset all fields and hide them initially
+
                     employmentDetails.style.display = 'none';
                     yearDetails.style.display = 'none';
                     univDetails.style.display = 'none';
                     positionDetails.style.display = 'none';
                     sectorDetails.style.display = 'none';
 
-                    // Remove 'required' attributes
                     typeOfEmployment.removeAttribute('required');
                     yearHired.removeAttribute('required');
                     universityEmployer.removeAttribute('required');
                     positionYearLevel.removeAttribute('required');
                     sector.removeAttribute('required');
 
-                    // Display fields based on the current status
                     if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
                         univDetails.style.display = 'block';
                         positionDetails.style.display = 'block';
                         sectorDetails.style.display = 'block';
 
-                        // Make relevant fields required
                         universityEmployer.setAttribute('required', 'required');
                         positionYearLevel.setAttribute('required', 'required');
                         sector.setAttribute('required', 'required');
@@ -570,7 +568,6 @@ $conn->close();
                         positionDetails.style.display = 'block';
                         sectorDetails.style.display = 'block';
 
-                        // Make relevant fields required
                         typeOfEmployment.setAttribute('required', 'required');
                         yearHired.setAttribute('required', 'required');
                         universityEmployer.setAttribute('required', 'required');
@@ -579,10 +576,8 @@ $conn->close();
                     }
                 }
 
-                // Initial toggle when the page loads
                 toggleSections(currentStatus.value);
 
-                // Update toggle when the status changes
                 currentStatus.addEventListener('change', function () {
                     toggleSections(this.value);
                 });

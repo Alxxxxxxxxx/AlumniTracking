@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
     $last_name = htmlspecialchars($row['last_name']);
     $email = htmlspecialchars($row['email']);
     $contact_number = htmlspecialchars($row['contact_number']);
+    $present_location = htmlspecialchars($row['present_location']);
     $present_address = htmlspecialchars($row['present_address']);
     $strand = htmlspecialchars($row['strand']);
     $years_of_enrollment = htmlspecialchars($row['years_of_enrollment']);
@@ -45,6 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_first_name = htmlspecialchars($_POST['first_name']);
     $updated_last_name = htmlspecialchars($_POST['last_name']);
     $updated_contact_number = htmlspecialchars($_POST['contact_number']);
+    $updated_present_location = htmlspecialchars($_POST['present_location']);
     $updated_present_address = htmlspecialchars($_POST['present_address']);
     $updated_current_status = htmlspecialchars($_POST['current_status']);
     $updated_university_employer = htmlspecialchars($_POST['university_employer']);
@@ -56,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         first_name = ?, 
         last_name = ?, 
         contact_number = ?, 
+        present_location = ?,
         present_address = ?, 
         current_status = ?, 
         university_employer = ?, 
@@ -66,10 +69,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param(
-        "ssssssssis", 
+        "ssssssssiss", 
         $updated_first_name, 
         $updated_last_name, 
         $updated_contact_number, 
+        $updated_present_location,
         $updated_present_address, 
         $updated_current_status, 
         $updated_university_employer, 
@@ -229,6 +233,13 @@ $conn->close();
             <div class="mb-3">
                 <label for="contact_number" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contact_number" name="contact_number" value="<?php echo $contact_number; ?>" required>
+            </div>
+            <div class="mb-3">
+                <label for="present_location" class="form-label">Present Location</label>
+                <select name="present_location" id="present_location" class="form-select" required>
+                    <option value="In the Philippines" <?= ($present_location == 'In the Philippines') ? 'selected' : ''; ?>>In the Philippines</option>
+                    <option value="Foreign Country" <?= ($present_location == 'Foreign Country') ? 'selected' : ''; ?>>Foreign Country</option>
+                </select>
             </div>
             <div class="mb-3">
                 <label for="present_address" class="form-label">Present Address</label>
