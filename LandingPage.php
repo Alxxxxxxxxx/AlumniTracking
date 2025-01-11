@@ -332,13 +332,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             text-align: center;        /* Align content in the center */
         }
 
-        .top_banner {
-            display: flex;
-            height: auto;
-            text-align: center; /* Center-align for mobile */
-            padding: 20px;
-        }
-
         /* Slideshow container */
         .slideshow-container {
             width: 80%;
@@ -346,7 +339,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             margin: auto;
             float: none;
             margin-bottom:20px;
-            margin-top: 20px;
+            margin-top: 180px;
             text-align: center;         
             border: 10px solid #fafafa; 
             border-radius: 10px; 
@@ -354,63 +347,76 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             background-color: rgba(255, 255, 255, 255);
         }
 
-        .in_banner {
-            display: flex;
-            width: 100%;
-            margin: 0 auto;
-            height: 120px;
-            background: transparent;
-        }
+       .top_banner {
+                display: flex;
+                height: auto;
+                text-align: center; /* Center-align for mobile */
+                padding: 10px;
+                width: 100%;
+                top: 0;
+                z-index: 20;
+                position: fixed;
+                background-color: #a00c30
+                
+            }
 
-        .banner_text {
-            float: none;
-            width: 500px;
-            margin: 0;
-            margin-left: 50px;
-            margin-top: 20px;
-            text-align: left;
-        }
+            .in_banner {
+                display: flex;
+                width: 100%;
+                margin: 0 auto;
+                height: 120px;
+                background: transparent;
+            }
 
-        .banner_text h1 {
-            font-size: 12pt;
-            color: #222222;
-            height: 50px;
-            margin: 0;
-            margin-left: 30px;
-            padding: 0;
-            font-weight: normal;
-            font-family: 'Shrikhand', cursive;
-        }
+            .banner_text {
+                float: none;
+                width: 70%;
+                margin: 0;
+                margin-left: 50px;
+                margin-top: 20px;
+                text-align: left;
+            }
 
-        .banner_text h2 {
-            font-size: 10pt;
-            color: #222222;
-            margin: 0;
-            margin-left: 30px;
-            margin-top: 0px;
-            padding: 0;
-            font-weight: normal;
-            font-family: 'Noticia Text', serif;
-        }
+            .banner_text h1 {
+                font-size: 12pt;
+                color: white;
+                height: 50px;
+                margin: 0;
+                margin-left: 30px;
+                padding: 0;
+                font-weight: normal;
+                font-family: 'Shrikhand', cursive;
+            }
+
+            .banner_text h2 {
+                font-size: 10pt;
+                color: white;
+                margin: 0;
+                margin-left: 30px;
+                margin-top: 0px;
+                padding: 0;
+                font-weight: normal;
+                font-family: 'Noticia Text', serif;
+            }
 
 
-        .logo {
-            float: none;
-            width: 30px;
-            height: 30px;
-            margin: 0;
-            margin-top: 10px;
-            cursor: pointer;
-            z-index: 11; 
-            position: relative; 
-        }
+            .logo {
+                float: none;
+                width: 30px;
+                height: 30px;
+                margin: 0;
+                margin-top: 10px;
+                cursor: pointer;
+                z-index: 11; 
+                position: relative; 
+            }
 
-        .logoimg{
-            width: 80px;
-            height: 80px;
-            z-index: 10; 
-            position: fixed;
-        }
+            .logoimg{
+                width: 80px;
+                height: 80px;
+                z-index: 10; 
+                position: fixed;
+            }
 
         
 

@@ -313,7 +313,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 background-color: black;
                 border-radius: 30px;
                 margin-bottom: 20px;
-
                 align-items: center;       /* Center vertically */
                 justify-content: center;   /* Center horizontally */
                 font-size: 1.1rem;
@@ -326,7 +325,13 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 display: flex;
                 height: auto;
                 text-align: center; /* Center-align for mobile */
-                padding: 20px;
+                padding: 10px;
+                width: 100%;
+                top: 0;
+                z-index: 20;
+                position: fixed;
+                background-color: #a00c30
+                
             }
 
             .in_banner {
@@ -339,7 +344,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
             .banner_text {
                 float: none;
-                width: 500px;
+                width: 70%;
                 margin: 0;
                 margin-left: 50px;
                 margin-top: 20px;
@@ -348,7 +353,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
             .banner_text h1 {
                 font-size: 12pt;
-                color: #222222;
+                color: white;
                 height: 50px;
                 margin: 0;
                 margin-left: 30px;
@@ -359,7 +364,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
             .banner_text h2 {
                 font-size: 10pt;
-                color: #222222;
+                color: white;
                 margin: 0;
                 margin-left: 30px;
                 margin-top: 0px;
@@ -398,6 +403,10 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 flex-direction:column;
                 justify-content: space-between;
                 background-color: transparent;
+            }
+
+            .vision{
+                margin-top: 200px;
             }
 
         }
