@@ -432,7 +432,7 @@ margin-right: 5px;
         <form method="POST">
             <input type="text" name="username" placeholder="Username" required />
             <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password" required />
+            <input type="password" name="password" placeholder="Password" required pattern=".{8,12}" title="Password must be between 8 and 12 characters." />
             <button type="submit">Sign Up</button>
         </form>
 
