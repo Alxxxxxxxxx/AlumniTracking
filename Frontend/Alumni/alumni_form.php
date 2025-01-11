@@ -235,7 +235,7 @@ $conn->close();
 
         .form-check-input:checked {
             background-color: #da1a32; 
-            border-color: #da1a32;
+            border-color:rgb(0, 0, 0);
         }
 
         .modal {
@@ -304,60 +304,72 @@ $conn->close();
             <input class="form-control" value="<?php echo $email; ?>" disabled>
         </div>
 
-        <!-- Checkbox for Terms and Conditions -->
-        <div class="form-check mb-3">
-            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" required>
-            <label for="privacy_consent" class="form-check-label">
-                I have read, understood, and agree to the <a href="#terms-modal" data-toggle="modal" data-target="#terms-modal">Terms and Conditions</a>.
+       <!-- Checkbox for Terms and Conditions -->
+       <div class="form-check mb-3">
+            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" >
+            <label for="privacy_consent" class="form-check-label" style="font-size: 16px; color: #000000;">
+                I have read, understood, and agree to the Terms and Conditions.
             </label>
         </div>
+
 
         <!-- Modal for Terms and Conditions -->
         <div class="modal fade" id="terms-modal" tabindex="-1" role="dialog" aria-labelledby="termsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable" role="document">
-                <div class="modal-content" style="z-index: 3">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+                        <h5 class="modal-title" id="termsModalLabel" style="color: #000000;">Terms and Conditions</h5>
+                        <!-- X button for closing -->
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body" style="max-height: 100%; overflow-y: auto; text-align: left; padding-left: 20px; text-align: justify;">
+                    <div class="modal-body" style="max-height: 60vh; overflow-y: auto; text-align: left; padding-left: 20px; text-align: justify; font-size: 14px; line-height: 1.5; color: #000000;">
                         <p><strong>DATA PRIVACY ACT</strong><br>
                             The alumni tracking system is committed to safeguarding the personal data of its users in strict compliance with the Data Privacy Act of 2012 (RA 10173). All information provided will be processed fairly, lawfully, and transparently, ensuring confidentiality and integrity. We sincerely value your security and respect your data privacy. Personal information will not be shared with third parties without explicit consent, except as required by law or with the approval of the school administration. Proper security protocols will be employed to prevent unauthorized access, disclosure, or alteration of personal data.
                         </p>
                         <p><strong>TERMS AND CONDITIONS</strong></p>
                         <ul>
-                            <p><strong>Acceptance of Terms:</strong> By accessing and completing this alumni tracker questionnaire, you acknowledge that you have read, understood, and agreed to be bound by these terms and conditions. If you do not agree with any part of these terms, please do not participate in this questionnaire.</p
-                            
-                            
-                            >
-                            <p><strong>Purpose of The Alumni Tracker:</strong> The alumni tracker aims to collect information to maintain a comprehensive database of the school’s graduates for administrative, networking, and research purposes.</p>
-                            <p><strong>Potential Use for Research:</strong> With approval from the school’s administrators, the alumni tracking system may be utilized for future research. Researchers may request access to the system to identify potential respondents if deemed necessary and approved by the school’s administration.</p>
-                            <p><strong>Potential Use for Networking:</strong> The tracker may be a point of contact for the school to reach out to alumni for future programs, events, or initiatives.</p>
-                            <p><strong>User Responsibilities:</strong> Participants agree to provide accurate and truthful information and respect the confidentiality of the alumni tracker.</p>
-                            <p><strong>Prohibited Activities:</strong> Participants must not submit false information or breach system security.</p>
-                            <p><strong>Limitation of Liability:</strong> The school is not liable for indirect or consequential damages or unauthorized access to data beyond its control.</p>
-                            <p><strong>Data Privacy and Confidentiality:</strong> Information will be stored securely and used solely for the purposes outlined.</p>
-                            <p><strong>Amendments to Terms:</strong> The school may update these terms, and continued use constitutes acceptance of any revisions.</p>
+                            <li><strong>Acceptance of Terms:</strong> By accessing and completing this alumni tracker questionnaire, you acknowledge that you have read, understood, and agreed to be bound by these terms and conditions. If you do not agree with any part of these terms, please do not participate in this questionnaire.</li>
+                            <li><strong>Purpose of The Alumni Tracker:</strong> The alumni tracker aims to collect information to maintain a comprehensive database of the school’s graduates for administrative, networking, and research purposes.</li>
+                            <li><strong>Potential Use for Research:</strong> With approval from the school’s administrators, the alumni tracking system may be utilized for future research. Researchers may request access to the system to identify potential respondents if deemed necessary and approved by the school’s administration.</li>
+                            <li><strong>Potential Use for Networking:</strong> The tracker may be a point of contact for the school to reach out to alumni for future programs, events, or initiatives.</li>
+                            <li><strong>User Responsibilities:</strong> Participants agree to provide accurate and truthful information and respect the confidentiality of the alumni tracker.</li>
+                            <li><strong>Prohibited Activities:</strong> Participants must not submit false information or breach system security.</li>
+                            <li><strong>Limitation of Liability:</strong> The school is not liable for indirect or consequential damages or unauthorized access to data beyond its control.</li>
+                            <li><strong>Data Privacy and Confidentiality:</strong> Information will be stored securely and used solely for the purposes outlined.</li>
+                            <li><strong>Amendments to Terms:</strong> The school may update these terms, and continued use constitutes acceptance of any revisions.</li>
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" id="accept-terms" class="btn btn-primary">Accept</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <script> 
-             <a href="#" id="terms-link">Terms and Conditions</a>
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var termsCheckbox = document.getElementById('privacy_consent');
+                var termsModal = new bootstrap.Modal(document.getElementById('terms-modal'));
+                var acceptButton = document.getElementById('accept-terms');
 
-                document.getElementById('terms-link').addEventListener('click', function (event) {
-                    event.preventDefault();
-                    var myModal = new bootstrap.Modal(document.getElementById('terms-modal'));
-                    myModal.show();
+                termsCheckbox.addEventListener('click', function (event) {
+                    if (!termsCheckbox.checked) {
+                        
+                    } else {
+                        termsCheckbox.checked = false;
+                        termsModal.show();
+                    }
                 });
+
+                acceptButton.addEventListener('click', function () {
+                    termsCheckbox.checked = true; 
+                    termsModal.hide(); 
+                });
+            });
+
+
         </script>
+
 
         <div class="mb-3">
             <label for="last_name" class="form-label">Last Name</label>
@@ -374,7 +386,7 @@ $conn->close();
         <div class="mb-3">
             <label for="present_location" class="form-label">Present Location</label>
             <select name="present_location" id="present_location" class="form-select" required>
-                <option>Choose Your Location</option>
+                <option value="" disabled selected>Choose Your Location</option> 
                 <option value="In the Philippines" <?php echo ($present_location == 'In the Philippines') ? 'selected' : ''; ?>>In the Philippines</option>
                 <option value="Foreign Country" <?php echo ($present_location == 'Foreign Country') ? 'selected' : ''; ?>>Foreign Country</option>
             </select>
@@ -440,7 +452,7 @@ $conn->close();
         <div class="mb-3">
             <label for="current_status" class="form-label">Current Status</label>
             <select name="current_status" id="current_status" class="form-select" required>
-                <option>Choose Your Location</option>
+                <option value="Disabled" <?php echo ($current_status == 'Disabled') ? 'selected' : ''; ?> disabled selected>Choose Your Current Status</option>
                 <option value="Secondary Student" <?php echo ($current_status == 'Secondary Student') ? 'selected' : ''; ?>>Secondary Student</option>
                 <option value="Tertiary Student" <?php echo ($current_status == 'Tertiary Student') ? 'selected' : ''; ?>>Tertiary Student</option>
                 <option value="Graduate School" <?php echo ($current_status == 'Graduate School') ? 'selected' : ''; ?>>Graduate School</option>
@@ -512,50 +524,45 @@ $conn->close();
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-            // Get the current status element
-            var currentStatus = document.getElementById('current_status');
+                var currentStatus = document.getElementById('current_status');
 
-            // Get all the conditional sections
-            var employmentDetails = document.getElementById('employment_details');
-            var yearDetails = document.getElementById('year_details');
-            var univDetails = document.getElementById('university_details');
-            var positionDetails = document.getElementById('position_details');
-            var sectorDetails = document.getElementById('sector_details');
+                var employmentDetails = document.getElementById('employment_details');
+                var yearDetails = document.getElementById('year_details');
+                var univDetails = document.getElementById('university_details');
+                var positionDetails = document.getElementById('position_details');
+                var sectorDetails = document.getElementById('sector_details');
 
-            // Function to toggle the sections
-            function toggleSections(status) {
-                // Reset all sections to 'none' by default
-                employmentDetails.style.display = 'none';
-                yearDetails.style.display = 'none';
-                univDetails.style.display = 'none';
-                positionDetails.style.display = 'none';
-                sectorDetails.style.display = 'none';
+                function toggleSections(status) {
+                    employmentDetails.style.display = 'none';
+                    yearDetails.style.display = 'none';
+                    univDetails.style.display = 'none';
+                    positionDetails.style.display = 'none';
+                    sectorDetails.style.display = 'none';
 
-                if (status === 'Not-Employed') {
-                    // No additional sections to show for "Not-Employed"
-                } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
-                    univDetails.style.display = 'block';
-                    positionDetails.style.display = 'block';
-                    sectorDetails.style.display = 'block';
-                } else {
-                    univDetails.style.display = 'block';
-                    employmentDetails.style.display = 'block';
-                    yearDetails.style.display = 'block';
-                    positionDetails.style.display = 'block';
-                    sectorDetails.style.display = 'block';
+                    if (status === '' || status === 'Choose Your Current Status') {
+                        return;
+                    } else if (status === 'Not-Employed' || status === 'Disabled') {
+                    } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
+                        univDetails.style.display = 'block';
+                        positionDetails.style.display = 'block';
+                        sectorDetails.style.display = 'block';
+                    } else {
+                        univDetails.style.display = 'block';
+                        employmentDetails.style.display = 'block';
+                        yearDetails.style.display = 'block';
+                        positionDetails.style.display = 'block';
+                        sectorDetails.style.display = 'block';
+                    }
                 }
-            }
 
-            // Initial check on page load
-            toggleSections(currentStatus.value);
+                toggleSections(currentStatus.value);
 
-            // Listen for changes to the current_status dropdown
-            currentStatus.addEventListener('change', function () {
-                toggleSections(this.value);
+                currentStatus.addEventListener('change', function () {
+                    toggleSections(this.value);
+                });
             });
-        });
-
         </script>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
