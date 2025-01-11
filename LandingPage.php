@@ -154,12 +154,15 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            width: 100%;      /* Ensures it spans the entire width */
-            z-index: 3; /* Footer's z-index is higher */
-            margin-top: auto;
+            position: fixed;  
+            bottom: 0;        
+            left: 0;         
+            width: 100%;      
+            z-index: 3; 
         }
 
         .footer-container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -170,11 +173,11 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         }
 
         .footer-content {
-            display: flex;             /* Flexbox to arrange items in a row */
-            justify-content: center;   /* Center items horizontally */
-            gap: 100px;                /* Space between items */
-            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-            width: 100%;               /* Ensure the container takes up the full width */
+            display: flex;             
+            justify-content: center;   
+            gap: 100px;               
+            margin: 10px 0;           
+            width: 100%;               
         }
 
         .footer-item {
@@ -182,17 +185,17 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             padding: 10px 20px;
             border-radius: 30px;
             display: flex;
-            align-items: center;       /* Center vertically */
-            justify-content: center;   /* Center horizontally */
+            align-items: center;       
+            justify-content: center;   
             gap: 10px;
             font-size: 1.1rem;
             font-family: 'Noticia Text', serif;
-            flex: 1;                   /* Ensure all footer items have the same width */
-            text-align: center;        /* Align content in the center */
-        }
+            flex: 1;                   
+            text-align: center;       
+            }
 
         .footer-location {
-            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
+            margin: 10px 0;           
             font-size: 1.1rem;
             font-family: 'Noticia Text', serif;
         }
@@ -201,6 +204,13 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             display: inline-block;
             color: white;
             font-size: 1.3rem;
+        }
+
+        .footer-text {
+            font-family: 'Courier New', monospace; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #222222;
         }
 
         /* Custom Font for Number, Facebook, and Gmail */
@@ -311,6 +321,8 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             width: 97%;      /* Ensures it spans the entire width */
             z-index: 3; /* Footer's z-index is higher */
             margin-top: auto;
+            bottom: none;
+            position: static
         }
 
         .footer-content {

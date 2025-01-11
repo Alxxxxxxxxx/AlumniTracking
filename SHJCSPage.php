@@ -15,36 +15,22 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
     <link rel="icon" href="images/logo.ico" type="image/logo">
     <link href="table.css" type="text/css" rel="stylesheet">
     <style>
-        body {
-            height: 100vh;
+       html, body {
+            height: 100%;
             margin: 0;
             display: flex;
             flex-direction: column;
             font-family: 'Shrikhand', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        body {
             background: #FAFAFA;
-            background-size: cover;
-            min-height: 100vh;
-
         }
 
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(243, 243, 243, 0.7);
-            z-index: -1;
-            
-        }
-
-        /* Top Banner and Other Styles */
         .top_banner {
-            height: auto;
-            text-align: center; /* Center-align for mobile */
-            padding: 20px;
+            height: 120px;
+            width: 100%;
+            background: transparent;
         }
 
         .in_banner {
@@ -80,6 +66,12 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             font-family: 'Noticia Text', serif;
         }
 
+        .glogo {
+            width: 102px;
+            height: 120px;
+            float: left;
+            margin: 0px 5px 0 5px;
+        }
 
         .logo {
             float: left;
@@ -91,10 +83,9 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             position: relative; 
         }
 
-        /* Wavy Sidebar */
         .wavy-sidebar {
             position: fixed;
-            left: -800px; /* Initially hidden */
+            left: -800px; 
             top: 0;
             width: 800px;
             height: 100vh;
@@ -102,27 +93,24 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             color: white;
             padding: 20px;
             clip-path: path('M 0 0 C 250 20, 50 150, 260 220 C 500 300, 200 500, 450 660 C 700 800, 1000 1000, 600 1000 L 0 1000 Z');
-            z-index: 2; /* Set the z-index to 2, below footer and logo */
-            transition: left 0.5s ease; /* Smooth transition for the sidebar */
+            z-index: 2; 
+            transition: left 0.5s ease; 
         }
 
-        /* Style the list of sidebar items */
         .wavy-sidebar ul {
             list-style: none;
             padding: 0;
             margin-top: 150px;
         }
 
-        /* Style for each list item in the sidebar */
         .wavy-sidebar li {
             margin: 20px 0;
         }
 
-        /* Style for the links (buttons) inside the sidebar */
         .wavy-sidebar li a {
             display: block;
             text-decoration: none;
-            color: white; /* Make the link text white */
+            color: white; 
             font-size: 30px;
             font-family: 'Noticia Text', serif;
             padding: 10px;
@@ -130,30 +118,31 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             transition: background-color 0.3s ease, padding 0.3s ease;
         }
 
-        /* Hover effect for the links */
         .wavy-sidebar li a:hover {
-            color: #FE0000; /* Change background color on hover */
-            padding-left: 20px; /* Slightly move text to the left */
+            color: #FE0000; 
+            padding-left: 20px; 
             font-weight: bolder;
         }
         .wavy-sidebar li a.active {
-            color: #222222;         /* Text color for active link */
-            font-weight: bold;      /* Make the text bold */
+            color: #222222;        
+            font-weight: bold;      
         }
 
-        /* Footer Styles */
         footer {
             background-color: #a00c30;
             padding: 5px 5px;
             color: white;
             text-align: center;
             font-family: 'Shrikhand', sans-serif;
-            width: 100%;      /* Ensures it spans the entire width */
-            z-index: 3; /* Footer's z-index is higher */
-            margin-top: auto;
+            position: fixed;  
+            bottom: 0;        
+            left: 0;         
+            width: 100%;      
+            z-index: 3; 
         }
 
         .footer-container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
@@ -164,11 +153,11 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
         }
 
         .footer-content {
-            display: flex;             /* Flexbox to arrange items in a row */
-            justify-content: center;   /* Center items horizontally */
-            gap: 100px;                /* Space between items */
-            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
-            width: 100%;               /* Ensure the container takes up the full width */
+            display: flex;             
+            justify-content: center;   
+            gap: 100px;               
+            margin: 10px 0;           
+            width: 100%;               
         }
 
         .footer-item {
@@ -176,17 +165,17 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             padding: 10px 20px;
             border-radius: 30px;
             display: flex;
-            align-items: center;       /* Center vertically */
-            justify-content: center;   /* Center horizontally */
+            align-items: center;       
+            justify-content: center;   
             gap: 10px;
             font-size: 1.1rem;
             font-family: 'Noticia Text', serif;
-            flex: 1;                   /* Ensure all footer items have the same width */
-            text-align: center;        /* Align content in the center */
-        }
+            flex: 1;                   
+            text-align: center;       
+            }
 
         .footer-location {
-            margin: 10px 0;            /* Reduced top and bottom margins (10px) */
+            margin: 10px 0;           
             font-size: 1.1rem;
             font-family: 'Noticia Text', serif;
         }
@@ -197,7 +186,12 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             font-size: 1.3rem;
         }
 
-        /* Custom Font for Number, Facebook, and Gmail */
+        .footer-text {
+            font-family: 'Courier New', monospace; 
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #222222;
+        }
 
         .fas.fa-map-marker-alt {
             color: #fafafa;
@@ -212,16 +206,16 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             text-decoration: underline; 
         }
 
-
         .content-section {
+            display: flex;
             justify-content: space-around;
             margin: 0;
             padding: 0;
-            flex: 1;
         }
 
         .content-box {
             display: flex;
+            align-items: flex-start; 
             justify-content: space-between;
             background-color: transparent;
         }
@@ -270,7 +264,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             height: 88%;
             margin-top: 50px;
         }
-
         @media only screen and (max-width: 600px) {
 
             .wavy-sidebar {
@@ -301,6 +294,8 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 width: 97%;      /* Ensures it spans the entire width */
                 z-index: 3; /* Footer's z-index is higher */
                 margin-top: auto;
+                bottom: none;
+                position: static;
             }
 
             .footer-content {
