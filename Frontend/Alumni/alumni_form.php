@@ -525,42 +525,69 @@ $conn->close();
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 var currentStatus = document.getElementById('current_status');
-
                 var employmentDetails = document.getElementById('employment_details');
                 var yearDetails = document.getElementById('year_details');
                 var univDetails = document.getElementById('university_details');
                 var positionDetails = document.getElementById('position_details');
                 var sectorDetails = document.getElementById('sector_details');
 
+                // Form fields
+                var typeOfEmployment = document.getElementById('type_of_employment');
+                var yearHired = document.getElementById('year_hired');
+                var universityEmployer = document.getElementById('university_employer');
+                var positionYearLevel = document.getElementById('position_year_level');
+                var sector = document.getElementById('sector');
+
                 function toggleSections(status) {
+                    // Reset all fields and hide them initially
                     employmentDetails.style.display = 'none';
                     yearDetails.style.display = 'none';
                     univDetails.style.display = 'none';
                     positionDetails.style.display = 'none';
                     sectorDetails.style.display = 'none';
 
-                    if (status === '' || status === 'Choose Your Current Status') {
-                        return;
-                    } else if (status === 'Not-Employed' || status === 'Disabled') {
-                    } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
+                    // Remove 'required' attributes
+                    typeOfEmployment.removeAttribute('required');
+                    yearHired.removeAttribute('required');
+                    universityEmployer.removeAttribute('required');
+                    positionYearLevel.removeAttribute('required');
+                    sector.removeAttribute('required');
+
+                    // Display fields based on the current status
+                    if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
                         univDetails.style.display = 'block';
                         positionDetails.style.display = 'block';
                         sectorDetails.style.display = 'block';
-                    } else {
+
+                        // Make relevant fields required
+                        universityEmployer.setAttribute('required', 'required');
+                        positionYearLevel.setAttribute('required', 'required');
+                        sector.setAttribute('required', 'required');
+                    } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
                         univDetails.style.display = 'block';
                         employmentDetails.style.display = 'block';
                         yearDetails.style.display = 'block';
                         positionDetails.style.display = 'block';
                         sectorDetails.style.display = 'block';
+
+                        // Make relevant fields required
+                        typeOfEmployment.setAttribute('required', 'required');
+                        yearHired.setAttribute('required', 'required');
+                        universityEmployer.setAttribute('required', 'required');
+                        positionYearLevel.setAttribute('required', 'required');
+                        sector.setAttribute('required', 'required');
                     }
                 }
 
+                // Initial toggle when the page loads
                 toggleSections(currentStatus.value);
 
+                // Update toggle when the status changes
                 currentStatus.addEventListener('change', function () {
                     toggleSections(this.value);
                 });
             });
+
         </script>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
