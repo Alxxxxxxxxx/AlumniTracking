@@ -436,11 +436,11 @@ $conn->close();
                     id="password"
                     placeholder="Password"
                     type="password" name="password" placeholder="Password" required pattern=".{8,12}" title="Password must be between 8 and 12 characters." 
-                    style="padding-right: 40px; width: 100%;"/>
+                    />
                 <i
                     class="fas fa-eye"
                     id="togglePassword"
-                    style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
+                    style="position: absolute;  top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
                     aria-label="Toggle password visibility"></i>
             </div>
             <?php if (isset($error)): ?>

@@ -506,11 +506,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 id="password"
                 placeholder="Password"
                 required="required"
-                style="padding-right: 40px; width: 100%;"/>
+                />
             <i
                 class="fas fa-eye"
                 id="togglePassword"
-                style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
+                style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
                 aria-label="Toggle password visibility"></i>
         </div>
         <div class="captcha-container">
