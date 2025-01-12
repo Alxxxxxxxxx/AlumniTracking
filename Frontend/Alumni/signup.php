@@ -426,16 +426,6 @@ $conn->close();
 
     <div class="login-container">
         <h2>Sign Up</h2>
-
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-        <form method="POST">
-            <input type="text" name="username" placeholder="Username" required />
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="password" name="password" placeholder="Password" required pattern=".{8,12}" title="Password must be between 8 and 12 characters." />
-=======
->>>>>>> Stashed changes
                 <form method="POST">
             <input type="text" name="username" placeholder="Username" required="required"/>
             <input type="email" name="email" placeholder="Email" required="required"/>
@@ -453,15 +443,6 @@ $conn->close();
                     style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
                     aria-label="Toggle password visibility"></i>
             </div>
-            <div class="captcha-container">
-                <div
-                    class="g-recaptcha"
-                    data-sitekey="6LeswLAqAAAAANMxYj8aJkCz8UimL0NOJ3drnCfQ"></div>
-            </div>
-<<<<<<< Updated upstream
-=======
->>>>>>> 7819b9c7f4f23322dd21922d7d879fdb056a4248
->>>>>>> Stashed changes
             <?php if (isset($error)): ?>
             <p style="color: #da1a32;"><?= htmlspecialchars($error) ?></p>
             <?php endif; ?>
