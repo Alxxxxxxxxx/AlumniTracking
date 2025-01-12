@@ -440,7 +440,7 @@ $conn->close();
                 <i
                     class="fas fa-eye"
                     id="togglePassword"
-                    style="position: absolute;  top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
+                    style="position: absolute; right: 50px; top: 50%; transform: translateY(-50%); cursor: pointer; font-size: 1.2rem; color: #888;"
                     aria-label="Toggle password visibility"></i>
             </div>
             <?php if (isset($error)): ?>
