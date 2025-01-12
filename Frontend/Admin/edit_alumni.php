@@ -193,9 +193,9 @@ if (isset($_GET['id'])) {
                 <select name="sector" id="sector" class="form-select" required>
                     <option value="Public" <?= ($row['sector'] == 'Public') ? 'selected' : ''; ?>>Public</option>
                     <option value="Private" <?= ($row['sector'] == 'Private') ? 'selected' : ''; ?>>Private</option>
-                    <option value="Goverment" <?php echo ($sector == 'Goverment') ? 'selected' : ''; ?>>Goverment</option>
-                    <option value="NGO" <?php echo ($sector == 'NGO') ? 'selected' : ''; ?>>NGO</option>
-                    <option value="Non-Profit" <?php echo ($sector == 'Non-Profit') ? 'selected' : ''; ?>>Non-Profit</option>
+                    <option value="Goverment" <?= ($row['sector'] == 'Goverment') ? 'selected' : ''; ?>>Goverment</option>
+                    <option value="NGO" <?= ($row['sector'] == 'NGO') ? 'selected' : ''; ?>>NGO</option>
+                    <option value="Non-Profit" <?= ($row['sector'] == 'Non-Profit') ? 'selected' : ''; ?>>Non-Profit</option>
                 </select>
             </div>
             <div class="form-group">
