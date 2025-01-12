@@ -513,7 +513,7 @@ else: ?>
                 </div>
                 <div class="footer-item">
                     <i class="fas fa-envelope"></i>
-                    <span>shjcssat.mesa@gmail.com</span>
+                    <span>shjcssta.mesa@gmail.com</span>
                 </div>
             </div>
             <div class="footer-location">

@@ -483,7 +483,7 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 </div>
                 <div class="footer-item">
                     <i class="fas fa-envelope"></i>
-                    <span>shjcssat.mesa@gmail.com</span>
+                    <span>shjcssta.mesa@gmail.com</span>
                 </div>
             </div>
             <div class="footer-location">
