@@ -199,6 +199,7 @@ $result = $conn->query($sql);
                 <select name="present_location" class="form-select filterSelect">
                     <option value="">Present Location (All)</option>
                     <option value="In the Philippines" <?= $filters['present_location'] == 'In the Philippines' ? 'selected' : '' ?>>In the Philippines</option>
+                    <option value="Foreign Country" <?= $filters['present_location'] == 'Foreign Country' ? 'selected' : '' ?>>Foreign Country</option>
                 </select>
                 <select name="strand" class="form-select filterSelect">
                     <option value="">Strand (All)</option>
@@ -221,6 +222,7 @@ $result = $conn->query($sql);
                     <option value="">Type of Employment (All)</option>
                     <option value="Full-time" <?= $filters['type_of_employment'] == 'Full-time' ? 'selected' : '' ?>>Full-time</option>
                     <option value="Part-time" <?= $filters['type_of_employment'] == 'Part-time' ? 'selected' : '' ?>>Part-time</option>
+                    <option value="Intern" <?= $filters['type_of_employment'] == 'Intern' ? 'selected' : '' ?>>Intern</option>
                 </select>
                 <input type="text" name="search" class="form-control filterSelect" placeholder="Search..." value="<?= $filters['search'] ?>">
                 <button type="submit" class="btn btn-primary filterSelect">Filter</button>
