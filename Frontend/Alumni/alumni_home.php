@@ -320,37 +320,78 @@ $conn->close();
         <a href="../../logout.php" class="btn btn-danger mt-3 logoutBtn">Logout</a>
     </div>
 
-        <script>
-            // JavaScript to conditionally hide/show employment details based on current status
-            document.getElementById('current_status').addEventListener('change', function() {
-                var currentStatus = this.value;
-                var employmentDetails = document.getElementById('employment_details');
-                var yearDetails = document.getElementById('year_details');
-                var univDetails = document.getElementById('university_details');
-                var positionDetails = document.getElementById('position_details');
-                var sectorDetails = document.getElementById('sector_details');
-                
-                // Hide employment details and year hired fields when certain statuses are selected
-                if (currentStatus === 'Not-Employed') {
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const currentStatus = document.getElementById('current_status');
+                const employmentDetails = document.getElementById('employment_details');
+                const yearDetails = document.getElementById('year_details');
+                const univDetails = document.getElementById('university_details');
+                const positionDetails = document.getElementById('position_details');
+                const sectorDetails = document.getElementById('sector_details');
+                const typeOfEmployment = document.getElementById('type_of_employment');
+                const yearHired = document.getElementById('year_hired');
+                const universityEmployer = document.getElementById('university_employer');
+                const positionYearLevel = document.getElementById('position_year_level');
+                const sector = document.getElementById('sector');
+
+                function toggleSections(status) {
+                    // Hide all sections and remove "required" attributes
                     employmentDetails.style.display = 'none';
                     yearDetails.style.display = 'none';
                     univDetails.style.display = 'none';
                     positionDetails.style.display = 'none';
                     sectorDetails.style.display = 'none';
-                } else if (currentStatus === 'Secondary Student' || currentStatus === 'Tertiary Student' || currentStatus === 'Graduate School') {
-                    employmentDetails.style.display = 'none';
-                    yearDetails.style.display = 'none';
-                    univDetails.style.display = 'block';
-                    positionDetails.style.display = 'block';
-                    sectorDetails.style.display = 'block';
-                } else {
-                    employmentDetails.style.display = 'block';
-                    yearDetails.style.display = 'block';
+
+                    typeOfEmployment.removeAttribute('required');
+                    yearHired.removeAttribute('required');
+                    universityEmployer.removeAttribute('required');
+                    positionYearLevel.removeAttribute('required');
+                    sector.removeAttribute('required');
+
+                    if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
+                        univDetails.style.display = 'block';
+                        positionDetails.style.display = 'block';
+                        sectorDetails.style.display = 'block';
+
+                        universityEmployer.setAttribute('required', 'required');
+                        positionYearLevel.setAttribute('required', 'required');
+                        sector.setAttribute('required', 'required');
+                    } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
+                        univDetails.style.display = 'block';
+                        employmentDetails.style.display = 'block';
+                        yearDetails.style.display = 'block';
+                        positionDetails.style.display = 'block';
+                        sectorDetails.style.display = 'block';
+
+                        typeOfEmployment.setAttribute('required', 'required');
+                        yearHired.setAttribute('required', 'required');
+                        universityEmployer.setAttribute('required', 'required');
+                        positionYearLevel.setAttribute('required', 'required');
+                        sector.setAttribute('required', 'required');
+                    }
+
+                    if (status === 'Not-Employed') {
+                        typeOfEmployment.value = "";
+                        yearHired.value = "";
+                        universityEmployer.value = "";
+                        positionYearLevel.value = "";
+                        sector.value = "";
+                    } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {  
+                        typeOfEmployment.value = "";
+                        yearHired.value = "";
+                    } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
+                    
+                    }
                 }
+
+                toggleSections(currentStatus.value);
+
+                currentStatus.addEventListener('change', function () {
+                    toggleSections(this.value);
+                });
             });
 
-            // Trigger change event on page load to set initial visibility
-            document.getElementById('current_status').dispatchEvent(new Event('change'));
+
         </script>
     </div>
 </body>

@@ -525,20 +525,20 @@ $conn->close();
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                var currentStatus = document.getElementById('current_status');
-                var employmentDetails = document.getElementById('employment_details');
-                var yearDetails = document.getElementById('year_details');
-                var univDetails = document.getElementById('university_details');
-                var positionDetails = document.getElementById('position_details');
-                var sectorDetails = document.getElementById('sector_details');
-                var typeOfEmployment = document.getElementById('type_of_employment');
-                var yearHired = document.getElementById('year_hired');
-                var universityEmployer = document.getElementById('university_employer');
-                var positionYearLevel = document.getElementById('position_year_level');
-                var sector = document.getElementById('sector');
+                const currentStatus = document.getElementById('current_status');
+                const employmentDetails = document.getElementById('employment_details');
+                const yearDetails = document.getElementById('year_details');
+                const univDetails = document.getElementById('university_details');
+                const positionDetails = document.getElementById('position_details');
+                const sectorDetails = document.getElementById('sector_details');
+                const typeOfEmployment = document.getElementById('type_of_employment');
+                const yearHired = document.getElementById('year_hired');
+                const universityEmployer = document.getElementById('university_employer');
+                const positionYearLevel = document.getElementById('position_year_level');
+                const sector = document.getElementById('sector');
 
                 function toggleSections(status) {
-
+                    // Hide all sections and remove "required" attributes
                     employmentDetails.style.display = 'none';
                     yearDetails.style.display = 'none';
                     univDetails.style.display = 'none';
@@ -572,6 +572,19 @@ $conn->close();
                         positionYearLevel.setAttribute('required', 'required');
                         sector.setAttribute('required', 'required');
                     }
+
+                    if (status === 'Not-Employed') {
+                        typeOfEmployment.value = "";
+                        yearHired.value = "";
+                        universityEmployer.value = "";
+                        positionYearLevel.value = "";
+                        sector.value = "";
+                    } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {  
+                        typeOfEmployment.value = "";
+                        yearHired.value = "";
+                    } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
+                    
+                    }
                 }
 
                 toggleSections(currentStatus.value);
@@ -580,6 +593,7 @@ $conn->close();
                     toggleSections(this.value);
                 });
             });
+
 
         </script>
 

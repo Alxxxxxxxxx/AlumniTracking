@@ -168,7 +168,7 @@ if (isset($_GET['id'])) {
                 <label for="academic_awards">Academic Awards:</label>
                 <input type="text" class="form-control" name="academic_awards" value="<?= $row['academic_awards'] ?>" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="current_status_wrapper">
                 <label for="current_status">Current Status:</label>
                 <select name="current_status" id="current_status" class="form-select" required>
                     <option value="Secondary Student" <?= ($row['current_status'] == 'Secondary Student') ? 'selected' : ''; ?>>Secondary Student</option>
@@ -180,17 +180,20 @@ if (isset($_GET['id'])) {
                     <option value="Not-Employed" <?= ($row['current_status'] == 'Not-Employed') ? 'selected' : ''; ?>>Not-Employed</option>
                 </select>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="university_details" style="display: none;">
                 <label for="university_employer">University / Employer:</label>
-                <input type="text" class="form-control" name="university_employer" value="<?= $row['university_employer'] ?>" required>
+                <input type="text" class="form-control" name="university_employer" id="university_employer" value="<?= $row['university_employer'] ?>">
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="position_details" style="display: none;">
                 <label for="position_year_level">Position / Year Level:</label>
-                <input type="text" class="form-control" name="position_year_level" value="<?= $row['position_year_level'] ?>" required>
+                <input type="text" class="form-control" name="position_year_level" id="position_year_level" value="<?= $row['position_year_level'] ?>">
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="sector_details" style="display: none;">
                 <label for="sector">Sector:</label>
-                <select name="sector" id="sector" class="form-select" required>
+                <select name="sector" id="sector" class="form-select">
                     <option value="Public" <?= ($row['sector'] == 'Public') ? 'selected' : ''; ?>>Public</option>
                     <option value="Private" <?= ($row['sector'] == 'Private') ? 'selected' : ''; ?>>Private</option>
                     <option value="Goverment" <?= ($row['sector'] == 'Goverment') ? 'selected' : ''; ?>>Goverment</option>
@@ -198,20 +201,102 @@ if (isset($_GET['id'])) {
                     <option value="Non-Profit" <?= ($row['sector'] == 'Non-Profit') ? 'selected' : ''; ?>>Non-Profit</option>
                 </select>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="employment_details" style="display: none;">
                 <label for="type_of_employment">Type of Employment:</label>
-                <select name="type_of_employment" id="type_of_employment" class="form-select" required>
+                <select name="type_of_employment" id="type_of_employment" class="form-select">
                     <option value="Full-time" <?= ($row['type_of_employment'] == 'Full-time') ? 'selected' : ''; ?>>Full-time</option>
                     <option value="Part-time" <?= ($row['type_of_employment'] == 'Part-time') ? 'selected' : ''; ?>>Part-time</option>
                     <option value="Intern" <?= ($row['type_of_employment'] == 'Intern') ? 'selected' : ''; ?>>Intern</option>
                 </select>
             </div>
-            <div class="form-group">
+
+            <div class="form-group" id="year_details" style="display: none;">
                 <label for="year_hired">Year Hired:</label>
-                <input type="text" class="form-control" name="year_hired" value="<?= $row['year_hired'] ?>" required>
+                <input type="text" class="form-control" name="year_hired" id="year_hired" value="<?= $row['year_hired'] ?>">
             </div>
+
             <button type="submit" class="btn btn-primary">Update Record</button>
+
         </form>
     </div>
+
+    <script>
+            document.addEventListener('DOMContentLoaded', function () {
+            const currentStatus = document.getElementById('current_status');
+            const employmentDetails = document.getElementById('employment_details');
+            const yearDetails = document.getElementById('year_details');
+            const univDetails = document.getElementById('university_details');
+            const positionDetails = document.getElementById('position_details');
+            const sectorDetails = document.getElementById('sector_details');
+            const typeOfEmployment = document.getElementById('type_of_employment');
+            const yearHired = document.getElementById('year_hired');
+            const universityEmployer = document.getElementById('university_employer');
+            const positionYearLevel = document.getElementById('position_year_level');
+            const sector = document.getElementById('sector');
+
+            function toggleSections(status) {
+                // Hide all sections and remove "required" attributes
+                employmentDetails.style.display = 'none';
+                yearDetails.style.display = 'none';
+                univDetails.style.display = 'none';
+                positionDetails.style.display = 'none';
+                sectorDetails.style.display = 'none';
+
+                typeOfEmployment.removeAttribute('required');
+                yearHired.removeAttribute('required');
+                universityEmployer.removeAttribute('required');
+                positionYearLevel.removeAttribute('required');
+                sector.removeAttribute('required');
+
+                if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {
+                    univDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
+
+                    universityEmployer.setAttribute('required', 'required');
+                    positionYearLevel.setAttribute('required', 'required');
+                    sector.setAttribute('required', 'required');
+                } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
+                    univDetails.style.display = 'block';
+                    employmentDetails.style.display = 'block';
+                    yearDetails.style.display = 'block';
+                    positionDetails.style.display = 'block';
+                    sectorDetails.style.display = 'block';
+
+                    typeOfEmployment.setAttribute('required', 'required');
+                    yearHired.setAttribute('required', 'required');
+                    universityEmployer.setAttribute('required', 'required');
+                    positionYearLevel.setAttribute('required', 'required');
+                    sector.setAttribute('required', 'required');
+                }
+
+                if (status === 'Not-Employed') {
+                    typeOfEmployment.value = "";
+                    yearHired.value = "";
+                    universityEmployer.value = "";
+                    positionYearLevel.value = "";
+                    sector.value = "";
+                } else if (status === 'Secondary Student' || status === 'Tertiary Student' || status === 'Graduate School') {  
+                    typeOfEmployment.value = "";
+                    yearHired.value = "";
+                } else if (status === 'Working Student' || status === 'Employed' || status === 'Self-Employed') {
+                
+                }
+            }
+
+            toggleSections(currentStatus.value);
+
+            currentStatus.addEventListener('change', function () {
+                toggleSections(this.value);
+            });
+        });
+
+
+        </script>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 </body>
 </html>
