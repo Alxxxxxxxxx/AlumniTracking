@@ -102,14 +102,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $update_stmt = $conn->prepare($update_sql);
 
-    // Check if the update SQL query was prepared successfully
     if ($update_stmt === false) {
         die("Error preparing the update SQL query: " . $conn->error);
     }
 
-    // Correct bind_param type string (17 parameters total)
     $update_stmt->bind_param(
-        "sssssssssssssssssss",  // 17 placeholders (all string types)
+        "sssssssssssssssssss", 
         $updated_first_name, 
         $updated_middle_name, 
         $updated_last_name, 
@@ -309,7 +307,7 @@ $conn->close();
 
        <!-- Checkbox for Terms and Conditions -->
        <div class="form-check mb-3">
-            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" >
+            <input type="checkbox" name="privacy_consent" id="privacy_consent" class="form-check-input" required>
             <label for="privacy_consent" class="form-check-label" style="font-size: 16px; color: #000000;">
                 I have read, understood, and agree to the Terms and Conditions.
             </label>

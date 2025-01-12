@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $checkEmail = "SELECT * FROM alumni WHERE email = '$email'";
     $result = $conn->query($checkEmail);
     if ($result->num_rows > 0) {
-        echo "Email already exists!";
+        $error = "Email Already Exist";
     } else {
         $sql = "INSERT INTO alumni (username, email, password) VALUES ('$username', '$email', '$password')";
         if ($conn->query($sql) === TRUE) {
@@ -226,190 +226,188 @@ $conn->close();
 
         @media only screen and (max-width: 600px) {
 
-.top_banner {
-    display: flex;
-    height: auto;
-    text-align: center; /* Center-align for mobile */
-    padding: 20px;
-}
+        .top_banner {
+            display: flex;
+            height: auto;
+            text-align: center; /* Center-align for mobile */
+            padding: 20px;
+        }
 
 
-.in_banner {
-    display: flex;
-    width: 100%;
-    margin: 0 auto;
-    height: 120px;
-    background: transparent;
-}
+        .in_banner {
+            display: flex;
+            width: 100%;
+            margin: 0 auto;
+            height: 120px;
+            background: transparent;
+        }
 
-.banner_text {
-    float: none;
-    width: 500px;
-    margin: 0;
-    margin-left: 50px;
-    margin-top: 20px;
-    text-align: left;
-}
+        .banner_text {
+            float: none;
+            width: 500px;
+            margin: 0;
+            margin-left: 50px;
+            margin-top: 20px;
+            text-align: left;
+        }
 
-.banner_text h1 {
-    font-size: 12pt;
-    color: white;
-    height: 50px;
-    margin: 0;
-    margin-left: 30px;
-    padding: 0;
-    font-weight: normal;
-    font-family: 'Shrikhand', cursive;
-}
+        .banner_text h1 {
+            font-size: 12pt;
+            color: white;
+            height: 50px;
+            margin: 0;
+            margin-left: 30px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Shrikhand', cursive;
+        }
 
-.banner_text h2 {
-    font-size: 10pt;
-    color: white;
-    margin: 0;
-    margin-left: 30px;
-    margin-top: 0px;
-    padding: 0;
-    font-weight: normal;
-    font-family: 'Noticia Text', serif;
-}
-
-
-.logo {
-    float: none;
-    width: 30px;
-    height: 30px;
-    margin: 0;
-    margin-top: 10px;
-    cursor: pointer;
-    z-index: 11; 
-    position: relative; 
-}
-
-.logoimg{
-width: 80px;
-height: 80px;
-z-index: 10; 
-}
-
-.login-container {
-position: static;
-top: 0;
-left: 0;
-transform: none;
-background: rgba(255, 255, 255, 0.5);
-padding: 0;
-border-radius: 1px;
-box-shadow: none;
-width: 100%;
-height: 100%;
-text-align: center;
-}
-
-.login-container h2 {
-font-family: 'Shrikhand', sans-serif;
-margin-top: 20px;
-margin-bottom: 20px;
-color: black;
-font-size: 2.5rem;
-font-weight: lighter;
-}
-
-.login-container input[type="text"],
-.login-container input[type="password"],
-.login-container input[type="email"] {
-width: 80%;
-padding: 10px;
-margin: 10px 0;
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 1rem;
-font-family: 'Noticia Text', serif;
-box-sizing: border-box;
-}
-
-.login-container button { 
-width: 80%;
-padding: 10px;
-background: #a00c30;
-color: white;
-border: none;
-border-radius: 5px;
-font-size: 1.2rem;
-font-family: 'Noticia Text', serif;
-cursor: pointer;
-box-sizing: border-box;
-}
-
-.login-container button:hover {
-background: #222222;
-}
-
-.captcha-container {
-display: flex;
-justify-content: center; 
-align-items: center; 
-margin: 20px 0;  
-}
-
-.back-button {
-position: static;
-top: 0;
-left: 0;
-background-color:transparent;
-color: white;
-padding: 8px 15px;
-border-radius: 5px;
-font-size: 1rem;
-font-family: 'Noticia Text', serif;
-text-decoration: none;
-display: inline-flex;
-align-items: center;
-font-weight: lighter;
-}
-
-.suh {
-width: 80%;
-background-color:transparent;
-border-radius: 10px;
-font-size: 1rem;
-font-family: 'Noticia Text', serif;
-text-decoration: none;
-font-weight: lighter;
-margin: auto;
-margin-top: 10px;
-margin-bottom: 20px;
-color: white;
-font-size: 1.2rem;
-}
-
-.suh2 {
-background-color:transparent;
-color: #222222;
-border-radius: 10px;
-font-size: 1rem;
-font-family: 'Noticia Text', serif;
-font-weight: bold;
-margin-top: 10px;
-margin-bottom: 20px;
-font-size: 1.2rem;
-text-decoration: none;
-}
-
-.suh2:hover {
-color: #a00c30;
-}
-
-.back-button:hover {
-color: #222222;
-}
-
-.back-button i {
-margin-right: 5px;
-}
+        .banner_text h2 {
+            font-size: 10pt;
+            color: white;
+            margin: 0;
+            margin-left: 30px;
+            margin-top: 0px;
+            padding: 0;
+            font-weight: normal;
+            font-family: 'Noticia Text', serif;
+        }
 
 
+        .logo {
+            float: none;
+            width: 30px;
+            height: 30px;
+            margin: 0;
+            margin-top: 10px;
+            cursor: pointer;
+            z-index: 11; 
+            position: relative; 
+        }
 
-}
+        .logoimg{
+        width: 80px;
+        height: 80px;
+        z-index: 10; 
+        }
+
+        .login-container {
+        position: static;
+        top: 0;
+        left: 0;
+        transform: none;
+        background: rgba(255, 255, 255, 0.5);
+        padding: 0;
+        border-radius: 1px;
+        box-shadow: none;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        }
+
+        .login-container h2 {
+        font-family: 'Shrikhand', sans-serif;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        color: black;
+        font-size: 2.5rem;
+        font-weight: lighter;
+        }
+
+        .login-container input[type="text"],
+        .login-container input[type="password"],
+        .login-container input[type="email"] {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: 'Noticia Text', serif;
+        box-sizing: border-box;
+        }
+
+        .login-container button { 
+        width: 80%;
+        padding: 10px;
+        background: #a00c30;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 1.2rem;
+        font-family: 'Noticia Text', serif;
+        cursor: pointer;
+        box-sizing: border-box;
+        }
+
+        .login-container button:hover {
+        background: #222222;
+        }
+
+        .captcha-container {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        margin: 20px 0;  
+        }
+
+        .back-button {
+        position: static;
+        top: 0;
+        left: 0;
+        background-color:transparent;
+        color: white;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-family: 'Noticia Text', serif;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        font-weight: lighter;
+        }
+
+        .suh {
+        width: 80%;
+        background-color:transparent;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: 'Noticia Text', serif;
+        text-decoration: none;
+        font-weight: lighter;
+        margin: auto;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        color: white;
+        font-size: 1.2rem;
+        }
+
+        .suh2 {
+        background-color:transparent;
+        color: #222222;
+        border-radius: 10px;
+        font-size: 1rem;
+        font-family: 'Noticia Text', serif;
+        font-weight: bold;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        }
+
+        .suh2:hover {
+        color: #a00c30;
+        }
+
+        .back-button:hover {
+        color: #222222;
+        }
+
+        .back-button i {
+        margin-right: 5px;
+        }
+
+        }
     </style>
 </head>
 <body>
@@ -429,6 +427,15 @@ margin-right: 5px;
     <div class="login-container">
         <h2>Sign Up</h2>
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+        <form method="POST">
+            <input type="text" name="username" placeholder="Username" required />
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="password" name="password" placeholder="Password" required pattern=".{8,12}" title="Password must be between 8 and 12 characters." />
+=======
+>>>>>>> Stashed changes
                 <form method="POST">
             <input type="text" name="username" placeholder="Username" required="required"/>
             <input type="email" name="email" placeholder="Email" required="required"/>
@@ -451,6 +458,10 @@ margin-right: 5px;
                     class="g-recaptcha"
                     data-sitekey="6LeswLAqAAAAANMxYj8aJkCz8UimL0NOJ3drnCfQ"></div>
             </div>
+<<<<<<< Updated upstream
+=======
+>>>>>>> 7819b9c7f4f23322dd21922d7d879fdb056a4248
+>>>>>>> Stashed changes
             <?php if (isset($error)): ?>
             <p style="color: #da1a32;"><?= htmlspecialchars($error) ?></p>
             <?php endif; ?>
