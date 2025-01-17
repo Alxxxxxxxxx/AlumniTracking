@@ -37,6 +37,7 @@ if ($result->num_rows > 0) {
     $position_year_level = htmlspecialchars($row['position_year_level']);
     $type_of_employment = htmlspecialchars($row['type_of_employment']);
     $year_hired = htmlspecialchars($row['year_hired']);
+    $alumni_feedback = htmlspecialchars($row['alumni_feedback']);
 } else {
     echo "User data not found.";
     exit();
@@ -55,6 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_position_year_level = htmlspecialchars($_POST['position_year_level']);
     $updated_type_of_employment = htmlspecialchars($_POST['type_of_employment']);
     $updated_year_hired = htmlspecialchars($_POST['year_hired']);
+    $updated_alumni_feedback = htmlspecialchars($_POST['alumni_feedback']);
 
     $update_sql = "UPDATE alumni SET 
         first_name = ?, 
@@ -67,7 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         university_employer = ?, 
         position_year_level = ?, 
         type_of_employment = ?, 
-        year_hired = ? 
+        year_hired = ?,
+        alumni_feedback = ?,
         WHERE email = ?";
 
     $update_stmt = $conn->prepare($update_sql);
@@ -84,6 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_position_year_level, 
         $updated_type_of_employment, 
         $updated_year_hired, 
+        $alumni_feedback,
         $user_identifier
     );
 
@@ -258,7 +262,7 @@ $conn->close();
                 <input type="text" class="form-control" id="strand" name="strand" value="<?php echo $strand; ?>" disabled>
             </div>
             <div class="mb-3">
-                <label for="years_of_enrollment" class="form-label">Years of Enrollment (Non-Editable)</label>
+                <label for="years_of_enrollment" class="form-label">Years of Tenure (Non-Editable)</label>
                 <input type="text" class="form-control" id="years_of_enrollment" name="years_of_enrollment" value="<?php echo $years_of_enrollment; ?>" disabled>
             </div>
             <div class="mb-3">
@@ -315,6 +319,11 @@ $conn->close();
             <div id="year_details" class="mb-3">
                 <label for="year_hired" class="form-label">Year Hired</label>
                 <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="alumni_feedback">Alumni Feedback:</label>
+                <input type="text" class="form-control" name="alumni_feedback" value="<?= $row['alumni_feedback'] ?>" required>
             </div>
 
             <!-- AGREEMENT AND SUBMISSION -->

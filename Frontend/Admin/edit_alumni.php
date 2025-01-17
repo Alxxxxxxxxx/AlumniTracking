@@ -39,6 +39,7 @@ if (isset($_GET['id'])) {
         $sector = $_POST['sector'];
         $type_of_employment = $_POST['type_of_employment'];
         $year_hired = $_POST['year_hired'];
+        $alumni_feedback = $_POST['alumni_feedback'];
 
         // Update query
         $update_sql = "UPDATE alumni SET 
@@ -48,7 +49,7 @@ if (isset($_GET['id'])) {
                         years_of_enrollment = '$years_of_enrollment', involvement = '$involvement',
                         academic_awards = '$academic_awards', current_status = '$current_status',
                         university_employer = '$university_employer', position_year_level = '$position_year_level',
-                        sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired'
+                        sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired', alumni_feedback = '$alumni_feedback
                         WHERE id = $id";
 
         if ($conn->query($update_sql) === TRUE) {
@@ -162,7 +163,7 @@ if (isset($_GET['id'])) {
                 </div>
             </div>
             <div class="form-group">
-                <label for="years_of_enrollment">Years of Enrollment:</label>
+                <label for="years_of_enrollment">Years of Tenure:</label>
                 <input type="text" class="form-control" name="years_of_enrollment" value="<?= $row['years_of_enrollment'] ?>" required>
             </div>
             <div class="form-group">
@@ -219,6 +220,11 @@ if (isset($_GET['id'])) {
             <div class="form-group" id="year_details" style="display: none;">
                 <label for="year_hired">Year Hired:</label>
                 <input type="text" class="form-control" name="year_hired" id="year_hired" value="<?= $row['year_hired'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="alumni_feedback">Alumni Feedback:</label>
+                <input type="text" class="form-control" name="alumni_feedback" value="<?= $row['alumni_feedback'] ?>" required>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Record</button>

@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
     $year_hired = htmlspecialchars($row['year_hired']);
     $privacy_consent = htmlspecialchars($row['privacy_consent']); 
     $sector = htmlspecialchars($row['sector']);
+    $alumni_feedback = htmlspecialchars($row['alumni_feedback']);
     $confirm_data = htmlspecialchars_decode($row['confirm_data']);
     
 } else {
@@ -78,6 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_academic_awards = htmlspecialchars($_POST['academic_awards']);
     $updated_privacy_consent = htmlspecialchars($_POST['privacy_consent']);
     $updated_sector = htmlspecialchars($_POST['sector']);
+    $updated_alumni_feedback = htmlspecialchars_decode($_POST['alumni_feedback']);
     $updated_confirm_data = htmlspecialchars_decode($_POST['confirm_data']);
 
     // Simplified SQL query for update
@@ -100,6 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         academic_awards = ?, 
         privacy_consent = ?, 
         sector = ?, 
+        alumni_feedback = ?,
         confirm_data = ? 
         WHERE email = ?";
 
@@ -110,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $update_stmt->bind_param(
-        "ssssssssssssssssssss", 
+        "sssssssssssssssssssss", 
         $updated_first_name, 
         $updated_middle_name, 
         $updated_last_name, 
@@ -129,6 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_academic_awards, 
         $updated_privacy_consent, 
         $updated_sector,
+        $updated_alumni_feedback,
         $updated_confirm_data,
         $user_identifier
     );
@@ -441,7 +445,7 @@ $conn->close();
             </div>
         </div>
         <div class="mb-3">
-            <label for="years_of_enrollment" class="form-label">Years of Enrollment</label>
+            <label for="years_of_enrollment" class="form-label">Years of Tenure</label>
             <input type="text" name="years_of_enrollment" id="years_of_enrollment" class="form-control" value="<?php echo $years_of_enrollment; ?>" placeholder="Ex. 2020 - 2024" required>
         </div>
 
@@ -506,6 +510,11 @@ $conn->close();
         <div id="year_details" class="mb-3">
             <label for="year_hired" class="form-label">Year Hired</label>
             <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>">
+        </div>
+        
+        <div class="form-group">
+                <label for="alumni_feedback">Alumni Feedback:</label>
+                <input type="text" class="form-control" name="alumni_feedback" value="<?= $row['alumni_feedback'] ?>" required>
         </div>
 
         <!-- AGREEMENT AND SUBMISSION -->
