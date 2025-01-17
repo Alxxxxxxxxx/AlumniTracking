@@ -28,6 +28,7 @@ if (isset($_GET['id'])) {
         $present_location = $_POST['present_location'];
         $present_address = $_POST['present_address'];
         $contact_number = $_POST['contact_number'];
+        $fb_account = $_POST['fb_account'];
         $strand = $_POST['strand'];
         $years_of_enrollment = $_POST['years_of_enrollment'];
         $involvement = $_POST['involvement'];
@@ -43,7 +44,7 @@ if (isset($_GET['id'])) {
         $update_sql = "UPDATE alumni SET 
                         last_name = '$last_name', first_name = '$first_name', middle_name = '$middle_name',
                         present_location = '$present_location', present_address = '$present_address', 
-                        contact_number = '$contact_number', strand = '$strand', 
+                        contact_number = '$contact_number',fb_account = '$fb_account' , strand = '$strand', 
                         years_of_enrollment = '$years_of_enrollment', involvement = '$involvement',
                         academic_awards = '$academic_awards', current_status = '$current_status',
                         university_employer = '$university_employer', position_year_level = '$position_year_level',
@@ -126,6 +127,10 @@ if (isset($_GET['id'])) {
             <div class="form-group">
                 <label for="contact_number">Contact Number:</label>
                 <input type="text" class="form-control" name="contact_number" value="<?= $row['contact_number'] ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="fb_account">Facebook Account:</label>
+                <input type="text" class="form-control" name="fb_account" value="<?= $row['fb_account'] ?>" required>
             </div>
             <div class="form-group">
                 <label for="strand">Strand:</label>
@@ -216,7 +221,7 @@ if (isset($_GET['id'])) {
                 <input type="text" class="form-control" name="year_hired" id="year_hired" value="<?= $row['year_hired'] ?>">
             </div>
 
-            <button type="submit" class="btn btn-danger">Update Record</button>
+            <button type="submit" class="btn btn-primary">Update Record</button>
 
         </form>
     </div>

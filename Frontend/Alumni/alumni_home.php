@@ -25,6 +25,7 @@ if ($result->num_rows > 0) {
     $last_name = htmlspecialchars($row['last_name']);
     $email = htmlspecialchars($row['email']);
     $contact_number = htmlspecialchars($row['contact_number']);
+    $fb_account = htmlspecialchars($row['fb_account']);
     $present_location = htmlspecialchars($row['present_location']);
     $present_address = htmlspecialchars($row['present_address']);
     $strand = htmlspecialchars($row['strand']);
@@ -46,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_first_name = htmlspecialchars($_POST['first_name']);
     $updated_last_name = htmlspecialchars($_POST['last_name']);
     $updated_contact_number = htmlspecialchars($_POST['contact_number']);
+    $updated_fb_account = htmlspecialchars($_POST['fb_account']);
     $updated_present_location = htmlspecialchars($_POST['present_location']);
     $updated_present_address = htmlspecialchars($_POST['present_address']);
     $updated_current_status = htmlspecialchars($_POST['current_status']);
@@ -58,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         first_name = ?, 
         last_name = ?, 
         contact_number = ?, 
+        fb_account = ?,
         present_location = ?,
         present_address = ?, 
         current_status = ?, 
@@ -73,6 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_first_name, 
         $updated_last_name, 
         $updated_contact_number, 
+        $updated_fb_account,
         $updated_present_location,
         $updated_present_address, 
         $updated_current_status, 
@@ -233,6 +237,10 @@ $conn->close();
             <div class="mb-3">
                 <label for="contact_number" class="form-label">Contact Number</label>
                 <input type="text" class="form-control" id="contact_number" name="contact_number" value="<?php echo $contact_number; ?>" required>
+            </div>
+            <div class="form-group">
+                <label for="fb_account">Facebook Account:</label>
+                <input type="text" class="form-control" name="fb_account" value="<?= $row['fb_account'] ?>" required>
             </div>
             <div class="mb-3">
                 <label for="present_location" class="form-label">Present Location</label>
