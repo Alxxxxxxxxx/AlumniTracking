@@ -48,9 +48,9 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
 
         /* Top Banner and Other Styles */
         .top_banner {
-            height: auto;
-            text-align: center; /* Center-align for mobile */
-            padding: 20px;
+            height: 120px;
+            width: 100%;
+            background: transparent;
         }
 
         .in_banner {
@@ -86,7 +86,10 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             font-family: 'Noticia Text', serif;
         }
 
-
+        .logo-container {
+  position: relative;
+  display: inline-block;
+}
         .logo {
             float: left;
             width: 107px;
@@ -95,7 +98,12 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             cursor: pointer;
             z-index: 10; 
             position: relative; 
+            transition: transform 0.3s ease;
         }
+        .logo:hover,
+.logo:active {
+  transform: scale(1.2);
+}
 
         /* Wavy Sidebar */
         .wavy-sidebar {
@@ -429,11 +437,6 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
                 z-index: 10; 
                 position: fixed;
             }
-
-        
-
-
-    
     }
 
 

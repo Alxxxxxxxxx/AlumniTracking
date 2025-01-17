@@ -81,7 +81,12 @@ if(preg_match('/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|c
             cursor: pointer;
             z-index: 10; 
             position: relative; 
+            transition: transform 0.3s ease;
         }
+        .logo:hover,
+.logo:active {
+  transform: scale(1.2);
+}
 
         .wavy-sidebar {
             position: fixed;

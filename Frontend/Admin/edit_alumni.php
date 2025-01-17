@@ -216,7 +216,7 @@ if (isset($_GET['id'])) {
                 <input type="text" class="form-control" name="year_hired" id="year_hired" value="<?= $row['year_hired'] ?>">
             </div>
 
-            <button type="submit" class="btn btn-primary">Update Record</button>
+            <button type="submit" class="btn btn-danger">Update Record</button>
 
         </form>
     </div>

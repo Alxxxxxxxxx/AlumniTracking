@@ -1,8 +1,8 @@
 <?php
 $server = "localhost";
-$username = "root";
-$password = ""; // Set your MySQL password
-$database = "school_alumni";
+$username = "u349903409_SchoolAlumni";
+$password = "SchoolAlumni123"; // Set your MySQL password
+$database = "u349903409_SchoolAlumni";
 
 $conn = new mysqli($server, $username, $password, $database);
 

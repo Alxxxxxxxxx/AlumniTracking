@@ -234,7 +234,7 @@ $result = $conn->query($sql);
                     <table class="table table-striped table-bordered">
                         <thead class="table-dark">
                             <tr>
-                                <th>ID</th>
+                                
                                 <th>Email</th>
                                 <th>Last Name</th>
                                 <th>First Name</th>
@@ -252,7 +252,7 @@ $result = $conn->query($sql);
                         <tbody>
                             <?php while ($row = $result->fetch_assoc()): ?>
                                 <tr>
-                                    <td><?= $row['id']; ?></td>
+                                    
                                     <td><?= $row['email']; ?></td>
                                     <td><?= $row['last_name']; ?></td>
                                     <td><?= $row['first_name']; ?></td>
