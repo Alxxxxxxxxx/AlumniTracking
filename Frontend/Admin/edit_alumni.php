@@ -39,6 +39,7 @@ if (isset($_GET['id'])) {
         $sector = $_POST['sector'];
         $type_of_employment = $_POST['type_of_employment'];
         $year_hired = $_POST['year_hired'];
+        $finish_course = $_POST['finish_course'];
         $alumni_feedback = $_POST['alumni_feedback'];
 
         // Update query
@@ -49,7 +50,7 @@ if (isset($_GET['id'])) {
                         years_of_enrollment = '$years_of_enrollment', involvement = '$involvement',
                         academic_awards = '$academic_awards', current_status = '$current_status',
                         university_employer = '$university_employer', position_year_level = '$position_year_level',
-                        sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired', alumni_feedback = '$alumni_feedback
+                        sector = '$sector', type_of_employment = '$type_of_employment', year_hired = '$year_hired', finish_course = '$finish_course', alumni_feedback = '$alumni_feedback
                         WHERE id = $id";
 
         if ($conn->query($update_sql) === TRUE) {
@@ -220,6 +221,11 @@ if (isset($_GET['id'])) {
             <div class="form-group" id="year_details" style="display: none;">
                 <label for="year_hired">Year Hired:</label>
                 <input type="text" class="form-control" name="year_hired" id="year_hired" value="<?= $row['year_hired'] ?>">
+            </div>
+
+            <div class="form-group">
+                <label for="finish_course">Finish Course:</label>
+                <input type="text" class="form-control" name="finish_course" value="<?= $row['finish_course'] ?>" required>
             </div>
 
             <div class="form-group">

@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
     $year_hired = htmlspecialchars($row['year_hired']);
     $privacy_consent = htmlspecialchars($row['privacy_consent']); 
     $sector = htmlspecialchars($row['sector']);
+    $finish_course = htmlspecialchars($row['finish_course']);
     $alumni_feedback = htmlspecialchars($row['alumni_feedback']);
     $confirm_data = htmlspecialchars_decode($row['confirm_data']);
     
@@ -79,6 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_academic_awards = htmlspecialchars($_POST['academic_awards']);
     $updated_privacy_consent = htmlspecialchars($_POST['privacy_consent']);
     $updated_sector = htmlspecialchars($_POST['sector']);
+    $updated_finish_course = htmlspecialchars($_POST['finish_course']);
     $updated_alumni_feedback = htmlspecialchars_decode($_POST['alumni_feedback']);
     $updated_confirm_data = htmlspecialchars_decode($_POST['confirm_data']);
 
@@ -102,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         academic_awards = ?, 
         privacy_consent = ?, 
         sector = ?, 
+        finish_course = ?,
         alumni_feedback = ?,
         confirm_data = ? 
         WHERE email = ?";
@@ -113,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $update_stmt->bind_param(
-        "sssssssssssssssssssss", 
+        "ssssssssssssssssssssss", 
         $updated_first_name, 
         $updated_middle_name, 
         $updated_last_name, 
@@ -132,6 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_academic_awards, 
         $updated_privacy_consent, 
         $updated_sector,
+        $updated_finish_course,
         $updated_alumni_feedback,
         $updated_confirm_data,
         $user_identifier
@@ -510,6 +514,11 @@ $conn->close();
         <div id="year_details" class="mb-3">
             <label for="year_hired" class="form-label">Year Hired</label>
             <input type="number" name="year_hired" id="year_hired" class="form-control" value="<?php echo $year_hired; ?>">
+        </div>
+
+        <div class="form-group">
+                <label for="finish_course">Finish Course:</label>
+                <input type="text" class="form-control" name="finish_course" value="<?= $row['finish_course'] ?>" required>
         </div>
         
         <div class="form-group">

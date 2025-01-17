@@ -37,6 +37,7 @@ if ($result->num_rows > 0) {
     $position_year_level = htmlspecialchars($row['position_year_level']);
     $type_of_employment = htmlspecialchars($row['type_of_employment']);
     $year_hired = htmlspecialchars($row['year_hired']);
+    $finish_course = htmlspecialchars($row['finish_course']);
     $alumni_feedback = htmlspecialchars($row['alumni_feedback']);
 } else {
     echo "User data not found.";
@@ -56,6 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updated_position_year_level = htmlspecialchars($_POST['position_year_level']);
     $updated_type_of_employment = htmlspecialchars($_POST['type_of_employment']);
     $updated_year_hired = htmlspecialchars($_POST['year_hired']);
+    $updated_finish_course = htmlspecialchars($_POST['finish_course']);
     $updated_alumni_feedback = htmlspecialchars($_POST['alumni_feedback']);
 
     $update_sql = "UPDATE alumni SET 
@@ -70,12 +72,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         position_year_level = ?, 
         type_of_employment = ?, 
         year_hired = ?,
-        alumni_feedback = ?,
-        WHERE email = ?";
+        finish_course = ?,
+        alumni_feedback = ?
+    WHERE email = ?";
+
 
     $update_stmt = $conn->prepare($update_sql);
     $update_stmt->bind_param(
-        "ssssssssiss", 
+        "ssssssssisssss", 
         $updated_first_name, 
         $updated_last_name, 
         $updated_contact_number, 
@@ -86,8 +90,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $updated_university_employer, 
         $updated_position_year_level, 
         $updated_type_of_employment, 
-        $updated_year_hired, 
-        $alumni_feedback,
+        $updated_year_hired,
+        $updated_finish_course,
+        $updated_alumni_feedback,
         $user_identifier
     );
 
@@ -324,6 +329,11 @@ $conn->close();
             <div class="form-group">
                 <label for="alumni_feedback">Alumni Feedback:</label>
                 <input type="text" class="form-control" name="alumni_feedback" value="<?= $row['alumni_feedback'] ?>" required>
+            </div>
+
+            <div class="form-group">
+                <label for="finish_course">Finish Course:</label>
+                <input type="text" class="form-control" name="finish_course" value="<?= $row['finish_course'] ?>" required>
             </div>
 
             <!-- AGREEMENT AND SUBMISSION -->
